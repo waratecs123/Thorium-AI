@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thorium-AI - Free AI Encyclopedia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Хедер будет загружен сюда -->
+    <div id="header-container"></div>
+
+    <!-- Основной контент -->
+    <div class="main-content">
+        <!-- Герой-секция -->
+        <section class="hero-section">
+            <h1 class="hero-title">Thorium-AI</h1>
+            <p class="hero-subtitle">
+                A comprehensive, free encyclopedia of Artificial Intelligence.
+                From basic concepts to advanced neural networks, explained clearly.
+            </p>
+
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Topics</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">250+</div>
+                    <div class="stat-label">Articles</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Cost</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1</div>
+                    <div class="stat-label">Creator</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Информация о проекте -->
+        <section class="project-info">
+            <h2 class="project-title">About This Project</h2>
+
+            <div class="project-description">
+                <p><strong>Thorium-AI</strong> is an educational project created by a single enthusiast.
+                The goal is to make AI knowledge accessible to everyone, regardless of background.</p>
+
+                <div class="highlight">
+                    <p>This project is completely <strong>free</strong> — no subscriptions, no payments,
+                    no hidden fees. All content is available to anyone with internet access.</p>
+                </div>
+
+                <p>As one person, I invest time and resources into creating this encyclopedia
+                because I believe AI knowledge should not be locked behind paywalls or
+                available only to students of elite universities.</p>
+
+                <p>Every article is written and created manually. No AI-generated content —
+                only verified information explained clearly.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-graduation-cap feature-icon"></i>
+                    <h3 class="feature-title">For Beginners</h3>
+                    <p class="feature-text">Start from scratch with simple explanations</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-code feature-icon"></i>
+                    <h3 class="feature-title">For Developers</h3>
+                    <p class="feature-text">Mathematics, algorithms, implementation details</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line feature-icon"></i>
+                    <h3 class="feature-title">For Professionals</h3>
+                    <p class="feature-text">Advanced topics and research analysis</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-globe feature-icon"></i>
+                    <h3 class="feature-title">For Everyone</h3>
+                    <p class="feature-text">AI's impact on society and ethics</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Предпросмотр содержания -->
+        <section class="content-preview">
+            <h2 class="section-title">Content Structure</h2>
+
+            <div class="project-description">
+                <p>The encyclopedia is organized into 8 sections:</p>
+
+                <ul>
+                    <li><strong>Practical AI</strong> – Everyday applications</li>
+                    <li><strong>AI Fundamentals</strong> – History and philosophy</li>
+                    <li><strong>Mathematics for AI</strong> – Essential math</li>
+                    <li><strong>Machine Learning</strong> – Core algorithms</li>
+                    <li><strong>Neural Networks</strong> – Biological to artificial</li>
+                    <li><strong>Deep Learning</strong> – Advanced architectures</li>
+                    <li><strong>Applied Directions</strong> – NLP, Computer Vision, RL</li>
+                    <li><strong>Advanced Topics</strong> – Ethics, limitations, future</li>
+                </ul>
+
+                <p>Each topic begins with an introduction for beginners and progresses
+                to advanced concepts.</p>
+            </div>
+        </section>
+
+        <!-- Информация о создателе -->
+        <section class="project-info">
+            <h2 class="project-title">From the Creator</h2>
+
+            <div class="project-description">
+                <p>I'm the person behind Thorium-AI. I'm not associated with any university
+                or corporation — just someone passionate about AI who believes knowledge
+                should be free.</p>
+
+                <p>This project requires hundreds of hours of work. I do it because:</p>
+
+                <ul>
+                    <li>I remember struggling to find clear explanations when learning AI</li>
+                    <li>AI literacy is crucial for everyone</li>
+                    <li>I want to give back to the community</li>
+                    <li>Education should not be a luxury product</li>
+                </ul>
+
+                <p>If you find this project valuable, you can support it through the
+                <strong>Support Project</strong> button in the sidebar. This helps cover
+                server costs and allows more time for content creation.</p>
+
+                <p>Most importantly — use this resource, share it, and let's make
+                AI education accessible together.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Загрузка хедера
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Настройка мобильного меню
+                setupMobileMenu();
+
+                // Активация первого аккордеона
+                activateFirstAccordion();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) return;
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Закрытие меню при клике на ссылку (мобильные)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Клавиша Escape
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Изменение размера окна
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function activateFirstAccordion() {
+            const firstSection = document.querySelector('.section-title');
+            if (firstSection) {
+                firstSection.classList.add('active');
+            }
+        }
+
+        // Автоматически закрываем меню на мобильных при клике вне его
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (window.innerWidth <= 768 && sidebar && overlay &&
+                sidebar.classList.contains('active') &&
+                !sidebar.contains(e.target) &&
+                !document.querySelector('.mobile-menu-toggle').contains(e.target)) {
+
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            }
+        });
+
+        // Отслеживание свайпов для закрытия меню
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!sidebar || !overlay) return;
+
+            // Свайп вправо (открыть меню)
+            if (touchEndX - touchStartX > 50 && touchStartX < 50) {
+                if (!sidebar.classList.contains('active')) {
+                    sidebar.classList.add('active');
+                    overlay.classList.add('active');
+                    document.body.classList.add('mobile-menu-open');
+                }
+            }
+            // Свайп влево (закрыть меню)
+            else if (touchStartX - touchEndX > 50 && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            }
+        }
+
+        // Функция для прокрутки к началу страницы
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
