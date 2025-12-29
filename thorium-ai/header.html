@@ -27,20 +27,38 @@
             top: 16px;
             left: 16px;
             z-index: 1002;
-            background: #ffffff;
-            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0);
+            border: 1px solid rgba(221, 221, 221, 0.4);
             border-radius: 4px;
             width: 40px;
             height: 40px;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .mobile-menu-toggle i {
             font-size: 20px;
-            color: #333;
+            color: rgba(51, 51, 51, 0.9);
+        }
+
+        /* Overlay for mobile */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
         }
 
         /* Sidebar Navigation */
@@ -329,12 +347,12 @@
 
             .welcome-container {
                 padding: 20px;
-                padding-top: 80px; /* Добавим отступ сверху для мобильной версии */
+                padding-top: 80px;
             }
 
             .welcome-title {
                 font-size: 24px;
-                margin-top: 20px; /* Отступ от кнопки меню */
+                margin-top: 20px;
             }
 
             .welcome-subtitle {
@@ -360,13 +378,11 @@
                 display: block;
             }
 
-            /* Убедимся, что заголовок в сайдбаре виден */
             .sidebar-header {
-                padding-top: 60px; /* Отступ для кнопки меню */
+                padding-top: 60px;
                 min-height: 100px;
             }
 
-            /* Увеличим зону клика для кнопки меню */
             .mobile-menu-toggle {
                 width: 44px;
                 height: 44px;
@@ -374,6 +390,17 @@
         }
 
         @media (max-width: 480px) {
+            .mobile-menu-toggle {
+                width: 36px;
+                height: 36px;
+                top: 12px;
+                left: 12px;
+            }
+
+            .mobile-menu-toggle i {
+                font-size: 18px;
+            }
+
             .topic-link {
                 padding: 8px 16px 8px 20px;
                 font-size: 12px;
@@ -395,7 +422,7 @@
 
             .sidebar-header {
                 padding: 16px;
-                padding-top: 70px; /* Больший отступ для очень маленьких экранов */
+                padding-top: 70px;
             }
 
             .support-btn {
@@ -412,20 +439,18 @@
                 font-size: 22px;
                 margin-top: 15px;
             }
-
-            .mobile-menu-toggle {
-                top: 12px;
-                left: 12px;
-            }
         }
 
-        /* Дополнительные медиа-запросы для очень маленьких экранов */
         @media (max-width: 360px) {
             .mobile-menu-toggle {
                 top: 10px;
                 left: 10px;
-                width: 40px;
-                height: 40px;
+                width: 34px;
+                height: 34px;
+            }
+
+            .mobile-menu-toggle i {
+                font-size: 16px;
             }
 
             .sidebar-header {
@@ -527,12 +552,12 @@
             }
 
             .mobile-menu-toggle {
-                background: #2a2a2a;
-                border-color: #444;
+                background: rgba(42, 42, 42, 0.7);
+                border-color: rgba(68, 68, 68, 0.4);
             }
 
             .mobile-menu-toggle i {
-                color: #e0e0e0;
+                color: rgba(224, 224, 224, 0.9);
             }
         }
     </style>

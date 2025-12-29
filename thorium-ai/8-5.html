@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8.5 Testing and Using AI - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">8.5 Testing and Using AI</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-book"></i> Section 8: How AI Works (Simply)</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 14 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>You've trained an AI model—now what? Training is only the beginning. The real test comes when AI meets the real world. Testing AI is like a chef tasting their dish before serving it to customers, or a pilot running through pre-flight checks before takeoff. It's the critical bridge between development and deployment, where we ensure AI works correctly, safely, and fairly before people depend on it. Let's explore how AI is tested and what makes it ready for real-world use.</p>
+
+                <h2>Why Testing AI is Different</h2>
+
+                <p>Traditional software testing checks if code follows instructions. AI testing is different because:</p>
+
+                <div class="note">
+                    <p><strong>Traditional Software:</strong><br>
+                    • Follows explicit rules programmed by humans<br>
+                    • Same input always produces same output<br>
+                    • Bugs are logic errors in the code</p>
+
+                    <p><strong>AI Systems:</strong><br>
+                    • Learns patterns from data (not following explicit rules)<br>
+                    • Same input can produce different outputs as learning continues<br>
+                    • Errors come from wrong patterns, biased data, or unexpected inputs</p>
+                </div>
+
+                <p>AI testing requires checking not just "does it run?" but "does it learn correctly?", "does it generalize well?", and "does it behave fairly?"</p>
+
+                <div class="highlight">
+                    <p>A key insight: AI can be 95% accurate overall but still dangerous if that 5% error occurs in critical situations. Testing must identify not just overall performance, but performance in specific scenarios that matter.</p>
+                </div>
+
+                <h3>The "AI Testing Mindset"</h3>
+
+                <p>Testing AI requires thinking like both a scientist and a safety inspector:</p>
+                <ul>
+                    <li><strong>Scientist:</strong> Hypothesis testing, controlled experiments, statistical validation</li>
+                    <li><strong>Safety Inspector:</strong> Looking for failure modes, edge cases, potential harms</li>
+                    <li><strong>User Advocate:</strong> Testing from user perspective, checking for usability and fairness</li>
+                </ul>
+
+                <h2>The Three-Layer Testing Approach</h2>
+
+                <p>Effective AI testing happens at three levels:</p>
+
+                <div class="tip">
+                    <p><strong>Layer 1: Model Testing</strong><br>
+                    • <strong>Focus:</strong> Does the AI learn correctly?<br>
+                    • <strong>Questions:</strong> Is training working? Is the model converging? Are we overfitting?<br>
+                    • <strong>Methods:</strong> Training curves, validation metrics, ablation studies</p>
+
+                    <p><strong>Layer 2: System Testing</strong><br>
+                    • <strong>Focus:</strong> Does the integrated system work?<br>
+                    • <strong>Questions:</strong> Does it handle real inputs? Is it fast enough? Is it reliable?<br>
+                    • <strong>Methods:</strong> Integration testing, performance testing, stress testing</p>
+
+                    <p><strong>Layer 3: Impact Testing</strong><br>
+                    • <strong>Focus:</strong> Does it work well in the real world?<br>
+                    • <strong>Questions:</strong> Is it fair? Is it safe? Does it help users?<br>
+                    • <strong>Methods:</strong> Bias testing, user studies, real-world pilot tests</p>
+                </div>
+
+                <h3>The "Train-Validate-Test" Data Split</h3>
+
+                <p>Fundamental to AI testing is separating your data:</p>
+
+                <div class="warning">
+                    <p><strong>Training Set (60-70%):</strong> Data used to teach the model<br>
+                    <strong>Validation Set (15-20%):</strong> Data used to tune and select models during development<br>
+                    <strong>Test Set (15-20%):</strong> Data used ONLY at the end to evaluate final performance<br>
+                    <br>
+                    <strong>Critical Rule:</strong> The test set must NEVER influence training decisions. It's the "final exam" the AI hasn't seen before.</p>
+                </div>
+
+                <h2>Testing During Training: Monitoring Learning</h2>
+
+                <p>While AI trains, we continuously test to ensure learning is progressing correctly:</p>
+
+                <div class="highlight">
+                    <p><strong>Loss/Error Curves:</strong> Tracking how error decreases over time<br>
+                    <strong>Validation Metrics:</strong> Regular checks on validation data<br>
+                    <strong>Early Stopping:</strong> Stopping training when validation performance plateaus or worsens<br>
+                    <strong>Gradient Monitoring:</strong> Checking if updates are reasonable sizes<br>
+                    <strong>Overfitting Detection:</strong> Comparing training vs. validation performance</p>
+                </div>
+
+                <h3>The "Training Dashboard" Metaphor</h3>
+
+                <p>Modern AI training is monitored like a spaceship dashboard:</p>
+
+                <div class="note">
+                    <p><strong>Fuel Gauge:</strong> Training progress (epochs completed)<br>
+                    <strong>Speedometer:</strong> Learning rate (how fast it's learning)<br>
+                    <strong>Altitude:</strong> Accuracy/performance metrics<br>
+                    <strong>Warning Lights:</strong> Overfitting, vanishing gradients, unstable training<br>
+                    <strong>Navigation:</strong> Validation performance guiding direction</p>
+                </div>
+
+                <p>Just as pilots constantly monitor instruments, AI engineers watch training metrics to catch problems early.</p>
+
+                <h2>Performance Metrics: How We Measure Success</h2>
+
+                <p>Different tasks require different ways to measure performance:</p>
+
+                <div class="tip">
+                    <p><strong>For Classification (Cat vs Dog):</strong><br>
+                    • <strong>Accuracy:</strong> Percentage correct overall<br>
+                    • <strong>Precision:</strong> Of those predicted as "cat," how many actually are cats?<br>
+                    • <strong>Recall:</strong> Of all actual cats, how many did we find?<br>
+                    • <strong>F1-Score:</strong> Balance between precision and recall</p>
+
+                    <p><strong>For Regression (Predicting Prices):</strong><br>
+                    • <strong>MAE:</strong> Mean Absolute Error (average error size)<br>
+                    • <strong>RMSE:</strong> Root Mean Squared Error (penalizes large errors more)<br>
+                    • <strong>R²:</strong> How much better than just predicting average</p>
+
+                    <p><strong>For Recommendation Systems:</strong><br>
+                    • <strong>Click-through Rate:</strong> How often recommendations are clicked<br>
+                    • <strong>Conversion Rate:</strong> How often leads to purchases/actions<br>
+                    • <strong>Diversity Score:</strong> How varied recommendations are</p>
+                </div>
+
+                <h3>The "Accuracy Paradox"</h3>
+
+                <p>A common trap in AI testing:</p>
+
+                <div class="warning">
+                    <p><strong>The Scenario:</strong> Building a fraud detection system where 99% of transactions are legitimate.<br>
+                    <strong>Naive Approach:</strong> Model that always says "not fraud" = 99% accurate!<br>
+                    <strong>The Problem:</strong> It catches 0% of actual fraud (the important cases).<br>
+                    <strong>The Lesson:</strong> Overall accuracy can be misleading. You need metrics relevant to your specific use case.</p>
+                </div>
+
+                <h2>Testing for Generalization: Will It Work on New Data?</h2>
+
+                <p>The ultimate test: Does the AI work on data it has never seen before?</p>
+
+                <div class="note">
+                    <p><strong>Cross-Validation:</strong> Rotating which data is used for training vs testing<br>
+                    • <strong>K-Fold:</strong> Split data into K parts, train K times using different test sets<br>
+                    • <strong>Leave-One-Out:</strong> Extreme version where each data point gets its turn as test<br>
+                    • <strong>Purpose:</strong> Get more reliable performance estimate</p>
+
+                    <p><strong>Out-of-Distribution Testing:</strong> Testing on data different from training data<br>
+                    • <strong>Example:</strong> Face recognition trained on adults, tested on children<br>
+                    • <strong>Example:</strong> Object detection trained on daylight photos, tested on night photos<br>
+                    • <strong>Purpose:</strong> See how system handles novel situations</p>
+
+                    <p><strong>Temporal Validation:</strong> Training on past data, testing on future data<br>
+                    • <strong>Example:</strong> Stock prediction trained on 2010-2019, tested on 2020-2021<br>
+                    • <strong>Purpose:</strong> Simulate real deployment where future is unknown</p>
+                </div>
+
+                <h3>The "Dataset Shift" Challenge</h3>
+
+                <p>Real-world data changes over time, breaking AI assumptions:</p>
+
+                <div class="highlight">
+                    <p><strong>Covariate Shift:</strong> Input distribution changes (e.g., new camera model)<br>
+                    <strong>Prior Probability Shift:</strong> Output distribution changes (e.g., fraud becomes more common)<br>
+                    <strong>Concept Drift:</strong> Relationship between input and output changes (e.g., "spam" definition evolves)<br>
+                    <br>
+                    <strong>Testing Strategy:</strong> Monitor performance over time, have retraining plans, test with recent data</p>
+                </div>
+
+                <h2>Testing for Fairness and Bias</h2>
+
+                <p>Critical testing that goes beyond accuracy:</p>
+
+                <div class="warning">
+                    <p><strong>Group Fairness Metrics:</strong><br>
+                    • Compare performance across demographic groups<br>
+                    • Example: Does facial recognition work equally well for all skin tones?<br>
+                    • Example: Do loan approval rates differ by gender when qualifications are equal?</p>
+
+                    <p><strong>Bias Testing Approaches:</strong><br>
+                    • <strong>Disparate Impact Analysis:</strong> Statistical tests for different outcomes<br>
+                    • <strong>Counterfactual Testing:</strong> Change only protected attribute (gender, race)<br>
+                    • <strong>Adversarial Testing:</strong> Try to make system fail in biased ways<br>
+                    • <strong>Representation Analysis:</strong> Check what patterns model has learned</p>
+
+                    <p><strong>Common Fairness Metrics:</strong><br>
+                    • Demographic Parity: Equal positive rates across groups<br>
+                    • Equal Opportunity: Equal true positive rates across groups<br>
+                    • Equal Accuracy: Similar overall accuracy across groups</p>
+                </div>
+
+                <h3>The "Fairness vs Accuracy Tradeoff"</h3>
+
+                <p>Sometimes making a model fairer reduces overall accuracy:</p>
+
+                <div class="note">
+                    <p><strong>Example:</strong> Facial recognition optimized for overall accuracy might perform best on majority group, poorly on minorities.<br>
+                    <strong>Dilemma:</strong> Maximize overall accuracy (unfair) vs equalize performance (lower overall accuracy)<br>
+                    <strong>Resolution:</strong> Depends on application. Medical diagnosis might prioritize overall accuracy, hiring tools must prioritize fairness.<br>
+                    <strong>Testing Requirement:</strong> Report both overall and group-specific performance.</p>
+                </div>
+
+                <h2>Testing for Robustness and Safety</h2>
+
+                <p>Will the AI break or do dangerous things in edge cases?</p>
+
+                <div class="tip">
+                    <p><strong>Adversarial Examples Testing:</strong><br>
+                    • Create inputs designed to fool the AI<br>
+                    • Example: Stop sign with subtle stickers that makes AI see it as speed limit<br>
+                    • Purpose: Test security and robustness</p>
+
+                    <p><strong>Stress Testing:</strong><br>
+                    • Extreme inputs outside normal range<br>
+                    • Example: Medical AI given impossible lab values<br>
+                    • Example: Self-driving car in extreme weather<br>
+                    • Purpose: Ensure graceful failure, not catastrophic failure</p>
+
+                    <p><strong>Failure Mode Analysis:</strong><br>
+                    • Systematically try to find how it fails<br>
+                    • Example: Chatbot testing with contradictory questions<br>
+                    • Example: Recommendation system with incomplete user history<br>
+                    • Purpose: Identify and fix failure modes before deployment</p>
+                </div>
+
+                <h3>The "Red Team vs Blue Team" Approach</h3>
+
+                <p>Adopted from cybersecurity for AI testing:</p>
+
+                <div class="highlight">
+                    <p><strong>Blue Team:</strong> Builds and defends the AI system<br>
+                    <strong>Red Team:</strong> Tries to attack and break the system<br>
+                    <strong>Process:</strong><br>
+                    1. Blue team builds AI with certain safety measures<br>
+                    2. Red team tries to find vulnerabilities, biases, failure modes<br>
+                    3. Blue team fixes issues found<br>
+                    4. Repeat until satisfactory robustness achieved<br>
+                    <strong>Benefits:</strong> Uncovers issues developers might miss, adversarial mindset</p>
+                </div>
+
+                <h2>User Testing: Does It Actually Help People?</h2>
+
+                <p>The most important test: Do users find it useful and usable?</p>
+
+                <div class="note">
+                    <p><strong>A/B Testing:</strong><br>
+                    • Compare AI system vs baseline (or two AI versions)<br>
+                    • Randomly assign users to different versions<br>
+                    • Measure which performs better on key metrics<br>
+                    • Example: New recommendation algorithm vs old one</p>
+
+                    <p><strong>Usability Testing:</strong><br>
+                    • Watch real users interact with the AI<br>
+                    • Identify confusion, misunderstandings, unexpected uses<br>
+                    • Example: Users misunderstanding AI assistant's capabilities</p>
+
+                    <p><strong>Task Success Testing:</strong><br>
+                    • Can users complete their goals with the AI?<br>
+                    • Measure time to completion, success rate, satisfaction<br>
+                    • Example: Can users find products faster with AI search?</p>
+
+                    <p><strong>Trust and Comfort Testing:</strong><br>
+                    • Do users trust the AI's recommendations?<br>
+                    • When do they override or ignore it?<br>
+                    • Example: Doctors trusting/not trusting diagnostic suggestions</p>
+                </div>
+
+                <h3>The "AI Adoption Curve" in Testing</h3>
+
+                <p>Users go through phases with AI systems:</p>
+
+                <div class="warning">
+                    <p><strong>Phase 1 - Novelty:</strong> Try it because it's new, tolerate errors<br>
+                    <strong>Phase 2 - Utility:</strong> Use it if it clearly helps, abandon if not<br>
+                    <strong>Phase 3 - Dependency:</strong> Integrate into workflow, expect reliability<br>
+                    <strong>Phase 4 - Criticality:</strong> System failure blocks work, high reliability expected<br>
+                    <br>
+                    <strong>Testing Implication:</strong> Different standards apply at each phase. Early testing focuses on potential, later testing focuses on reliability.</p>
+                </div>
+
+                <h2>The Deployment Pipeline: From Testing to Use</h2>
+
+                <p>Moving from tested model to production system:</p>
+
+                <div class="highlight">
+                    <p><strong>1. Shadow Deployment:</strong><br>
+                    • AI runs alongside human/system but doesn't act<br>
+                    • Compare AI decisions with actual decisions<br>
+                    • Example: AI suggests diagnoses but doctors don't see them</p>
+
+                    <p><strong>2. Canary Deployment:</strong><br>
+                    • Roll out to small percentage of users<br>
+                    • Monitor closely for issues<br>
+                    • Example: 5% of users get new recommendation algorithm</p>
+
+                    <p><strong>3. Blue-Green Deployment:</strong><br>
+                    • Two identical production environments<br>
+                    • Switch traffic from old (blue) to new (green)<br>
+                    • Quick rollback if problems</p>
+
+                    <p><strong>4. Continuous Monitoring:</strong><br>
+                    • Track performance metrics in real production<br>
+                    • Set up alerts for performance degradation<br>
+                    • Automatic rollback triggers</p>
+                </div>
+
+                <h3>The "Monitoring Dashboard" for Production AI</h3>
+
+                <p>What to watch once AI is deployed:</p>
+
+                <div class="tip">
+                    <p><strong>Performance Metrics:</strong> Accuracy, latency, throughput<br>
+                    <strong>Business Metrics:</strong> Conversion rates, user engagement, revenue impact<br>
+                    <strong>Data Quality:</strong> Input distributions (detect data drift)<br>
+                    <strong>Resource Usage:</strong> CPU, memory, costs<br>
+                    <strong>Error Rates:</strong> By category, by user segment<br>
+                    <strong>User Feedback:</strong> Explicit ratings, implicit behavior</p>
+                </div>
+
+                <h2>Real-World Testing Examples</h2>
+
+                <p>How major AI systems are tested:</p>
+
+                <div class="note">
+                    <p><strong>Tesla Autopilot:</strong><br>
+                    • <strong>Simulation Testing:</strong> Billions of virtual miles in diverse scenarios<br>
+                    • <strong>Shadow Mode:</strong> Compare what AI would do vs what human does<br>
+                    • <strong>Fleet Learning:</strong> Learn from edge cases encountered by all Teslas<br>
+                    • <strong>Regulatory Testing:</strong> Specific tests for regulatory approval</p>
+
+                    <p><strong>Google Search AI:</strong><br>
+                    • <strong>Side-by-Side Testing:</strong> Human raters compare AI vs current results<br>
+                    • <strong>A/B Testing:</strong> Gradual rollouts to percentage of users<br>
+                    • <strong>Quality Rater Guidelines:</strong> Extensive documentation for human evaluation<br>
+                    • <strong>Query Understanding Testing:</strong> Test on ambiguous queries</p>
+
+                    <p><strong>Medical Imaging AI:</strong><br>
+                    • <strong>Clinical Trials:</strong> Like drug testing with control groups<br>
+                    • <strong>Multi-site Testing:</strong> Test across different hospitals, equipment<br>
+                    • <strong>Blinded Evaluation:</strong> Doctors evaluate without knowing AI input<br>
+                    • <strong>FDA Validation:</strong> Rigorous regulatory testing requirements</p>
+
+                    <p><strong>ChatGPT/Chatbots:</strong><br>
+                    • <strong>Red Teaming:</strong> Experts try to make it say harmful things<br>
+                    • <strong>Adversarial Testing:</strong> Systematic attempts to find failures<br>
+                    • <strong>Human Feedback:</strong> Reinforcement learning from human preferences<br>
+                    • <strong>Safety Layer Testing:</strong> Test filters and safety mechanisms</p>
+                </div>
+
+                <h3>The "Testing in Production" Paradox</h3>
+
+                <p>A modern approach with careful controls:</p>
+
+                <div class="warning">
+                    <p><strong>The Paradox:</strong> You can't fully test AI without real users and real data, but you shouldn't expose users to untested AI.<br>
+                    <strong>The Solution:</strong> Controlled exposure with safeguards:<br>
+                    1. Feature flags to turn off quickly<br>
+                    2. Rate limiting to control exposure<br>
+                    3. Careful monitoring with automatic rollback<br>
+                    4. Clear communication to users about testing<br>
+                    <strong>The Reality:</strong> Some issues only emerge at scale with real users.</p>
+                </div>
+
+                <h2>Ethical Considerations in Testing and Deployment</h2>
+
+                <p>Testing isn't just technical—it's ethical:</p>
+
+                <div class="warning">
+                    <p><strong>Informed Consent:</strong> Do test users know they're testing AI? Can they opt out?<br>
+                    <strong>Risk Assessment:</strong> What harm could testing cause? How is it mitigated?<br>
+                    <strong>Bias Documentation:</strong> Transparent reporting of performance across groups<br>
+                    <strong>Right to Explanation:</strong> Can users understand why AI made certain decisions?<br>
+                    <strong>Testing Representativeness:</strong> Does test population represent all user groups?<br>
+                    <strong>Post-Deployment Monitoring:</strong> Continuing responsibility after launch</p>
+                </div>
+
+                <h3>The "Pre-mortem" Exercise for AI Testing</h3>
+
+                <p>A proactive testing approach:</p>
+
+                <div class="highlight">
+                    <p><strong>The Exercise:</strong> Imagine it's one year after deployment and the AI has caused a major problem. What went wrong?<br>
+                    <strong>Steps:</strong><br>
+                    1. Assemble team (developers, testers, domain experts, ethicists)<br>
+                    2. Imagine worst-case scenarios (discrimination, safety failures, privacy breaches)<br>
+                    3. Work backward: What testing would have caught this? What safeguards were missing?<br>
+                    4. Implement those tests and safeguards<br>
+                    <strong>Benefits:</strong> Identifies blind spots, encourages critical thinking, proactive rather than reactive</p>
+                </div>
+
+                <h2>Practical Implications for You</h2>
+
+                <p>Understanding AI testing helps you:</p>
+
+                <div class="tip">
+                    <p><strong>As a User:</strong><br>
+                    • Understand why AI services improve gradually<br>
+                    • Recognize that "beta" means active testing and improvement<br>
+                    • Provide feedback—you're part of the testing process!</p>
+
+                    <p><strong>As a Developer:</strong><br>
+                    • Implement proper testing from the start<br>
+                    • Choose metrics relevant to your specific application<br>
+                    • Plan for monitoring and maintenance, not just initial deployment</p>
+
+                    <p><strong>As a Decision-Maker:</strong><br>
+                    • Ask the right questions about AI systems you adopt<br>
+                    • Understand that testing continues after deployment<br>
+                    • Budget for ongoing testing and improvement, not just development</p>
+                </div>
+
+                <h3>The "Next Time You Use AI" Observations</h3>
+
+                <p>Notice these testing aspects in everyday AI:</p>
+                <ul>
+                    <li><strong>Netflix Recommendations:</strong> Constantly A/B testing algorithms with subsets of users</li>
+                    <li><strong>Google Maps ETAs:</strong> Continuously comparing predicted vs actual arrival times</li>
+                    <li><strong>Spam Filters:</strong> Learning from your "report spam" and "not spam" actions</li>
+                    <li><strong>Voice Assistants:</strong> Improving from "sorry, I didn't understand that" moments</li>
+                </ul>
+
+                <h2>The Future of AI Testing</h2>
+
+                <p>Emerging trends in testing methodologies:</p>
+
+                <div class="note">
+                    <p><strong>Automated Testing:</strong> AI that tests other AI systems<br>
+                    <strong>Explainability Testing:</strong> Testing not just what AI decides but why<br>
+                    <strong>Continuous Validation:</strong> Always testing as data and world evolve<br>
+                    <strong>Causal Testing:</strong> Testing understanding of cause-effect, not just correlation<br>
+                    <strong>Federated Testing:</strong> Testing across distributed data without centralizing<br>
+                    <strong>Simulation-Based Testing:</strong> Extensive testing in virtual environments before real deployment</p>
+                </div>
+
+                <h3>The "Testing as Teaching" Metaphor</h3>
+
+                <p>A helpful way to think about AI testing:</p>
+
+                <div class="warning">
+                    <p><strong>Traditional Testing:</strong> Pass/fail gate before release<br>
+                    <strong>AI Testing as Teaching:</strong> Continuous feedback loop for improvement<br>
+                    <strong>Analogy:</strong> Testing AI is like a teacher giving exams:<br>
+                    • Initial tests identify knowledge gaps<br>
+                    • Targeted teaching addresses weaknesses<br>
+                    • Final exams confirm readiness<br>
+                    • Real-world application is the ultimate test<br>
+                    • Even after "graduation," lifelong learning continues</p>
+                </div>
+
+                <p>Testing and using AI is not the end of the development process—it's the beginning of the improvement process. Every interaction, every failure, every success becomes data for making the AI better. The most successful AI systems aren't those that start perfect, but those that learn fastest from real-world use.</p>
+
+                <div class="highlight">
+                    <p><strong>Key Takeaway:</strong> Testing AI is a multi-dimensional challenge requiring technical rigor, ethical consideration, and user-centered thinking. It continues from initial development through deployment and beyond. The goal isn't perfection—it's understanding the system's capabilities and limitations, ensuring safety and fairness, and creating feedback loops for continuous improvement. Well-tested AI isn't just more reliable; it's more trustworthy, more useful, and more likely to deliver real value to people.</p>
+                </div>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="8-4.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 8.4 Training AI Models
+                </a>
+                <a href="9-1.html" class="nav-link">
+                    Next: 9.1 AI Ethics Overview <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">AI Testing</span>
+                <span class="tag">Validation</span>
+                <span class="tag">Deployment</span>
+                <span class="tag">Performance Metrics</span>
+                <span class="tag">Bias Testing</span>
+                <span class="tag">A/B Testing</span>
+                <span class="tag">Robustness</span>
+                <span class="tag">Production AI</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open the eighth section for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const eighthSection = document.querySelector('[data-section="8"]');
+            if (eighthSection) {
+                eighthSection.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
