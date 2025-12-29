@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.0 Introduction: Prompt Engineering for Everyone - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">5.0 Introduction: Prompt Engineering for Everyone</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-comment-alt"></i> Section 5: Talking to AI</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 6 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>Prompt Engineering is not simply "the skill of asking AI questions." It is a new form of communication, a fundamental skill of the digital age, comparable in importance to the ability to use a search engine or an office suite in the early 2000s. It is a discipline at the intersection of linguistics, psychology, and computer science that transforms a dialogue with a neural network from a lottery into a predictable and efficient process for achieving the desired result.</p>
+
+                <div class="highlight">
+                    <p>Why is this even necessary? Shouldn't AI understand me intuitively?</p>
+                    <p>Imagine asking a human assistant: "Make something beautiful for the presentation." One assistant might bring a bouquet of flowers, another—a beautiful chart, a third—select some music. To get exactly what you need, you clarify: "I need a beautiful chart for a slide about sales growth, in a minimalist style, blue tones, with figures for the last quarter."</p>
+                    <p>With a neural network, it's the same story, only a million times more complex. It lacks your context, experience, and common sense. It is an incredibly powerful, but extremely literal, literary device. Every word in the prompt (query) is an instruction that influences the probability of certain "tokens" (words/parts of words) appearing in the response. Prompt engineering is the art of composing such instructions to maximize the probability of obtaining the desired result.</p>
+                </div>
+
+                <h2>Evolution: From Magic to Engineering</h2>
+
+                <p><strong>The Era of Incantations (2020-2022):</strong> Users of the first large language models (GPT-3) and image generators (DALL-E 1) discovered that adding magic words like "trending on ArtStation, 4k, hyperdetailed, unreal engine 5" radically changed the outcome. This was the alchemy phase: a method of trial, error, and mystical formulas passed within communities.</p>
+
+                <p><strong>The Era of Patterns (2022-2023):</strong> With the mass arrival of ChatGPT, Midjourney, and Stable Diffusion, the first systematic approaches emerged. People began noticing and documenting working patterns: the "Role — Task — Context — Constraints — Goal" structure, the importance of negative prompts ("no watermark, no blur").</p>
+
+                <div class="note">
+                    <p><strong>The Era of Engineering (2023 — present):</strong> Prompt engineering is becoming a professional discipline. We are witnessing:</p>
+                    <ul>
+                        <li><strong>Standardized methodologies:</strong> Chain-of-Thought (step-by-step reasoning), Few-shot prompting (teaching by example directly in the prompt).</li>
+                        <li><strong>Specialists:</strong> Companies hire prompt engineers for fine-tuning AI interactions.</li>
+                        <li><strong>Scientific study:</strong> Research into how model architecture influences susceptibility to different prompt types.</li>
+                    </ul>
+                </div>
+
+                <h2>Core Philosophy: You are the director, AI is a brilliant but literal actor.</h2>
+
+                <p>Your task is not just to give a command, but to set the scene, explain the character's motivation, and position the camera. For AI, context is everything.</p>
+
+                <div class="tip">
+                    <p><strong>A Simple Hierarchy of an Effective Prompt (using text as an example):</strong></p>
+
+                    <p><strong>Role (Role):</strong> "You are an experienced career consultant with 10 years of experience..."</p>
+                    <p><em>What it does:</em> Sets the behavioral model, speech style, depth of knowledge. Activates the corresponding "neural pathways" in the model.</p>
+
+                    <p><strong>Task/Instruction (Task/Instruction):</strong> "...write a cover letter for a Data Scientist position at a large tech company."</p>
+                    <p><em>What it does:</em> Clearly defines the action. The verb ("write," "analyze," "compare") is the most important element.</p>
+
+                    <p><strong>Context (Context):</strong> "I am a graduate of the Mechanics and Mathematics Faculty of Moscow State University, completed a Machine Learning course, have two pet projects on GitHub. The job requires knowledge of Python, SQL, and statistics basics."</p>
+                    <p><em>What it does:</em> Fills the task with specifics. Without context, the answer will be generic and useless.</p>
+
+                    <p><strong>Constraints/Format (Constraints/Format):</strong> "The letter must be in English, no longer than 250 words, professional but with a modern tone. Present the result in three paragraphs: greeting, main body, conclusion."</p>
+                    <p><em>What it does:</em> Narrows the search space, saves your editing time, sets technical requirements.</p>
+
+                    <p><strong>Goal/Success Criteria (Goal/Success Criteria):</strong> "The goal is to stand out among hundreds of other candidates, to emphasize potential and motivation, not just experience."</p>
+                    <p><em>What it does:</em> Explains why, not just what. Directs the model's creative energy in the right direction.</p>
+                </div>
+
+                <h2>Why should everyone learn this?</h2>
+
+                <ul>
+                    <li><strong>Saves time and money:</strong> One well-crafted prompt replaces 10 iterations of "guessing" and editing.</li>
+                    <li><strong>Unlocks the full potential of AI:</strong> Most users utilize only 5-10% of ChatGPT's capabilities. Prompt engineering provides access to the remaining 90%.</li>
+                    <li><strong>Competitive advantage:</strong> In the job market and in business, the winner will not be the one who has access to AI, but the one who knows how to effectively manage it to solve complex problems.</li>
+                    <li><strong>Protection from frustration:</strong> By understanding how the model "thinks," you stop getting angry at stupid answers and start correcting your queries.</li>
+                </ul>
+
+                <div class="note">
+                    <p>Prompt engineering is the hygiene of digital thinking. It is the realization that in a dialogue with AI, the responsibility for the quality of the result lies primarily with the human formulating the task. In the following sections, we will examine specific techniques, "magic phrases," and communication styles that will transform you from a passive user into a director of artificial intelligence.</p>
+                </div>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="/index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="5-1.html" class="nav-link">
+                    Next: 5.1 Prompt Differences <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">Introduction</span>
+                <span class="tag">Prompt Engineering</span>
+                <span class="tag">AI Communication</span>
+                <span class="tag">Techniques</span>
+                <span class="tag">ChatGPT</span>
+                <span class="tag">Best Practices</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 5)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 5 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section5 = document.querySelector('.section-title[data-section="5"]');
+            if (section5) {
+                section5.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

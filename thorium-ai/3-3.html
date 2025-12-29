@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.3 Boston Dynamics Robots - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">3.3 Boston Dynamics Robots</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-robot"></i> Section 3: AI Sensations</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 7 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>Boston Dynamics robots are not just engineering projects. They are the physical embodiment of artificial intelligence's most ambitious task: to teach a machine to interact with a chaotic, unpredictable, and relentlessly physical world. While most AI breakthroughs occur in the digital realm (text, images, strategy), Boston Dynamics forces AI to contend with gravity, friction, inertia, and sudden disturbances. Their videos are not advertisements but scientific publications in the form of stress tests, demonstrating revolutionary advances in robotics and machine learning.</p>
+
+                <h2>Evolution: From Hydraulics to Intelligence</h2>
+
+                <p>The company's history reflects paradigm shifts in robotics:</p>
+
+                <div class="highlight">
+                    <p><strong>The Era of Hydraulics and Kinematics (BigDog, LS3):</strong> Early robots were "dumb." Their stability was achieved through complex systems of hydraulic actuators, force sensors, and reflexive controllers that responded to loss of balance like a human knee-jerk reflex. There was almost no "learning" in the modern sense here. This was the pinnacle of classical programming.</p>
+                </div>
+
+                <p><strong>The Era of Electric Actuators and Optimization (Spot, Handle):</strong> The shift to electric motors made robots quieter, lighter, and more energy-efficient. More complex motion planning algorithms emerged, but precise physics modeling and trajectory optimization remained key.</p>
+
+                <div class="note">
+                    <p><strong>The Era of Machine Learning (Atlas, the latest Spot):</strong> Today, the focus has shifted. Precisely programming every movement is impossible for complex tasks (e.g., running across a pile of planks or performing acrobatics). Modern Boston Dynamics robots increasingly use machine learning to create high-level behavioral policies and adapt in real time.</p>
+                </div>
+
+                <h2>Key Technological Pillars</h2>
+
+                <h3>1. High-Fidelity Simulation (Digital Twin)</h3>
+                <p>Before a robot takes a step in the real world, it attempts and fails thousands of times in a virtual one.</p>
+
+                <p><strong>Physics Engine:</strong> Boston Dynamics uses ultra-accurate physics simulations (based on proprietary or modified software) that account for mass, inertia, friction, material elasticity, and actuator hydraulics/electricity.</p>
+
+                <p><strong>Reinforcement Learning (RL):</strong> In this simulation, the robot's "digital twin," controlled by a neural network (policy), attempts to complete a task. For successful actions (maintaining balance, moving forward) it receives a "reward," for falls — a "penalty." Through trial and error over millions and billions of iterations, the neural network finds optimal movement strategies. This gives rise to motions a programmer could never describe manually. For example, the specific way to reposition legs when walking on gravel.</p>
+
+                <h3>2. High-Speed Perception and State Estimation</h3>
+                <p>The robot must understand where it is in space and predict the consequences of its actions.</p>
+
+                <p><strong>Lidar, Stereo Cameras, Force/Torque Sensors:</strong> Atlas and Spot create a real-time 3D map of their environment.</p>
+
+                <p><strong>State Estimation:</strong> Raw sensor data is filtered and fused so the robot knows with high accuracy the position and orientation of each of its joints in space, as well as velocity and acceleration. This is its proprioception (sense of its own body).</p>
+
+                <div class="tip">
+                    <p><strong>Prediction:</strong> Based on this model, the system predicts, for example, how the center of mass will shift with the next step.</p>
+                </div>
+
+                <h3>3. Hierarchical Control</h3>
+                <p>Robot control is divided into levels, like in an army:</p>
+
+                <ul>
+                    <li><strong>Highest Level (Strategist):</strong> Makes decisions: "Jump over the log," "Climb the stairs," "Open the door." AI algorithms for object recognition and action sequence planning can be used here.</li>
+                    <li><strong>Mid-Level (Tactician):</strong> Converts a high-level command into a sequence of specific body movements (kinematic trajectory). For example, for a jump, it calculates with what force and at what moment to push off with the legs.</li>
+                    <li><strong>Lowest Level (Executor):</strong> High-frequency (1000 Hz and above) controllers that directly manage the actuators (motors) to precisely follow the given trajectory, compensating for disturbances (a gust of wind, a slippery surface). This is the reflex level, operating on PID controllers and more complex nonlinear controllers.</li>
+                </ul>
+
+                <h3>Example: Atlas's Backflip</h3>
+                <p>This is the culmination of these technologies. To perform it, the system must:</p>
+
+                <ol>
+                    <li>Calculate a trajectory where the center of mass describes the required parabola.</li>
+                    <li>Synchronize a powerful leg thrust with a swing of the arms to create rotational momentum.</li>
+                    <li>Adjust the body's position in mid-air using the inertia of the limbs.</li>
+                    <li>Calculate and cushion the landing by bending the legs at precisely calculated moments.</li>
+                </ol>
+
+                <p>Do all this accounting for real floor irregularities, actuator inaccuracies, and system delays. Most of this strategy was developed and optimized in simulations using reinforcement learning.</p>
+
+                <h2>Practical Applications Beyond the Show</h2>
+
+                <p><strong>Spot — The Industrial Inspector:</strong> Works at power plants, petrochemical facilities, construction sites. Its value lies in autonomy and sensors. It can autonomously patrol a facility along a set route, collecting data (thermal imaging, gas analysis, photos), detecting leaks or cracks in places that are dangerous or difficult for humans to access.</p>
+
+                <p><strong>Stretch — The Warehouse Worker:</strong> A robot for automatically unloading boxes from trucks and palletizing. It demonstrates the application of advanced manipulation algorithms in logistics.</p>
+
+                <div class="highlight">
+                    <p><strong>Atlas — Prototype of the Future:</strong> Currently a research platform. Its skills are the foundation for rescue robots that can operate in disaster zones or for universal domestic helpers.</p>
+                </div>
+
+                <h2>Philosophical and Cultural Resonance</h2>
+
+                <p>Boston Dynamics robots evoke a unique mix of awe and unease ("uncanny valley"). Their movements, too smooth and adaptive for a machine yet not quite human, are subconsciously perceived as supernatural. They materialize both dreams of technological liberation from hard labor and fears of a new, indestructible form of mechanical life.</p>
+
+                <div class="note">
+                    <p>Unlike "silent" digital AIs, Boston Dynamics robots are AI that has physical consequences. Their development directly leads to a world where autonomous machines will not only think but also act alongside us, raising acute questions of safety, ethics, and a new division of labor.</p>
+                </div>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="3-2.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 3.2 AlphaFold Discovery
+                </a>
+                <a href="3-4.html" class="nav-link">
+                    Next: 3.4 OpenAI Valuation <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">Boston Dynamics</span>
+                <span class="tag">Robotics</span>
+                <span class="tag">Atlas</span>
+                <span class="tag">Spot</span>
+                <span class="tag">Reinforcement Learning</span>
+                <span class="tag">Physical AI</span>
+                <span class="tag">Robot Control</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 3)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 3 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section3 = document.querySelector('.section-title[data-section="3"]');
+            if (section3) {
+                section3.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
