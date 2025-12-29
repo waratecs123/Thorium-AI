@@ -1,4 +1,7 @@
 # Thorium-AI — AI for Everyone, No Code Needed
+## [thorium-ai.com](http://thorium-ai.com/)
+
+## [thorium-ai.com (alternative link)](https://thorium-ai.pages.dev/)
 
 **Thorium-AI** is a practical guide to Artificial Intelligence for everyday life. No code, no complex theories — just clear explanations of how AI already works around you. From TikTok algorithms to ChatGPT, from deepfakes to self-driving cars.
 
