@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.0 Introduction: AI Records and Breakthroughs - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">3.0 Introduction: AI Records and Breakthroughs</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-robot"></i> Section 3: AI Sensations</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 6 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>Imagine watching historical footage: the first human spaceflight, the Moon landing, the first personal computer. These events became moments of collective awareness, points of no return, after which the world could never be the same again. In the field of artificial intelligence, we are currently experiencing exactly such a pivotal moment, but it is stretched over time and consists of a series of "lightning strikes" — high-profile breakthroughs that one after another captivate humanity's imagination.</p>
+
+                <p>These breakthroughs are important not only for scientists and engineers. They are important for everyone because they:</p>
+
+                <div class="highlight">
+                    <p><strong>Make the power of AI tangible.</strong> You can talk endlessly about "neural networks" and "transformers," but when you see a robot perform a backflip or a program defeat a world champion in a game requiring intuition, you feel the scale of what has happened. This is no longer theory, but a demonstration of power.</p>
+                </div>
+
+                <div class="highlight">
+                    <p><strong>Raise new questions about ourselves.</strong> Each such record makes us ponder: "What remains uniquely human?" If AI can create, devise strategies, and make scientific discoveries — then what are we? These events trigger the most crucial philosophical and ethical discussions.</p>
+                </div>
+
+                <div class="highlight">
+                    <p><strong>Define our immediate future.</strong> A breakthrough in one lab today becomes the foundation for new medicines, products, industries, and even social changes tomorrow. By understanding the essence of these sensations, we begin to understand the contours of the world we will live in in just 5-10 years.</p>
+                </div>
+
+                <div class="note">
+                    <p>In this chapter, we will analyze not just technological successes, but iconic events that have become symbols of a new era.</p>
+                </div>
+
+                <h2>AlphaGo vs. Lee Sedol (2016)</h2>
+
+                <p>This was not just a computer's victory in a board game. It was a demonstration that a machine is capable of beauty and intuition. The move it made in one of the games was so unexpected and elegant that experts initially thought it was an error. Later, it was recognized as brilliant. This was the moment when AI moved from brute-force computation to something resembling insight.</p>
+
+                <h2>AlphaFold (2020)</h2>
+
+                <p>This is AI's transition from the virtual world to the world of fundamental science. Proteins are the "building blocks of life," and the shape they fold into determines everything in a living organism. Figuring out a single protein structure manually could take years of a PhD scientist's work. AlphaFold solved this problem for hundreds of thousands of proteins with the highest accuracy. This is a breakthrough that will accelerate the creation of new medicines for cancer, Alzheimer's, and many other diseases. AI has become the most powerful tool of cognition, a new microscope for humanity.</p>
+
+                <div class="tip">
+                    <p>AlphaFold represents AI's transformation from a tool for analysis to a partner in discovery — not just processing data, but generating new scientific knowledge.</p>
+                </div>
+
+                <h2>Boston Dynamics Robots</h2>
+
+                <p>This is AI acquiring flesh and blood (or rather, steel and sensors). While most neural networks live in data centers and process information, Boston Dynamics robots learn to interact with the most complex and unpredictable environment — the physical world. Their ability to maintain balance, adapt to pushes, and perform complex movements shows that AI can master not only intelligence but also physical skill. This is the foundation for future automation in the real world: on construction sites, in rescue operations, in our homes.</p>
+
+                <h2>OpenAI Valuation & ChatGPT Growth</h2>
+
+                <p>This is a social and economic explosion. The unprecedented speed with which ChatGPT reached 100 million users showed that advanced AI has become a mass consumer product. And the phenomenal valuation of OpenAI (over $80 billion) proved that this is not just a toy, but a new foundation for the economy. This is the event that wrested AI from the hands of specialists and placed it in the hands of students, writers, entrepreneurs, and homemakers, instantly changing the labor market and notions of creativity.</p>
+
+                <div class="warning">
+                    <p>The democratization of AI through tools like ChatGPT represents both an unprecedented opportunity and a profound disruption, requiring new frameworks for education, ethics, and economic policy.</p>
+                </div>
+
+                <h2>The Evolution Chain of AI</h2>
+
+                <p>By studying these events, we see a logical chain of AI evolution: from abstract intelligence (games) → to intelligence as a co-author of scientific discoveries → to intelligence embodied in a physical agent → and, finally, to intelligence as a ubiquitous utility service, accessible to everyone. Each link in this chain is not the end of the road, but the start of a new race, a new cycle of development.</p>
+
+                <div class="tip">
+                    <p><strong>Ready to dive deeper?</strong> Let's explore each of these groundbreaking moments, starting with the elegant and surprising victory of AlphaGo over Lee Sedol.</p>
+                </div>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="/index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="3-1.html" class="nav-link">
+                    Next: 3.1 AlphaGo vs Lee Sedol <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">Introduction</span>
+                <span class="tag">AI Breakthroughs</span>
+                <span class="tag">Historical Moments</span>
+                <span class="tag">AI Evolution</span>
+                <span class="tag">Technology History</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 3)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 3 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section3 = document.querySelector('.section-title[data-section="3"]');
+            if (section3) {
+                section3.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

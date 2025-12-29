@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.1 AlphaGo vs. Lee Sedol - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">3.1 AlphaGo vs. Lee Sedol</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-robot"></i> Section 3: AI Sensations</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 7 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>The March 2016 match between the AlphaGo computer program and the legendary Go player Lee Sedol was more than just a sporting event. It was a historical fork in the road, a moment when humanity received undeniable proof: artificial intelligence had reached a level capable not only of calculation, but also of demonstrating something indistinguishable from creative intuition in one of the most complex intellectual spheres created by humans.</p>
+
+                <h2>Context: Why Go is Not Chess</h2>
+
+                <p>To understand the scale of the achievement, one must grasp the complexity of Go.</p>
+
+                <div class="highlight">
+                    <p><strong>Simple Rules, Unimaginable Complexity.</strong> The rules of Go can be explained in a minute: two players take turns placing black and white stones on a 19x19 board, the goal is to surround territory. However, the number of possible positions in Go (~10¹⁷⁰) exceeds the number of atoms in the observable universe (~10⁸⁰). This makes a complete enumeration of all options absolutely impossible even for the most powerful supercomputers.</p>
+                </div>
+
+                <p><strong>Intuition vs. Calculation.</strong> In chess, a strong player can calculate sequences of moves many steps ahead. In Go, this is impossible due to the branching width. Top-level players, like Lee Sedol (holder of the highest rank, 9th dan), make decisions based on strategic intuition, a "sense of shape," and experience accumulated over decades of recognizing thousands of patterns. They "see" strong and weak groups of stones, "feel" the tension on the board.</p>
+
+                <div class="note">
+                    <p><strong>History of AI Defeats.</strong> Until 2016, the best computer programs in Go played at the level of a strong amateur. Experts predicted it would take at least another 10 years before AI could defeat a world champion. It was believed that this would require a breakthrough in the field of artificial intuitive thinking, not just an increase in computing power.</p>
+                </div>
+
+                <h2>AlphaGo's Architecture: A Brilliant Synthesis</h2>
+
+                <p>Google's DeepMind subsidiary's AlphaGo was not just a "fast calculator." Its strength lay in the synergy of several deep neural networks that mimicked different aspects of human thinking in Go.</p>
+
+                <p><strong>Policy Network — "Intuition."</strong> This deep convolutional neural network (similar to image recognition networks) was trained on 30 million moves from games played by strong human players. It looked at a board position as an image and predicted which moves a professional player would make in that situation. It learned to recognize patterns and discard obviously weak moves, narrowing the search field from hundreds of possible moves to a few dozen of the most promising ones.</p>
+
+                <p><strong>Value Network — "Strategic Vision."</strong> This was a key innovation. Instead of calculating a position to the end (which is impossible), this neural network learned to evaluate the probability of winning from any given board position. It answered the question: "If the game continues from this position, how likely is it that black (or white) will win?" Training was done on millions of games AlphaGo simulated against itself. Thus, the value network learned to feel the strategic potential of a position, not to count specific points.</p>
+
+                <p><strong>Monte Carlo Tree Search (MCTS) — "Thought Experiment."</strong> The algorithm combined the power of both networks. To choose a move, it conducted thousands of quick "thought experiments" (simulations) from the current position:</p>
+
+                <ol>
+                    <li><strong>Selection:</strong> At each simulation step, the Policy Network suggested which moves were interesting to explore.</li>
+                    <li><strong>Expansion:</strong> The algorithm delved into interesting branches.</li>
+                    <li><strong>Simulation:</strong> The game was quickly played out to the end (often with random moves or using a simplified Policy Network).</li>
+                    <li><strong>Backpropagation:</strong> The result of the simulation (win/loss) was used to update the evaluation of moves along the path to the root.</li>
+                </ol>
+
+                <p>The final move was chosen as the most explored and statistically promising. This was not a brute-force calculation, but a balanced exploration guided by intuition (Policy Network) and strategic assessment (Value Network).</p>
+
+                <h2>The Climax: Move 37, Game 2</h2>
+
+                <p>After AlphaGo's victory in the first game, in the second game, Lee Sedol was playing an aggressive, complex game. On the 37th move, AlphaGo made a move that stunned the entire Go world.</p>
+
+                <div class="highlight">
+                    <p><strong>Expert Reaction:</strong> A commentator, a 9th dan professional, upon seeing the move, first thought it was a mistake or "interference." The move was made on the fifth line from the edge, which in classical strategy is considered too distant and "empty" for the early middle game. No high-level human would have made it in that position.</p>
+                </div>
+
+                <p><strong>Consequences:</strong> Dozens of moves later, the genius of the move became apparent. It created a subtle, pressuring influence on the entire center and right flank of the board, linking seemingly unrelated groups of stones. It was a move that did not pursue an immediate tactical goal, but built a strategic advantage for dozens of moves ahead. Lee Sedol later admitted that it was after this move that he realized he was playing against a being of a different order.</p>
+
+                <h2>Philosophical and Practical Significance</h2>
+
+                <p>AlphaGo's 4-1 victory was an event of planetary scale.</p>
+
+                <div class="tip">
+                    <p><strong>Paradigm Shift:</strong> It proved that deep learning and reinforcement learning allow machines to master areas requiring intuitive, pattern-based thinking, without explicit rule programming.</p>
+                </div>
+
+                <p><strong>A New Tool for Humanity:</strong> Go players themselves began studying AlphaGo's games, discovering new, non-obvious strategies and concepts. AI became a coach and a source of inspiration for humans in their own discipline.</p>
+
+                <p><strong>The Path to AGI:</strong> AlphaGo became a prototype for systems that can learn in complex, uncertain environments. Its successor, AlphaZero, learned from scratch to play not only Go but also chess and shogi, achieving superhuman level in just a few hours, simply by playing against itself. This showed a path toward creating universal learning algorithms.</p>
+
+                <div class="note">
+                    <p>The AlphaGo vs. Lee Sedol match will remain in history as the "Sputnik moment" for AI — a vivid demonstration that machines have moved into a new league of intellectual ability, forcing humanity for the first time to seriously contemplate partnership and competition with non-biological intelligence.</p>
+                </div>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="3-0.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 3.0 Introduction
+                </a>
+                <a href="3-2.html" class="nav-link">
+                    Next: 3.2 AlphaFold Discovery <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">AlphaGo</span>
+                <span class="tag">Lee Sedol</span>
+                <span class="tag">DeepMind</span>
+                <span class="tag">Go</span>
+                <span class="tag">Neural Networks</span>
+                <span class="tag">AI History</span>
+                <span class="tag">Machine Learning</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 3)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 3 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section3 = document.querySelector('.section-title[data-section="3"]');
+            if (section3) {
+                section3.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

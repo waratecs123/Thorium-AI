@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.2 AlphaFold Discovery - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">3.2 AlphaFold Discovery</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-robot"></i> Section 3: AI Sensations</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 8 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>The 2020 discovery by AlphaFold was not just another AI victory in a scientific competition. It was a fundamental breakthrough in biology, comparable in significance to deciphering the structure of DNA or the invention of the microscope. AlphaFold solved one of science's greatest and most complex challenges — the protein folding problem — which humanity had struggled with for over 50 years.</p>
+
+                <h2>The Problem: The Riddle of Life's "Second Code"</h2>
+
+                <p><strong>What is a protein?</strong> Proteins are molecular machines that perform virtually all functions in a living organism: they transport oxygen (hemoglobin), digest food (enzymes), protect against viruses (antibodies), and form muscles and tissues.</p>
+
+                <div class="highlight">
+                    <p><strong>What is "folding"?</strong> A protein is synthesized in a cell as a long chain of amino acids (20 types). This chain does not remain straight — it folds within fractions of a second into an extremely complex three-dimensional structure, unique to each protein. It is this 3D shape that determines the protein's function. Just as a key fits a lock, the shape of an enzyme's active site fits the molecule it is meant to break down.</p>
+                </div>
+
+                <p><strong>What's the difficulty?</strong> Predicting how a chain of hundreds of amino acids will fold in space is incredibly difficult. The number of possible conformations is astronomically large (Levinthal's paradox). Experimental methods for determining structure (X-ray crystallography, cryo-electron microscopy) require months or years of meticulous work, expensive equipment, and often fail.</p>
+
+                <h2>AlphaFold's Solution: How AI "Saw" the Invisible</h2>
+
+                <p>DeepMind's AlphaFold is not a single algorithm but a complex "pipeline" of several neural networks that process information at different levels.</p>
+
+                <h3>1. Gathering "Evolutionary Clues" (Multiple Sequence Alignment - MSA)</h3>
+                <p>The system begins not by analyzing a single protein sequence, but thousands of related sequences from different species.</p>
+
+                <div class="note">
+                    <p><strong>The Logic:</strong> If two amino acids in different proteins mutate together throughout evolution, it is a strong signal that they are close to each other in the 3D structure. It's like figuring out how furniture is assembled by looking at instructions in different languages — similar descriptions will point to the same connections.</p>
+                </div>
+
+                <p><strong>Neural Network #1 (Evoformer):</strong> This is the heart of AlphaFold. A special transformer architecture (Evoformer) analyzes a giant multiple sequence alignment matrix. It incredibly efficiently identifies deep, non-obvious correlations between amino acids that may be separated by hundreds of positions in the chain but end up as neighbors in space. Its output is a potential distance map between all pairs of amino acids in the protein.</p>
+
+                <h3>2. Building the 3D Model</h3>
+                <p><strong>Neural Network #2 (Structure Module):</strong> It takes information from the Evoformer and builds a spatial model. Its task is to design the actual 3D coordinates of the protein backbone atoms so that they correspond to the predicted distances and angles.</p>
+
+                <p><strong>Physical Plausibility:</strong> The model doesn't just build abstract geometry. It accounts for the laws of physics (bond angles, bond lengths, steric hindrances) to make the structure chemically plausible. The final model is a "cloud" of atoms with spatial coordinates.</p>
+
+                <h3>3. Assessing Reliability (Confidence Score - pLDDT)</h3>
+                <p>AlphaFold doesn't just give an answer. For each predicted region of the protein (and for each amino acid), the model assigns a confidence score from 0 to 100 (pLDDT). Regions with a high score (>90) are predicted with accuracy comparable to experimental methods. A low score (<50) often indicates intrinsically disordered, flexible regions of the protein — and this too is important biological information.</p>
+
+                <h2>The Scale of the Achievement: Numbers That Changed Science</h2>
+
+                <div class="highlight">
+                    <p><strong>CASP14 (2020):</strong> At the prestigious Critical Assessment of protein Structure Prediction (CASP) competition, AlphaFold2 achieved an average accuracy of ~92 GDT (Global Distance Test), far exceeding the result of any previous system (~75 for the previous CASP winner) and surpassing the threshold considered equivalent to experimental accuracy.</p>
+                </div>
+
+                <p><strong>AlphaFold DB:</strong> In July 2021, DeepMind, in collaboration with the European Molecular Biology Laboratory's European Bioinformatics Institute (EMBL-EBI), released to the public the predicted structures for nearly all human proteins and 20 other key organisms — over 350,000 structures in total. Later, this database expanded to over 200 million structures, covering almost all known protein sequences.</p>
+
+                <h2>Practical Consequences: A Revolution in Biology and Medicine</h2>
+
+                <p>AlphaFold did not replace experimental biology, but radically accelerated and redirected it.</p>
+
+                <div class="tip">
+                    <p><strong>Drug Discovery:</strong> Scientists can now see the exact 3D structure of a drug target (e.g., a protein on the surface of a virus or cancer cell) and use computer-aided design to create a molecule that fits into it perfectly. This cuts years of costly trial and error.</p>
+                </div>
+
+                <p><strong>Understanding Diseases:</strong> Many genetic diseases are caused by a "break" in a protein's amino acid sequence, which changes its shape and function. Now, we can instantly model how exactly a mutation distorts the structure and understand the disease mechanism.</p>
+
+                <p><strong>Synthetic Biology:</strong> Engineers creating new enzymes to break down plastic or produce biofuels can use AlphaFold to design a protein with the desired function "from a blueprint."</p>
+
+                <p><strong>A New Language for Biology:</strong> Structural information is becoming a basic, accessible property of a protein, just like its genetic sequence. This changes the very methodology of science: hypotheses can now first be tested "in simulation."</p>
+
+                <h2>Philosophical Meaning: AI as a Tool of Cognition</h2>
+
+                <div class="note">
+                    <p>AlphaFold is not just a powerful calculator. It is a system that uncovered fundamental patterns in evolutionary data that are non-obvious to humans. It learned to "read" the history of life recorded in protein sequences and translate it into the language of three-dimensional structures. This proves that AI can become a fundamentally new tool for scientific discovery, capable of finding connections in data of such scale and complexity that they surpass human intuition.</p>
+                </div>
+
+                <p>The AlphaFold breakthrough showed that the most complex scientific problems can be solved not only by the genius of an individual scientist but also by the genius of a neural network architecture trained on the entire corpus of human knowledge. This opens an era of accelerated scientific and technological progress, driven by the symbiosis of human and artificial intelligence.</p>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="3-1.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 3.1 AlphaGo vs Lee Sedol
+                </a>
+                <a href="3-3.html" class="nav-link">
+                    Next: 3.3 Boston Dynamics Robots <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">AlphaFold</span>
+                <span class="tag">DeepMind</span>
+                <span class="tag">Protein Folding</span>
+                <span class="tag">Biology</span>
+                <span class="tag">Science Breakthrough</span>
+                <span class="tag">Medical Research</span>
+                <span class="tag">Neural Networks</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 3)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 3 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section3 = document.querySelector('.section-title[data-section="3"]');
+            if (section3) {
+                section3.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
