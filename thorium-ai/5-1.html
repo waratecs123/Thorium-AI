@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.1 Prompt Differences - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">5.1 Prompt Differences</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-comment-alt"></i> Section 5: Talking to AI</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 7 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>An effective dialogue with AI begins with the understanding that not all prompts are created equal. The difference between a mediocre and a brilliant result often lies not in switching models, but in the microscopic nuances of wording. It's like tuning a sensitive radio receiver: a shift of a millimeter—and you catch a clear signal instead of hissing static.</p>
+
+                <p>Let's examine the key differences between prompt types using practical examples.</p>
+
+                <h2>1. Generic vs. Contextual</h2>
+
+                <div class="highlight">
+                    <p><strong>Generic (poor):</strong> "Write an advertisement."</p>
+                    <p><em>AI Response:</em> "Discover the amazing world of our product! It will change your life for the better. Buy now!" (Clichéd, useless, untrustworthy).</p>
+                </div>
+
+                <div class="tip">
+                    <p><strong>Contextual (good):</strong> "You are a copywriter for an electronics marketplace. Write a short, dynamic advertisement for the new MegaBoom wireless Bluetooth speaker. Target audience: young people aged 18-30 who value parties and street style. Emphasize powerful bass, water resistance, and 20-hour battery life. Use slang and emojis. No more than 2 sentences."</p>
+                    <p><em>AI Response:</em> "Ride the wave with #MegaBoom! 💥 Unkillable bass for any party and rain protection – charge up on adrenaline for 20 hours without an outlet. #louderthanthunder"</p>
+                </div>
+
+                <p><strong>The Difference:</strong> Context turns an abstract task into a concrete one. The model activates the necessary "neural pathways": style for youth, knowledge of terms (Bluetooth, water resistance), ability to work within structural constraints.</p>
+
+                <h2>2. Outcome-Oriented vs. Process-Oriented</h2>
+
+                <p><strong>Outcome-Oriented (often poor for complex tasks):</strong> "Why did the Roman Empire fall?"</p>
+                <p><em>AI Response:</em> Provides a generic, encyclopedic list of reasons (economic difficulties, barbarian invasions, political corruption, etc.), which can be found on Wikipedia.</p>
+
+                <div class="note">
+                    <p><strong>Process-Oriented (Chain-of-Thought method — "reasoning step-by-step"):</strong> "Analyze why the Roman Empire fell, reasoning step-by-step like a historian. First, identify long-term structural factors (social, economic). Then analyze key crisis events of the 3rd-5th centuries. After that, assess how these factors interacted and reinforced each other. Finally, provide a concise conclusion."</p>
+                    <p><em>AI Response:</em> Begins with structure: "Step 1: Long-term factors. By the 3rd century, the empire faced... Step 2: Crisis events. The Gothic invasions in 410 were not a cause but a consequence... Step 3: Interaction. Military spending drained the economy, leading to higher taxes and social discontent, weakening the army... Step 4: Conclusion. Rome fell not due to a single invasion, but due to a vicious cycle where political instability, economic decline, and military threats mutually reinforced each other over centuries."</p>
+                </div>
+
+                <p><strong>The Difference:</strong> The second prompt forces the model to simulate an expert's thought process. This is not just information retrieval, but its structuring, analysis, and synthesis. The answer is deeper, more logical, and much more useful for learning.</p>
+
+                <h2>3. Single-Turn vs. Multi-Turn</h2>
+
+                <p><strong>Single-Turn (poor for complex projects):</strong> "Create a launch plan for a coffee online store."</p>
+                <p><em>AI Response:</em> Produces a standard 10-point plan (niche research, registration, supplier selection...), which is too generic.</p>
+
+                <div class="tip">
+                    <p><strong>Multi-Turn (dialogue that reveals details):</strong></p>
+                    <p><em>Step 1 (Strategy):</em> "Imagine I'm launching an online store for premium coffee for connoisseurs in Moscow. What unique value should I offer to stand out?"</p>
+                    <p><em>AI Response:</em> "It could be: rare single-origin beans, a subscription with tasting sets, detailed information about the farm and roast, barista masterclasses."</p>
+
+                    <p><em>Step 2 (Deepening):</em> "Great, develop the subscription idea. Describe a structure with 3 subscription tiers (Novice, Connoisseur, Guru) with different frequencies and content."</p>
+                    <p><em>AI Response:</em> Details each tier.</p>
+
+                    <p><em>Step 3 (Specifics):</em> "Now, based on the 'Connoisseur' tier (delivery every 2 weeks), draft a rough cost and retail price calculation if the wholesale price per bag is 300 rubles."</p>
+                </div>
+
+                <p><strong>The Difference:</strong> A multi-turn dialogue allows for iterative clarification and deepening of the task, using the AI's previous responses as context. This creates a sense of collaboration and leads to a customized, well-developed result.</p>
+
+                <h2>4. Positive vs. With Negative Constraints</h2>
+
+                <p>Especially critical for image generation and precise texts.</p>
+
+                <p><strong>Positive Only (risks unwanted elements):</strong> "Draw a portrait of a wizard in a forest."</p>
+                <p><em>Risk:</em> AI might draw a young female wizard, a cartoonish old man, add a dragon, choose a dark gloomy style — thousands of possibilities.</p>
+
+                <div class="warning">
+                    <p><strong>With Negative Constraints (channels creativity in the right direction):</strong> "Draw a detailed portrait of an elderly, wise male wizard with a long gray beard, in blue robes, in a gloomy coniferous forest. No staff, no animals, no magical effects, in the style of realistic fantasy painting, not cartoonish."</p>
+                </div>
+
+                <p><strong>The Difference:</strong> Negative instructions (negative prompts) are a powerful tool for subtracting the undesirable. They explicitly tell the model what should NOT be in the response, directing its limited computational resources to generate exactly what you need.</p>
+
+                <div class="note">
+                    <p><strong>Key Takeaway:</strong> A neural network is not an oracle. It is a supremely powerful but common-sense-lacking pattern processor. The quality of its work directly depends on the quality and detail of the input data — your prompt. Conscious use of these differences is the first and most important step from the frustration of "oh, that's not it" to confidently managing the result.</p>
+                </div>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="5-0.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 5.0 Introduction
+                </a>
+                <a href="5-2.html" class="nav-link">
+                    Next: 5.2 Magic Phrases <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">Prompt Engineering</span>
+                <span class="tag">Techniques</span>
+                <span class="tag">Context</span>
+                <span class="tag">Chain-of-Thought</span>
+                <span class="tag">Multi-Turn Dialogue</span>
+                <span class="tag">Negative Prompts</span>
+                <span class="tag">Best Practices</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 5)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 5 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section5 = document.querySelector('.section-title[data-section="5"]');
+            if (section5) {
+                section5.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

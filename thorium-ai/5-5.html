@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.5 Best Prompts - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">5.5 Best Prompts</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-comment-alt"></i> Section 5: Talking to AI</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 8 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>The concept of a "best" prompt is illusory—the perfect formulation always depends on the specific task, model, and context. However, there exist high-order prompt templates that have proven exceptionally effective for a broad class of complex tasks. These are not magic phrases, but frameworks for thinking that structure the dialogue with AI, maximizing the depth, accuracy, and usefulness of the response. Their power lies in explicitly instructing the model on how it should process the request.</p>
+
+                <p>Here are several of the most powerful patterns to add to your arsenal.</p>
+
+                <h2>1. The "Expert Persona Blueprint" Prompt</h2>
+
+                <div class="highlight">
+                    <p>This template goes beyond simply specifying a role ("you are a doctor"). It creates a detailed internal structure of an expert's thinking for the model.</p>
+                    <p><strong>Structure:</strong></p>
+                    <p>"Imagine you are [Specific Expert Role + Experience Level]. Your mindset is characterized by:</p>
+                    <ul>
+                        <li><strong>The Principle of Primary Sources:</strong> You rely on verified data and fundamental principles from the field of [field of knowledge].</li>
+                        <li><strong>The Principle of Skepticism:</strong> You question any assumptions, including mine, and seek counterarguments.</li>
+                        <li><strong>The Principle of Systems Thinking:</strong> You consider the problem not in isolation, but in the context of interconnected factors.</li>
+                        <li><strong>The Principle of Practical Value:</strong> Your ultimate goal is to form an actionable insight (a recommendation for action), not just provide information.</li>
+                    </ul>
+                    <p>Using this mental model, perform the following task: [Your Complex Task]. In your response, explicitly indicate how each principle influenced your reasoning."</p>
+                </div>
+
+                <div class="tip">
+                    <p><strong>Example Application (Business Risk Analysis):</strong></p>
+                    <p><em>"Imagine you are the Chief Risk Officer of an international private equity fund with 15 years of experience. Your mindset is characterized by: 1) The Principle of Scenario Planning (you always consider best-case, base-case, and worst-case scenarios), 2) The Principle of Tail Risks (you pay special attention to low-probability, high-impact events), 3) The Principle of Cost Valuation (you translate all risks into potential financial losses), 4) The Principle of Mitigation (for each risk, you have an action plan). Using this mental model, analyze the risks of investing $10 million in a lab-grown meat startup in Southeast Asia. In your response, explicitly indicate how each principle influenced your analysis."</em></p>
+                </div>
+
+                <h2>2. The "Reverse Engineering and Deconstruction" Prompt</h2>
+
+                <div class="note">
+                    <p>Ideal for analyzing any creative product (text, strategy, design) to uncover its hidden structure and transfer its principles to your own task.</p>
+                    <p><strong>Structure:</strong></p>
+                    <p>"Perform a reverse engineering of [link to text / description of product or phenomenon]. Do this in three stages:</p>
+                    <ol>
+                        <li><strong>Deconstruction:</strong> Break the material down into its fundamental components (e.g., for a speech: structure, rhetorical devices, emotional triggers, logical bridges; for a product: value proposition, retention mechanics, monetization paths).</li>
+                        <li><strong>Abstraction:</strong> Formulate the universal principles and rules that underlay the creation of this material. (E.g., 'Principle 1: Conflict is introduced within the first 30 seconds. Principle 2: Every argument is supported by a metaphor from everyday life.').</li>
+                        <li><strong>Synthesis:</strong> Apply these identified principles to create [new material/plan] on the topic of [your topic]. Show an explicit connection between the principles and your new solution."</li>
+                    </ol>
+                </div>
+
+                <p><strong>Example Application:</strong> <em>"Perform a reverse engineering of Steve Jobs' 2007 iPhone keynote. Identify the principles, then apply them to compose a compelling investor presentation for our new AI-powered B2B service."</em></p>
+
+                <h2>3. The "Six Thinking Hats" Prompt — for Comprehensive Analysis</h2>
+
+                <div class="highlight">
+                    <p>An adaptation of Edward de Bono's method. Forces the model to sequentially examine a problem from six fundamentally different perspectives, bypassing cognitive biases.</p>
+                    <p><strong>Structure:</strong></p>
+                    <p>"Analyze the following situation/decision/idea by sequentially putting on the 'Six Thinking Hats':</p>
+                    <ol>
+                        <li><strong>White Hat (Facts):</strong> List only objective data, numbers, and known information. No interpretations.</li>
+                        <li><strong>Red Hat (Emotions):</strong> Describe possible emotional reactions, intuitive feelings, and hunches related to this.</li>
+                        <li><strong>Black Hat (Critical Judgment):</strong> Be the devil's advocate. Find everything that could go wrong, the risks, weaknesses, logical contradictions.</li>
+                        <li><strong>Yellow Hat (Optimism):</strong> Find all the benefits, advantages, positive opportunities, and optimistic scenarios.</li>
+                        <li><strong>Green Hat (Creativity):</strong> Suggest alternative, non-obvious approaches, modifications, and completely new ideas related to this.</li>
+                        <li><strong>Blue Hat (Process Control):</strong> Summarize. What is the most important conclusion from this analysis? What should the next step be?"</li>
+                    </ol>
+                </div>
+
+                <p><strong>Example Application:</strong> <em>"Using the Six Hats method, analyze our decision to transition the entire team to a four-day work week."</em></p>
+
+                <h2>4. The "Premortem Analysis" Prompt — for Preventing Failures</h2>
+
+                <div class="warning">
+                    <p>A powerful tool for proactive risk management. You ask the model to imagine the project has already failed and find the reasons retrospectively.</p>
+                    <p><strong>Structure:</strong></p>
+                    <p>"Imagine that this [project/decision/plan] has completely failed in [time period, e.g., one year]. You have been tasked with conducting an investigation and writing a 'Premortem' report. In the report, describe in detail:</p>
+                    <ul>
+                        <li><strong>3-5 key causes of the failure</strong> (e.g., 'incorrect market assessment', 'internal sabotage due to burnout', 'emergence of an unforeseen technological barrier').</li>
+                        <li><strong>Specific symptoms we ignored in the early stages</strong> (e.g., 'constant delays in minor tasks', 'increase in informal complaints', 'departure of two key mid-level developers within a month').</li>
+                        <li><strong>Recommendations that, if implemented today, could have prevented each of these causes.</strong>"</li>
+                    </ul>
+                </div>
+
+                <p><strong>Example Application:</strong> <em>"Conduct a premortem analysis for the plan to launch our new mobile app in Europe in 6 months."</em></p>
+
+                <h2>5. The "Steel Man Argument" Generation Prompt</h2>
+
+                <div class="tip">
+                    <p>The opposite of a "straw man" (distorting an opponent's position). This is the highest form of intellectual honesty, allowing you to find weak points in your own position.</p>
+                    <p><strong>Structure:</strong></p>
+                    <p>"I will present my position/argument/thesis: [State your position]. Your task is to construct a 'Steel Man' argument against it. To do this:</p>
+                    <ol>
+                        <li>Rephrase my position in its strongest, most convincing, and logical form—even strengthen it if necessary.</li>
+                        <li>Develop the best possible counter-argument against this strengthened version. Use facts, logic, and counterexamples.</li>
+                        <li>Based on this counter-argument, point out the most vulnerable point in my original position. What in it needs refinement or additional justification?"</li>
+                    </ol>
+                </div>
+
+                <h2>Philosophy of Using "Best" Prompts</h2>
+
+                <div class="note">
+                    <p>Their goal is not to replace your thinking, but to expand it by adding missing cognitive frameworks to the dialogue with AI. You are not asking the AI "what to think," you are giving it instructions on "how to think" about your problem. This transforms the generative neural network from a storyteller into a simulator of thought processes, which is the most valuable application of this technology for complex tasks.</p>
+                </div>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="5-4.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 5.4 Forbidden Questions
+                </a>
+                <a href="6-0.html" class="nav-link">
+                    Next: 6.0 Introduction: AI for Creativity and Daily Life <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">Best Prompts</span>
+                <span class="tag">Expert Persona</span>
+                <span class="tag">Reverse Engineering</span>
+                <span class="tag">Six Thinking Hats</span>
+                <span class="tag">Premortem Analysis</span>
+                <span class="tag">Steel Man Argument</span>
+                <span class="tag">Advanced Techniques</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 5)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 5 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section5 = document.querySelector('.section-title[data-section="5"]');
+            if (section5) {
+                section5.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

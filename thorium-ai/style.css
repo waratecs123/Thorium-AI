@@ -186,51 +186,6 @@ a:active {
     color: #f9826c;
 }
 
-/* ============ Lists - Improved Readability ============ */
-ul, ol {
-    margin: var(--spacing-lg) 0;
-    padding-left: var(--spacing-xl);
-}
-
-li {
-    margin: var(--spacing-md) 0;
-    font-size: 1.125em;
-    line-height: 1.7;
-    position: relative;
-}
-
-li > ul,
-li > ol {
-    margin: var(--spacing-sm) 0 var(--spacing-sm) var(--spacing-lg);
-}
-
-ul li:before {
-    content: "";
-    position: absolute;
-    left: -1.2em;
-    top: 0.85em;
-    width: 6px;
-    height: 6px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-}
-
-ol {
-    counter-reset: item;
-}
-
-ol li {
-    counter-increment: item;
-}
-
-ol li:before {
-    content: counter(item) ".";
-    position: absolute;
-    left: -2em;
-    font-weight: 600;
-    color: var(--accent-color);
-}
-
 /* ============ Code Blocks & Inline Code ============ */
 pre {
     background-color: var(--code-bg);
@@ -441,33 +396,6 @@ figcaption {
     line-height: 1.8;
 }
 
-/* ============ Definition Lists - For Terms ============ */
-dl {
-    margin: var(--spacing-xl) 0;
-    background-color: var(--sidebar-bg);
-    border-radius: var(--border-radius);
-    padding: var(--spacing-lg);
-}
-
-dt {
-    font-weight: 600;
-    margin-top: var(--spacing-lg);
-    color: var(--accent-color);
-    font-size: 1.1em;
-}
-
-dt:first-child {
-    margin-top: 0;
-}
-
-dd {
-    margin-left: var(--spacing-md);
-    margin-bottom: var(--spacing-lg);
-    padding-left: var(--spacing-md);
-    border-left: 2px solid var(--border-color);
-    line-height: 1.7;
-}
-
 /* ============ Keyboard Shortcuts ============ */
 kbd {
     background-color: var(--code-bg);
@@ -666,16 +594,6 @@ kbd {
     border-top: 2px solid var(--border-color);
     font-size: 0.9em;
     color: var(--muted-color);
-}
-
-.footnotes ol {
-    padding-left: var(--spacing-lg);
-}
-
-.footnotes li {
-    margin: var(--spacing-sm) 0;
-    font-size: 0.95em;
-    line-height: 1.6;
 }
 
 /* ============ Article Navigation ============ */
@@ -1202,18 +1120,6 @@ kbd {
 
     .nav-link {
         min-width: 100%;
-    }
-
-    ul, ol {
-        padding-left: var(--spacing-lg);
-    }
-
-    ul li:before {
-        left: -1em;
-    }
-
-    ol li:before {
-        left: -1.5em;
     }
 
     .welcome-container {

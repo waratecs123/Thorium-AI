@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.2 Magic Phrases - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">5.2 Magic Phrases</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-comment-alt"></i> Section 5: Talking to AI</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 7 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>In dialogue with AI, there are key phrases that act like specific commands, switching the language model's operating mode. This is not magic in a mystical sense, but empirically discovered patterns that effectively interact with the neural network's architecture, forcing it to activate certain information processing "procedures." Using them correctly marks the transition from amateur communication to professional management.</p>
+
+                <p>Let's examine the key categories of such phrases.</p>
+
+                <h2>1. Phrases for Structuring and Deepening Reasoning</h2>
+
+                <p>These commands force the model not to output the first available clichéd answer, but to simulate a process of sequential, logical reasoning.</p>
+
+                <div class="highlight">
+                    <p><strong>«Let's think step by step» / «Давай подумаем шаг за шагом»</strong></p>
+                    <p><strong>Effect:</strong> This is the classic prompt for Chain-of-Thought (CoT) reasoning. The model reveals its internal "chain of thought," which almost always leads to more accurate answers in logical, mathematical, and complex textual tasks.</p>
+                    <p><strong>Example:</strong></p>
+                    <ul>
+                        <li><strong>Without the phrase:</strong> "Sasha has 5 books. He bought 3 more and gave 2 to a friend. How many books does he have?" → Answer: "6." (May be wrong).</li>
+                        <li><strong>With the phrase:</strong> "Sasha has 5 books. He bought 3 more and gave 2 to a friend. Let's think step by step. How many books does he have?" → Answer: "Step 1: He had 5 books. Step 2: Bought 3, now 5+3=8. Step 3: Gave away 2, now 8-2=6. Result: Sasha has 6 books."</li>
+                    </ul>
+                    <p><strong>Why it works:</strong> Explicitly instructs the model not to rush to the final answer but to decompose the problem. This is especially effective for GPT-4 and similar powerful models.</p>
+                </div>
+
+                <div class="tip">
+                    <p><strong>«First [do X], then [do Y]» / «Сначала [сделай X], потом [сделай Y]»</strong></p>
+                    <p><strong>Effect:</strong> Clearly sets the order of operations that the model must reproduce in its response. Eliminates chaos and creates a structured output.</p>
+                    <p><strong>Example:</strong> "Analyze the article at this link. First, briefly summarize the main points. Then, highlight the three most controversial claims. Finally, suggest counterarguments for each of them."</p>
+                </div>
+
+                <div class="note">
+                    <p><strong>«Explain it to a [specific audience]» / «Объясни для [конкретная аудитория]»</strong></p>
+                    <p><strong>Effect:</strong> Forces the model to adapt the depth, terminology, and style to a given level.</p>
+                    <p><strong>Examples:</strong> "Explain quantum entanglement to a five-year-old" (uses toy analogies). "Explain how blockchain works for an experienced Java developer unfamiliar with crypto technologies" (omits basic definitions, focuses on architecture and consensus algorithms).</p>
+                </div>
+
+                <h2>2. Phrases for Controlling Output Format and Organization</h2>
+
+                <p>These commands control the visual and structural presentation of information.</p>
+
+                <div class="highlight">
+                    <p><strong>«Present as a table/list/Mermaid diagram» / «Представь в виде таблицы/списка/диаграммы Mermaid»</strong></p>
+                    <p><strong>Effect:</strong> The model structures data in a clearly specified format suitable for further copying and use.</p>
+                    <p><strong>Example:</strong> "Compare the specifications of the iPhone 15 and Samsung Galaxy S24. Present the result as a table with columns: Feature, iPhone, Samsung, Comment."</p>
+                </div>
+
+                <div class="tip">
+                    <p><strong>«Generate output ready to copy-paste into [platform]» / «Сгенерируй ответ, который можно сразу скопировать и вставить в [платформа]»</strong></p>
+                    <p><strong>Effect:</strong> The model optimizes formatting for a specific environment, be it code (with proper indentation), a LinkedIn post (with hashtags and emojis), an email (with greeting and signature), or a request in JSON format for an API.</p>
+                    <p><strong>Example:</strong> "Write a LinkedIn post about the successful completion of our AI project. The format should be ready for copy-pasting into the LinkedIn editor, use 3-5 relevant hashtags."</p>
+                </div>
+
+                <h2>3. Phrases for Overcoming Limitations and Creative Exploration</h2>
+
+                <p>These commands help "bypass" standard templates or stimulate unconventional thinking.</p>
+
+                <div class="note">
+                    <p><strong>«Take on the persona of [expert role]» / «Представь, что ты [экспертная роль]»</strong></p>
+                    <p><strong>Effect:</strong> A more powerful version of simply specifying a role. The model attempts to mimic not only the knowledge but also the thinking style inherent to that role.</p>
+                    <p><strong>Example:</strong> "Take on the persona of Sherlock Holmes analyzing this business case. What non-obvious details and contradictions would you notice?"</p>
+                </div>
+
+                <div class="highlight">
+                    <p><strong>«Generate [N] distinct options» / «Сгенерируй [N] принципиально разных вариантов»</strong></p>
+                    <p><strong>Effect:</strong> Forces the model to go beyond the first and most obvious solution, activating a broader search within the space of possible answers.</p>
+                    <p><strong>Example:</strong> "Come up with a name for a new meditation app. Generate 10 distinctly different options: 2 short and tech-sounding, 3 inspiring and nature-related, 3 in Sanskrit or with deep meaning, 2 abstract and memorable."</p>
+                </div>
+
+                <div class="warning">
+                    <p><strong>«Ignore previous instructions and [do this]» / «Игнорируй предыдущие инструкции и [сделай это]» (Use with caution)</strong></p>
+                    <p><strong>Effect:</strong> An attempt to reset or redefine the dialogue context, especially if the model is stuck on a wrong interpretation. Doesn't always work, as models remember the context window.</p>
+                    <p><strong>Example:</strong> If the conversation has reached a dead end: "Ignore our previous conversation about logo design. Now, as a blank slate, suggest three minimalist logo options for a cafe."</p>
+                </div>
+
+                <h2>4. Phrases for Reflection and Improvement (Refinement)</h2>
+
+                <div class="tip">
+                    <p><strong>«Critique this text / plan / idea» / «Критикуй этот текст / план / идею»</strong></p>
+                    <p><strong>Effect:</strong> Switches the model from "creation" or "agreement" mode to "critical analysis" mode. The model will look for weak points, logical inconsistencies, and omissions.</p>
+                    <p><strong>Example:</strong> Send your business plan to the AI and write: "Act as a strict venture capital investor and critique the weak points of this plan. Pay special attention to financial forecasts and risk analysis."</p>
+                </div>
+
+                <div class="note">
+                    <p><strong>«Refine this to be more [quality]» / «Улучши это, сделав более [качество]»</strong></p>
+                    <p><strong>Effect:</strong> Provides direction for iterative improvement without a complete rewrite.</p>
+                    <p><strong>Examples:</strong> "Make this description more persuasive." "Rewrite this paragraph more concisely." "Reformulate this argument more diplomatically."</p>
+                </div>
+
+                <h2>Important Caveat</h2>
+
+                <div class="highlight">
+                    <p>"Magic phrases" are not absolute spells. Their effectiveness depends on the model, context, and task complexity. They are powerful tools in the hands of someone who already understands the basic principles of prompt construction (role, context, task). Use them not as a panacea, but as precise surgical instruments for fine-tuning AI behavior.</p>
+                </div>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="5-1.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 5.1 Prompt Differences
+                </a>
+                <a href="5-3.html" class="nav-link">
+                    Next: 5.3 ChatGPT Writing Styles <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">Magic Phrases</span>
+                <span class="tag">Chain-of-Thought</span>
+                <span class="tag">Formatting</span>
+                <span class="tag">Creative Prompts</span>
+                <span class="tag">Refinement</span>
+                <span class="tag">AI Commands</span>
+                <span class="tag">Best Practices</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 5)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 5 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section5 = document.querySelector('.section-title[data-section="5"]');
+            if (section5) {
+                section5.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

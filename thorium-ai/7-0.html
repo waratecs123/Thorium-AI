@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7.0 Introduction: Risks, Ethics and Protection - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">7.0 Introduction: Risks, Ethics and Protection</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-exclamation-triangle"></i> Section 7: Dangers and Ethics</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 6 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>The era of ambient artificial intelligence has arrived. While its capabilities inspire awe, its proliferation introduces a complex landscape of systemic risks, unprecedented ethical dilemmas, and novel threat vectors. This is no longer a speculative discussion about a distant future; it is a framework for understanding the operational realities of a world where cognitive and creative processes are increasingly automated, outsourced, and amplified by machines. The central question has shifted from "what can AI do?" to "at what cost, to whom, and who is accountable?"</p>
+
+                <p>This chapter moves beyond capability demos to a critical examination of the externalities and failure modes of intelligent systems. It is not a Luddite manifesto but a necessary risk literacy guide for the age of generative and autonomous technologies.</p>
+
+                <h2>Why This Concerns Every Stakeholder (Not Just Ethicists)</h2>
+
+                <div class="highlight">
+                    <p><strong>The Amplification Dilemma:</strong> AI acts as a force multiplier. It can amplify human creativity, productivity, and scientific discovery with equal efficiency to human bias, deception, and social discord. Without an understanding of its failure modes, we risk scaling harm while pursuing progress.</p>
+                </div>
+
+                <div class="warning">
+                    <p><strong>Asymmetric & Irreversible Harm:</strong> The potential for damage has become scalable, automated, and personalized. A single actor can now generate disinformation or fraud at industrial scale (deepfake fraud, hyper-personalized phishing). The velocity of harm—the speed at which a damaging AI-generated artifact can be created, disseminated, and cause impact—now often outpaces the velocity of defense—our institutional, legal, and technical capacity to respond.</p>
+                </div>
+
+                <div class="note">
+                    <p><strong>The Accountability Vacuum:</strong> As AI systems become more autonomous and inscrutable ("black box" problem), traditional legal and ethical frameworks for assigning responsibility break down. In an incident involving an AI system, is liability with the developer, the trainer, the deployer, the user, or the model itself? This accountability gap creates a dangerous space where harm can occur without clear recourse.</p>
+                </div>
+
+                <div class="tip">
+                    <p><strong>The Epistemic Crisis:</strong> Generative AI's ability to synthesize hyper-realistic text, audio, and video erodes the foundation of epistemic trust—our shared agreement on basic facts and evidence. When reality itself becomes programmable, the bedrock of informed public discourse, judicial processes, and social cohesion is fundamentally threatened.</p>
+                </div>
+
+                <h2>A Structured Analysis of the Risk Landscape</h2>
+
+                <p>We will examine these challenges not as abstract fears, but as concrete, emerging problems across distinct layers:</p>
+
+                <ul>
+                    <li><strong>Instrumental Harm (Sections 7.1-7.2):</strong> The deliberate weaponization of AI for fraud, manipulation, and harassment. This includes the rise of deepfake-based extortion, synthetic identity fraud, and AI-powered social engineering attacks that directly threaten individual security and financial integrity.</li>
+                    <li><strong>Systemic & Structural Harm (Sections 7.3-7.4):</strong> Harm embedded in the AI lifecycle itself.
+                        <ul>
+                            <li><strong>Bias & Discrimination:</strong> How historical biases in training data and design choices lead to unfair, discriminatory outcomes in critical areas like hiring, lending, and policing, perpetuating and scaling societal inequities.</li>
+                            <li><strong>Labor Displacement & Value Erosion:</strong> Analyzing the real trajectory of automation beyond simplistic "job loss" narratives. This includes the deskilling of professions, wage suppression, and the erosion of meaning and economic value in human creative and cognitive labor.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Individual & Societal Harm (Section 7.5):</strong> The privacy trade-off. The fuel for personalized AI is intimate behavioral data, leading to pervasive surveillance, manipulative micro-targeting, and the erosion of personal autonomy and mental sovereignty.</li>
+                    <li><strong>Defensive Postures & Mitigation (Section 7.6):</strong> The emerging arms race for detection and provenance. We explore technical (watermarking, detectors), legislative (transparency requirements), and societal (digital literacy) responses aimed at restoring trust and enabling defense.</li>
+                </ul>
+
+                <h2>The Paradigm Shift: From AI Safety to Safety from AI.</h2>
+
+                <div class="highlight">
+                    <p>The focus is evolving from securing AI systems from hackers (AI security) towards protecting individuals, communities, and democratic institutions from harms caused or exacerbated by AI systems. This encompasses both malicious use and the unintended systemic consequences of benign applications.</p>
+                </div>
+
+                <p>This chapter provides a foundational map of this contested terrain. Its goal is to equip you with the critical framework to not only harness the power of AI but also to recognize its pitfalls, advocate for responsible development, and implement personal and organizational safeguards. Understanding these risks is the prerequisite for the ethical and sustainable integration of artificial intelligence into the human world.</p>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="/index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="7-1.html" class="nav-link">
+                    Next: 7.1 Deepfake Fraud <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">Introduction</span>
+                <span class="tag">AI Ethics</span>
+                <span class="tag">Risks</span>
+                <span class="tag">Safety</span>
+                <span class="tag">Accountability</span>
+                <span class="tag">Bias</span>
+                <span class="tag">Digital Literacy</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 7)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 7 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section7 = document.querySelector('.section-title[data-section="7"]');
+            if (section7) {
+                section7.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9.0 Introduction: Start Your AI Journey - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">9.0 Introduction: Start Your AI Journey</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-rocket"></i> Section 9: First Steps with AI</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 5 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>Welcome to the most practical and essential phase of your engagement with artificial intelligence. Up to this point, we have explored theory, risks, and capabilities. Now, it is time to move from knowledge to action. This chapter is your step-by-step roadmap for transitioning from the state of "I've heard about AI" to the state of "I use AI to solve my problems."</p>
+
+                <h2>Why starting now is not just trendy but critically important?</h2>
+
+                <div class="highlight">
+                    <p><strong>The Barrier to Entry Has Collapsed.</strong> Just a year ago, working with advanced AI required programming skills or complex configurations. Today, it is about intuitive web interfaces and apps accessible to anyone with a browser. You are only late if you don't start today.</p>
+                </div>
+
+                <div class="tip">
+                    <p><strong>Forming a Unique Skill.</strong> The ability to interact effectively with AI (prompt engineering, analyzing results, integrating it into workflows) is becoming a new form of digital literacy, as crucial as mastering office software was two decades ago. Those who acquire this skill first will gain a colossal advantage in the job market and business.</p>
+                </div>
+
+                <div class="note">
+                    <p><strong>Exponential Returns from Practice.</strong> Every successful dialogue with an AI, every image created, or every document analyzed does not just provide an immediate result. It trains your "intuitive understanding" of how the model "thinks," enabling you to set increasingly complex and precise tasks for it. This is a skill that grows geometrically.</p>
+                </div>
+
+                <h2>Your Starting Philosophy: "AI is not a wizard, but a smart, limited partner."</h2>
+
+                <p>Forget Hollywood images of all-knowing robots. The modern AI available to you is a powerful but literal tool. It does not understand context like a human, lacks common sense, and is prone to plausible-sounding confabulations ("hallucinations"). Your role is to become its director and editor—clearly setting the scene, providing context, and critically evaluating the results.</p>
+
+                <h2>What This Chapter Will Give You:</h2>
+
+                <p>We will move from the simplest, zero-risk steps to more complex integrations. You will learn:</p>
+
+                <ul>
+                    <li>Where to find the best free tools for text, image, and analysis without drowning in a sea of options.</li>
+                    <li>How to overcome the "blank page syndrome" and create your first meaningful results in minutes.</li>
+                    <li>The foundational principles for building effective "conversations" with AI to get exactly what you need.</li>
+                    <li>How to apply AI to real-world tasks you already face.</li>
+                </ul>
+
+                <div class="warning">
+                    <p><strong>A Fundamental Mindset Shift: From Consumer to Co-Creator.</strong></p>
+                    <p>You are not just launching an app. You are beginning a collaboration with a new type of intelligence. The quality of this collaboration depends 90% on you: on your ability to ask questions, provide feedback, and guide the process.</p>
+                </div>
+
+                <div class="highlight">
+                    <p>The goal of this chapter is not to make you an AI expert, but to make you a confident and competent user. To give you the keys to a new world of possibilities where your creativity and critical thinking, augmented by machine intelligence, can achieve results you previously considered inaccessible or requiring years of training.</p>
+                </div>
+
+                <p>Let's begin. Your first practical step is just a few clicks away.</p>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="/index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="9-1.html" class="nav-link">
+                    Next: 9.1 Best Free AI Tools <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">Introduction</span>
+                <span class="tag">Getting Started</span>
+                <span class="tag">Practical Guide</span>
+                <span class="tag">Mindset</span>
+                <span class="tag">First Steps</span>
+                <span class="tag">Co-Creator</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section (Section 9)
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open Section 9 for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const section9 = document.querySelector('.section-title[data-section="9"]');
+            if (section9) {
+                section9.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
