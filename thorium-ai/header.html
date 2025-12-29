@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thorium-AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: #ffffff;
+            color: #222222;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 1002;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu-toggle i {
+            font-size: 20px;
+            color: #333;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 320px;
+            background: #ffffff;
+            border-right: 1px solid #e5e5e5;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #e5e5e5;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            color: #333;
+            font-size: 22px;
+        }
+
+        .site-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .site-subtitle {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        /* Support Button */
+        .support-btn {
+            display: block;
+            padding: 12px 20px;
+            margin: 20px;
+            background: #f0f0f0;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .support-btn:hover {
+            background: #e8e8e8;
+            border-color: #ccc;
+        }
+
+        .support-icon {
+            color: #e25555;
+        }
+
+        /* Topics Navigation */
+        .topics-nav {
+            padding: 0 0 20px 0;
+        }
+
+        .topic-category {
+            margin-bottom: 24px;
+        }
+
+        .category-title {
+            padding: 8px 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .topic-section {
+            margin-bottom: 4px;
+        }
+
+        .section-title {
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.2s;
+            background: #f8f8f8;
+            border-left: 4px solid #4285f4;
+            margin: 8px 0;
+        }
+
+        .section-title:hover {
+            background: #f0f0f0;
+        }
+
+        .toggle-icon {
+            font-size: 12px;
+            color: #666;
+            transition: transform 0.2s;
+        }
+
+        .section-title.active .toggle-icon {
+            transform: rotate(90deg);
+        }
+
+        .topic-list {
+            display: none;
+        }
+
+        .section-title.active + .topic-list {
+            display: block;
+        }
+
+        .topic-item {
+            list-style: none;
+        }
+
+        .topic-link {
+            display: flex;
+            align-items: flex-start;
+            padding: 8px 20px 8px 28px;
+            color: #444;
+            text-decoration: none;
+            font-size: 13px;
+            line-height: 1.4;
+            transition: background 0.2s;
+            border-left: 1px solid transparent;
+        }
+
+        .topic-link:hover {
+            background: #f9f9f9;
+            border-left-color: #ccc;
+        }
+
+        .topic-link.active {
+            background: #f0f0f0;
+            color: #222;
+            border-left-color: #999;
+            font-weight: 500;
+        }
+
+        .topic-number {
+            color: #666;
+            font-size: 11px;
+            min-width: 24px;
+            margin-right: 8px;
+            font-variant-numeric: tabular-nums;
+            margin-top: 1px;
+        }
+
+        .intro-link {
+            color: #4285f4;
+            font-weight: 500;
+        }
+
+        .intro-link .topic-number {
+            color: #4285f4;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 320px;
+            flex: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .welcome-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+            background: #f8f9fa;
+        }
+
+        .welcome-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 24px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .welcome-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: left;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            color: #4285f4;
+            margin-bottom: 16px;
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .feature-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                width: 100%;
+                max-width: 320px;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .welcome-container {
+                padding: 20px;
+                padding-top: 80px; /* Добавим отступ сверху для мобильной версии */
+            }
+
+            .welcome-title {
+                font-size: 24px;
+                margin-top: 20px; /* Отступ от кнопки меню */
+            }
+
+            .welcome-subtitle {
+                font-size: 16px;
+            }
+
+            .welcome-features {
+                grid-template-columns: 1fr;
+            }
+
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.3);
+                z-index: 999;
+            }
+
+            .overlay.active {
+                display: block;
+            }
+
+            /* Убедимся, что заголовок в сайдбаре виден */
+            .sidebar-header {
+                padding-top: 60px; /* Отступ для кнопки меню */
+                min-height: 100px;
+            }
+
+            /* Увеличим зону клика для кнопки меню */
+            .mobile-menu-toggle {
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .topic-link {
+                padding: 8px 16px 8px 20px;
+                font-size: 12px;
+            }
+
+            .topic-number {
+                min-width: 20px;
+                margin-right: 6px;
+            }
+
+            .section-title {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+
+            .category-title {
+                padding: 8px 16px;
+            }
+
+            .sidebar-header {
+                padding: 16px;
+                padding-top: 70px; /* Больший отступ для очень маленьких экранов */
+            }
+
+            .support-btn {
+                margin: 16px;
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+
+            .welcome-container {
+                padding-top: 70px;
+            }
+
+            .welcome-title {
+                font-size: 22px;
+                margin-top: 15px;
+            }
+
+            .mobile-menu-toggle {
+                top: 12px;
+                left: 12px;
+            }
+        }
+
+        /* Дополнительные медиа-запросы для очень маленьких экранов */
+        @media (max-width: 360px) {
+            .mobile-menu-toggle {
+                top: 10px;
+                left: 10px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .sidebar-header {
+                padding-top: 60px;
+            }
+
+            .welcome-container {
+                padding-top: 60px;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a1a;
+                color: #e0e0e0;
+            }
+
+            .sidebar {
+                background: #1a1a1a;
+                border-right-color: #333;
+            }
+
+            .sidebar-header {
+                background: #1a1a1a;
+                border-bottom-color: #333;
+            }
+
+            .site-title {
+                color: #e0e0e0;
+            }
+
+            .site-subtitle {
+                color: #999;
+            }
+
+            .support-btn {
+                background: #2a2a2a;
+                border-color: #444;
+                color: #e0e0e0;
+            }
+
+            .section-title {
+                background: #2a2a2a;
+                color: #e0e0e0;
+                border-left-color: #4285f4;
+            }
+
+            .section-title:hover {
+                background: #333;
+            }
+
+            .topic-link {
+                color: #bbb;
+            }
+
+            .topic-link:hover {
+                background: #2a2a2a;
+                border-left-color: #666;
+            }
+
+            .topic-link.active {
+                background: #333;
+                color: #fff;
+                border-left-color: #888;
+            }
+
+            .intro-link {
+                color: #8ab4f8;
+            }
+
+            .intro-link .topic-number {
+                color: #8ab4f8;
+            }
+
+            .welcome-container {
+                background: #1a1a1a;
+            }
+
+            .welcome-title {
+                color: #e0e0e0;
+            }
+
+            .welcome-subtitle {
+                color: #999;
+            }
+
+            .feature-card {
+                background: #2a2a2a;
+                border-color: #333;
+            }
+
+            .feature-title {
+                color: #e0e0e0;
+            }
+
+            .feature-description {
+                color: #999;
+            }
+
+            .mobile-menu-toggle {
+                background: #2a2a2a;
+                border-color: #444;
+            }
+
+            .mobile-menu-toggle i {
+                color: #e0e0e0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-section">
+                <i class="fas fa-brain logo-icon"></i>
+                <div>
+                    <div class="site-title">Thorium-AI</div>
+                    <div class="site-subtitle">Distribution under the MIT license</div>
+                </div>
+            </div>
+        </div>
+
+        <a href="https://www.donationalerts.com/r/mobius_org" target="_blank" class="support-btn">
+            Support Project
+        </a>
+
+        <a href="https://t.me/mobius_org" target="_blank" class="support-btn">
+            Telegram Channel
+        </a>
+
+        <nav class="topics-nav">
+            <!-- Part 1: Practice -->
+            <div class="topic-category">
+                <div class="category-title">PRACTICAL AI</div>
+
+                <!-- Topic 1 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="1">
+                        <span>1. AI Around Us</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-1">
+                        <li class="topic-item"><a href="thorium-ai/1/1-0.html" class="topic-link intro-link"><span class="topic-number">1.0</span> Introduction: Where AI Already Works</a></li>
+                        <li class="topic-item"><a href="thorium-ai/1/1-1.html" class="topic-link"><span class="topic-number">1.1</span> YouTube/Netflix Recommendations</a></li>
+                        <li class="topic-item"><a href="thorium-ai/1/1-2.html" class="topic-link"><span class="topic-number">1.2</span> TikTok/Reels Algorithms</a></li>
+                        <li class="topic-item"><a href="thorium-ai/1/1-3.html" class="topic-link"><span class="topic-number">1.3</span> Voice Assistants</a></li>
+                        <li class="topic-item"><a href="thorium-ai/1/1-4.html" class="topic-link"><span class="topic-number">1.4</span> Social Media Filters</a></li>
+                        <li class="topic-item"><a href="thorium-ai/1/1-5.html" class="topic-link"><span class="topic-number">1.5</span> Text Autocorrection</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 2 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="2">
+                        <span>2. ChatGPT and Neural Networks</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-2">
+                        <li class="topic-item"><a href="thorium-ai/2/2-0.html" class="topic-link intro-link"><span class="topic-number">2.0</span> Introduction: ChatGPT Explained Simply</a></li>
+                        <li class="topic-item"><a href="thorium-ai/2/2-1.html" class="topic-link"><span class="topic-number">2.1</span> ChatGPT: How It Works</a></li>
+                        <li class="topic-item"><a href="thorium-ai/2/2-2.html" class="topic-link"><span class="topic-number">2.2</span> Midjourney/Stable Diffusion</a></li>
+                        <li class="topic-item"><a href="thorium-ai/2/2-3.html" class="topic-link"><span class="topic-number">2.3</span> Deepfake Technology</a></li>
+                        <li class="topic-item"><a href="thorium-ai/2/2-4.html" class="topic-link"><span class="topic-number">2.4</span> Voice Cloning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/2/2-5.html" class="topic-link"><span class="topic-number">2.5</span> Neural Network Translators</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 3 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="3">
+                        <span>3. AI Sensations</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-3">
+                        <li class="topic-item"><a href="thorium-ai/3/3-0.html" class="topic-link intro-link"><span class="topic-number">3.0</span> Introduction: AI Records and Breakthroughs</a></li>
+                        <li class="topic-item"><a href="thorium-ai/3/3-1.html" class="topic-link"><span class="topic-number">3.1</span> AlphaGo vs Lee Sedol</a></li>
+                        <li class="topic-item"><a href="thorium-ai/3/3-2.html" class="topic-link"><span class="topic-number">3.2</span> AlphaFold Discovery</a></li>
+                        <li class="topic-item"><a href="thorium-ai/3/3-3.html" class="topic-link"><span class="topic-number">3.3</span> Boston Dynamics Robots</a></li>
+                        <li class="topic-item"><a href="thorium-ai/3/3-4.html" class="topic-link"><span class="topic-number">3.4</span> OpenAI Valuation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/3/3-5.html" class="topic-link"><span class="topic-number">3.5</span> ChatGPT Growth</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 4 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="4">
+                        <span>4. Future is Now</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-4">
+                        <li class="topic-item"><a href="thorium-ai/4/4-0.html" class="topic-link intro-link"><span class="topic-number">4.0</span> Introduction: Future That's Already Here</a></li>
+                        <li class="topic-item"><a href="thorium-ai/4/4-1.html" class="topic-link"><span class="topic-number">4.1</span> AI Doctor Diagnosis</a></li>
+                        <li class="topic-item"><a href="thorium-ai/4/4-2.html" class="topic-link"><span class="topic-number">4.2</span> Personal Teacher</a></li>
+                        <li class="topic-item"><a href="thorium-ai/4/4-3.html" class="topic-link"><span class="topic-number">4.3</span> Movies with Age Regression</a></li>
+                        <li class="topic-item"><a href="thorium-ai/4/4-4.html" class="topic-link"><span class="topic-number">4.4</span> Self-Driving Cars</a></li>
+                        <li class="topic-item"><a href="thorium-ai/4/4-5.html" class="topic-link"><span class="topic-number">4.5</span> Smart Home of the Future</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 5 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="5">
+                        <span>5. Talking to AI</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-5">
+                        <li class="topic-item"><a href="thorium-ai/5/5-0.html" class="topic-link intro-link"><span class="topic-number">5.0</span> Introduction: Prompt Engineering for Everyone</a></li>
+                        <li class="topic-item"><a href="thorium-ai/5/5-1.html" class="topic-link"><span class="topic-number">5.1</span> Prompt Differences</a></li>
+                        <li class="topic-item"><a href="thorium-ai/5/5-2.html" class="topic-link"><span class="topic-number">5.2</span> Magic Phrases</a></li>
+                        <li class="topic-item"><a href="thorium-ai/5/5-3.html" class="topic-link"><span class="topic-number">5.3</span> ChatGPT Writing Styles</a></li>
+                        <li class="topic-item"><a href="thorium-ai/5/5-4.html" class="topic-link"><span class="topic-number">5.4</span> Forbidden Questions</a></li>
+                        <li class="topic-item"><a href="thorium-ai/5/5-5.html" class="topic-link"><span class="topic-number">5.5</span> Best Prompts</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 6 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="6">
+                        <span>6. AI for Hobbies</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-6">
+                        <li class="topic-item"><a href="thorium-ai/6/6-0.html" class="topic-link intro-link"><span class="topic-number">6.0</span> Introduction: AI for Creativity and Daily Life</a></li>
+                        <li class="topic-item"><a href="thorium-ai/6/6-1.html" class="topic-link"><span class="topic-number">6.1</span> Writing a Book</a></li>
+                        <li class="topic-item"><a href="thorium-ai/6/6-2.html" class="topic-link"><span class="topic-number">6.2</span> Creating Music</a></li>
+                        <li class="topic-item"><a href="thorium-ai/6/6-3.html" class="topic-link"><span class="topic-number">6.3</span> Cooking with AI</a></li>
+                        <li class="topic-item"><a href="thorium-ai/6/6-4.html" class="topic-link"><span class="topic-number">6.4</span> Interior Design</a></li>
+                        <li class="topic-item"><a href="thorium-ai/6/6-5.html" class="topic-link"><span class="topic-number">6.5</span> Gardening</a></li>
+                        <li class="topic-item"><a href="thorium-ai/6/6-6.html" class="topic-link"><span class="topic-number">6.6</span> Fitness Program</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 7 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="7">
+                        <span>7. Dangers and Ethics</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-7">
+                        <li class="topic-item"><a href="thorium-ai/7/7-0.html" class="topic-link intro-link"><span class="topic-number">7.0</span> Introduction: Risks, Ethics and Protection</a></li>
+                        <li class="topic-item"><a href="thorium-ai/7/7-1.html" class="topic-link"><span class="topic-number">7.1</span> Deepfake Fraud</a></li>
+                        <li class="topic-item"><a href="thorium-ai/7/7-2.html" class="topic-link"><span class="topic-number">7.2</span> AI Phone Calls</a></li>
+                        <li class="topic-item"><a href="thorium-ai/7/7-3.html" class="topic-link"><span class="topic-number">7.3</span> AI Bias</a></li>
+                        <li class="topic-item"><a href="thorium-ai/7/7-4.html" class="topic-link"><span class="topic-number">7.4</span> Disappearing Professions</a></li>
+                        <li class="topic-item"><a href="thorium-ai/7/7-5.html" class="topic-link"><span class="topic-number">7.5</span> Privacy</a></li>
+                        <li class="topic-item"><a href="thorium-ai/7/7-6.html" class="topic-link"><span class="topic-number">7.6</span> Content Detection</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Part 2: Fundamentals -->
+            <div class="topic-category">
+                <div class="category-title">AI FUNDAMENTALS</div>
+
+                <!-- Topic 8 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="8">
+                        <span>8. AI History</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-8">
+                        <li class="topic-item"><a href="thorium-ai/8/8-0.html" class="topic-link intro-link"><span class="topic-number">8.0</span> Introduction: From Myths to Reality</a></li>
+                        <li class="topic-item"><a href="thorium-ai/8/8-1.html" class="topic-link"><span class="topic-number">8.1</span> Ancient Myths</a></li>
+                        <li class="topic-item"><a href="thorium-ai/8/8-2.html" class="topic-link"><span class="topic-number">8.2</span> Alan Turing</a></li>
+                        <li class="topic-item"><a href="thorium-ai/8/8-3.html" class="topic-link"><span class="topic-number">8.3</span> First AI Winter</a></li>
+                        <li class="topic-item"><a href="thorium-ai/8/8-4.html" class="topic-link"><span class="topic-number">8.4</span> Expert Systems</a></li>
+                        <li class="topic-item"><a href="thorium-ai/8/8-5.html" class="topic-link"><span class="topic-number">8.5</span> Second AI Winter</a></li>
+                        <li class="topic-item"><a href="thorium-ai/8/8-6.html" class="topic-link"><span class="topic-number">8.6</span> Renaissance 2010s</a></li>
+                        <li class="topic-item"><a href="thorium-ai/8/8-7.html" class="topic-link"><span class="topic-number">8.7</span> 2020s and ChatGPT</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 9 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="9">
+                        <span>9. AI Philosophy</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-9">
+                        <li class="topic-item"><a href="thorium-ai/9/9-0.html" class="topic-link intro-link"><span class="topic-number">9.0</span> Introduction: Can Machines "Think"?</a></li>
+                        <li class="topic-item"><a href="thorium-ai/9/9-1.html" class="topic-link"><span class="topic-number">9.1</span> Turing Test</a></li>
+                        <li class="topic-item"><a href="thorium-ai/9/9-2.html" class="topic-link"><span class="topic-number">9.2</span> Chinese Room</a></li>
+                        <li class="topic-item"><a href="thorium-ai/9/9-3.html" class="topic-link"><span class="topic-number">9.3</span> Hard Problem of Consciousness</a></li>
+                        <li class="topic-item"><a href="thorium-ai/9/9-4.html" class="topic-link"><span class="topic-number">9.4</span> Functionalism</a></li>
+                        <li class="topic-item"><a href="thorium-ai/9/9-5.html" class="topic-link"><span class="topic-number">9.5</span> Qualia</a></li>
+                        <li class="topic-item"><a href="thorium-ai/9/9-6.html" class="topic-link"><span class="topic-number">9.6</span> AI and Rights</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 10 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="10">
+                        <span>10. AI Types</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-10">
+                        <li class="topic-item"><a href="thorium-ai/10/10-0.html" class="topic-link intro-link"><span class="topic-number">10.0</span> Introduction: Classification of AI Systems</a></li>
+                        <li class="topic-item"><a href="thorium-ai/10/10-1.html" class="topic-link"><span class="topic-number">10.1</span> Narrow AI</a></li>
+                        <li class="topic-item"><a href="thorium-ai/10/10-2.html" class="topic-link"><span class="topic-number">10.2</span> General AI (AGI)</a></li>
+                        <li class="topic-item"><a href="thorium-ai/10/10-3.html" class="topic-link"><span class="topic-number">10.3</span> Superintelligence</a></li>
+                        <li class="topic-item"><a href="thorium-ai/10/10-4.html" class="topic-link"><span class="topic-number">10.4</span> Artificial Superintelligence</a></li>
+                        <li class="topic-item"><a href="thorium-ai/10/10-5.html" class="topic-link"><span class="topic-number">10.5</span> Reactive Machines</a></li>
+                        <li class="topic-item"><a href="thorium-ai/10/10-6.html" class="topic-link"><span class="topic-number">10.6</span> Limited Memory</a></li>
+                        <li class="topic-item"><a href="thorium-ai/10/10-7.html" class="topic-link"><span class="topic-number">10.7</span> Theory of Mind</a></li>
+                        <li class="topic-item"><a href="thorium-ai/10/10-8.html" class="topic-link"><span class="topic-number">10.8</span> Self-aware AI</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 11 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="11">
+                        <span>11. AI Approaches</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-11">
+                        <li class="topic-item"><a href="thorium-ai/11/11-0.html" class="topic-link intro-link"><span class="topic-number">11.0</span> Introduction: Methods for Creating AI</a></li>
+                        <li class="topic-item"><a href="thorium-ai/11/11-1.html" class="topic-link"><span class="topic-number">11.1</span> Symbolic AI</a></li>
+                        <li class="topic-item"><a href="thorium-ai/11/11-2.html" class="topic-link"><span class="topic-number">11.2</span> Connectionism</a></li>
+                        <li class="topic-item"><a href="thorium-ai/11/11-3.html" class="topic-link"><span class="topic-number">11.3</span> Evolutionary Algorithms</a></li>
+                        <li class="topic-item"><a href="thorium-ai/11/11-4.html" class="topic-link"><span class="topic-number">11.4</span> Bayesian Networks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/11/11-5.html" class="topic-link"><span class="topic-number">11.5</span> Hybrid Systems</a></li>
+                        <li class="topic-item"><a href="thorium-ai/11/11-6.html" class="topic-link"><span class="topic-number">11.6</span> Neuromorphic Computing</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Part 3: Mathematics -->
+            <div class="topic-category">
+                <div class="category-title">MATHEMATICS FOR AI</div>
+
+                <!-- Topic 12 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="12">
+                        <span>12. Mathematics in AI</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-12">
+                        <li class="topic-item"><a href="thorium-ai/12/12-0.html" class="topic-link intro-link"><span class="topic-number">12.0</span> Introduction: Why AI is Math in Action</a></li>
+                        <li class="topic-item"><a href="thorium-ai/12/12-1.html" class="topic-link"><span class="topic-number">12.1</span> World Abstraction</a></li>
+                        <li class="topic-item"><a href="thorium-ai/12/12-2.html" class="topic-link"><span class="topic-number">12.2</span> Discrete vs Continuous</a></li>
+                        <li class="topic-item"><a href="thorium-ai/12/12-3.html" class="topic-link"><span class="topic-number">12.3</span> Computational Complexity</a></li>
+                        <li class="topic-item"><a href="thorium-ai/12/12-4.html" class="topic-link"><span class="topic-number">12.4</span> Information Theory</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 13 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="13">
+                        <span>13. Linear Algebra</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-13">
+                        <li class="topic-item"><a href="thorium-ai/13/13-0.html" class="topic-link intro-link"><span class="topic-number">13.0</span> Introduction: Language of Neural Networks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/13/13-1.html" class="topic-link"><span class="topic-number">13.1</span> Scalars, Vectors, Matrices</a></li>
+                        <li class="topic-item"><a href="thorium-ai/13/13-2.html" class="topic-link"><span class="topic-number">13.2</span> Vector Spaces</a></li>
+                        <li class="topic-item"><a href="thorium-ai/13/13-3.html" class="topic-link"><span class="topic-number">13.3</span> Addition and Multiplication</a></li>
+                        <li class="topic-item"><a href="thorium-ai/13/13-4.html" class="topic-link"><span class="topic-number">13.4</span> Eigenvalues</a></li>
+                        <li class="topic-item"><a href="thorium-ai/13/13-5.html" class="topic-link"><span class="topic-number">13.5</span> Matrix Decompositions</a></li>
+                        <li class="topic-item"><a href="thorium-ai/13/13-6.html" class="topic-link"><span class="topic-number">13.6</span> Neural Network as Pipeline</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 14 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="14">
+                        <span>14. Mathematical Analysis</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-14">
+                        <li class="topic-item"><a href="thorium-ai/14/14-0.html" class="topic-link intro-link"><span class="topic-number">14.0</span> Introduction: How AI Learns</a></li>
+                        <li class="topic-item"><a href="thorium-ai/14/14-1.html" class="topic-link"><span class="topic-number">14.1</span> Derivatives</a></li>
+                        <li class="topic-item"><a href="thorium-ai/14/14-2.html" class="topic-link"><span class="topic-number">14.2</span> Gradients</a></li>
+                        <li class="topic-item"><a href="thorium-ai/14/14-3.html" class="topic-link"><span class="topic-number">14.3</span> Optimization</a></li>
+                        <li class="topic-item"><a href="thorium-ai/14/14-4.html" class="topic-link"><span class="topic-number">14.4</span> Chain Rule</a></li>
+                        <li class="topic-item"><a href="thorium-ai/14/14-5.html" class="topic-link"><span class="topic-number">14.5</span> Mountain Descent Analogy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 15 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="15">
+                        <span>15. Probability Theory</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-15">
+                        <li class="topic-item"><a href="thorium-ai/15/15-0.html" class="topic-link intro-link"><span class="topic-number">15.0</span> Introduction: World of Uncertainty</a></li>
+                        <li class="topic-item"><a href="thorium-ai/15/15-1.html" class="topic-link"><span class="topic-number">15.1</span> Distributions</a></li>
+                        <li class="topic-item"><a href="thorium-ai/15/15-2.html" class="topic-link"><span class="topic-number">15.2</span> Conditional Probability</a></li>
+                        <li class="topic-item"><a href="thorium-ai/15/15-3.html" class="topic-link"><span class="topic-number">15.3</span> Bayes Theorem</a></li>
+                        <li class="topic-item"><a href="thorium-ai/15/15-4.html" class="topic-link"><span class="topic-number">15.4</span> Random Variables</a></li>
+                        <li class="topic-item"><a href="thorium-ai/15/15-5.html" class="topic-link"><span class="topic-number">15.5</span> Markov Processes</a></li>
+                        <li class="topic-item"><a href="thorium-ai/15/15-6.html" class="topic-link"><span class="topic-number">15.6</span> Spam Filter Example</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 16 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="16">
+                        <span>16. Information Theory</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-16">
+                        <li class="topic-item"><a href="thorium-ai/16/16-0.html" class="topic-link intro-link"><span class="topic-number">16.0</span> Introduction: Measuring Information</a></li>
+                        <li class="topic-item"><a href="thorium-ai/16/16-1.html" class="topic-link"><span class="topic-number">16.1</span> Shannon Entropy</a></li>
+                        <li class="topic-item"><a href="thorium-ai/16/16-2.html" class="topic-link"><span class="topic-number">16.2</span> Information Entropy</a></li>
+                        <li class="topic-item"><a href="thorium-ai/16/16-3.html" class="topic-link"><span class="topic-number">16.3</span> KL-Divergence</a></li>
+                        <li class="topic-item"><a href="thorium-ai/16/16-4.html" class="topic-link"><span class="topic-number">16.4</span> Mutual Information</a></li>
+                        <li class="topic-item"><a href="thorium-ai/16/16-5.html" class="topic-link"><span class="topic-number">16.5</span> Cross-entropy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Part 4: Machine Learning -->
+            <div class="topic-category">
+                <div class="category-title">MACHINE LEARNING</div>
+
+                <!-- Topic 17 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="17">
+                        <span>17. ML Basics</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-17">
+                        <li class="topic-item"><a href="thorium-ai/17/17-0.html" class="topic-link intro-link"><span class="topic-number">17.0</span> Introduction: Learning from Examples</a></li>
+                        <li class="topic-item"><a href="thorium-ai/17/17-1.html" class="topic-link"><span class="topic-number">17.1</span> Programming vs Learning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/17/17-2.html" class="topic-link"><span class="topic-number">17.2</span> Data-driven Philosophy</a></li>
+                        <li class="topic-item"><a href="thorium-ai/17/17-3.html" class="topic-link"><span class="topic-number">17.3</span> Models and Algorithms</a></li>
+                        <li class="topic-item"><a href="thorium-ai/17/17-4.html" class="topic-link"><span class="topic-number">17.4</span> Generalization Ability</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 18 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="18">
+                        <span>18. Learning Types</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-18">
+                        <li class="topic-item"><a href="thorium-ai/18/18-0.html" class="topic-link intro-link"><span class="topic-number">18.0</span> Introduction: How Systems Learn</a></li>
+                        <li class="topic-item"><a href="thorium-ai/18/18-1.html" class="topic-link"><span class="topic-number">18.1</span> Supervised Learning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/18/18-2.html" class="topic-link"><span class="topic-number">18.2</span> Unsupervised Learning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/18/18-3.html" class="topic-link"><span class="topic-number">18.3</span> Semi-supervised Learning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/18/18-4.html" class="topic-link"><span class="topic-number">18.4</span> Reinforcement Learning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/18/18-5.html" class="topic-link"><span class="topic-number">18.5</span> Self-supervised Learning</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 19 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="19">
+                        <span>19. Metrics and Evaluation</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-19">
+                        <li class="topic-item"><a href="thorium-ai/19/19-0.html" class="topic-link intro-link"><span class="topic-number">19.0</span> Introduction: How to Evaluate Models</a></li>
+                        <li class="topic-item"><a href="thorium-ai/19/19-1.html" class="topic-link"><span class="topic-number">19.1</span> Loss Functions</a></li>
+                        <li class="topic-item"><a href="thorium-ai/19/19-2.html" class="topic-link"><span class="topic-number">19.2</span> Accuracy, Precision, Recall</a></li>
+                        <li class="topic-item"><a href="thorium-ai/19/19-3.html" class="topic-link"><span class="topic-number">19.3</span> ROC-AUC Curve</a></li>
+                        <li class="topic-item"><a href="thorium-ai/19/19-4.html" class="topic-link"><span class="topic-number">19.4</span> Confusion Matrix</a></li>
+                        <li class="topic-item"><a href="thorium-ai/19/19-5.html" class="topic-link"><span class="topic-number">19.5</span> Overfitting and Underfitting</a></li>
+                        <li class="topic-item"><a href="thorium-ai/19/19-6.html" class="topic-link"><span class="topic-number">19.6</span> Bias-variance Tradeoff</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 20 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="20">
+                        <span>20. ML Algorithms</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-20">
+                        <li class="topic-item"><a href="thorium-ai/20/20-0.html" class="topic-link intro-link"><span class="topic-number">20.0</span> Introduction: Basic ML Algorithms</a></li>
+                        <li class="topic-item"><a href="thorium-ai/20/20-1.html" class="topic-link"><span class="topic-number">20.1</span> Linear Regression</a></li>
+                        <li class="topic-item"><a href="thorium-ai/20/20-2.html" class="topic-link"><span class="topic-number">20.2</span> Logistic Regression</a></li>
+                        <li class="topic-item"><a href="thorium-ai/20/20-3.html" class="topic-link"><span class="topic-number">20.3</span> k-Nearest Neighbors</a></li>
+                        <li class="topic-item"><a href="thorium-ai/20/20-4.html" class="topic-link"><span class="topic-number">20.4</span> Decision Trees</a></li>
+                        <li class="topic-item"><a href="thorium-ai/20/20-5.html" class="topic-link"><span class="topic-number">20.5</span> Random Forests</a></li>
+                        <li class="topic-item"><a href="thorium-ai/20/20-6.html" class="topic-link"><span class="topic-number">20.6</span> Support Vector Machines</a></li>
+                        <li class="topic-item"><a href="thorium-ai/20/20-7.html" class="topic-link"><span class="topic-number">20.7</span> k-means Clustering</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Part 5: Neural Networks -->
+            <div class="topic-category">
+                <div class="category-title">NEURAL NETWORKS</div>
+
+                <!-- Topic 21 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="21">
+                        <span>21. Neural Networks Biology</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-21">
+                        <li class="topic-item"><a href="thorium-ai/21/21-0.html" class="topic-link intro-link"><span class="topic-number">21.0</span> Introduction: Biological Basis</a></li>
+                        <li class="topic-item"><a href="thorium-ai/21/21-1.html" class="topic-link"><span class="topic-number">21.1</span> Biological Neuron</a></li>
+                        <li class="topic-item"><a href="thorium-ai/21/21-2.html" class="topic-link"><span class="topic-number">21.2</span> Synapses and Neurotransmitters</a></li>
+                        <li class="topic-item"><a href="thorium-ai/21/21-3.html" class="topic-link"><span class="topic-number">21.3</span> Action Potential</a></li>
+                        <li class="topic-item"><a href="thorium-ai/21/21-4.html" class="topic-link"><span class="topic-number">21.4</span> Neural Networks in Brain</a></li>
+                        <li class="topic-item"><a href="thorium-ai/21/21-5.html" class="topic-link"><span class="topic-number">21.5</span> Neuroplasticity</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 22 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="22">
+                        <span>22. Neuron Model</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-22">
+                        <li class="topic-item"><a href="thorium-ai/22/22-0.html" class="topic-link intro-link"><span class="topic-number">22.0</span> Introduction: Mathematical Model</a></li>
+                        <li class="topic-item"><a href="thorium-ai/22/22-1.html" class="topic-link"><span class="topic-number">22.1</span> Artificial Neuron</a></li>
+                        <li class="topic-item"><a href="thorium-ai/22/22-2.html" class="topic-link"><span class="topic-number">22.2</span> Weighted Sum of Inputs</a></li>
+                        <li class="topic-item"><a href="thorium-ai/22/22-3.html" class="topic-link"><span class="topic-number">22.3</span> Activation Function</a></li>
+                        <li class="topic-item"><a href="thorium-ai/22/22-4.html" class="topic-link"><span class="topic-number">22.4</span> Firing Threshold</a></li>
+                        <li class="topic-item"><a href="thorium-ai/22/22-5.html" class="topic-link"><span class="topic-number">22.5</span> Bias Term</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 23 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="23">
+                        <span>23. Neural Network Architecture</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-23">
+                        <li class="topic-item"><a href="thorium-ai/23/23-0.html" class="topic-link intro-link"><span class="topic-number">23.0</span> Introduction: Structure of Neural Networks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/23/23-1.html" class="topic-link"><span class="topic-number">23.1</span> Input Layer</a></li>
+                        <li class="topic-item"><a href="thorium-ai/23/23-2.html" class="topic-link"><span class="topic-number">23.2</span> Hidden Layers</a></li>
+                        <li class="topic-item"><a href="thorium-ai/23/23-3.html" class="topic-link"><span class="topic-number">23.3</span> Output Layer</a></li>
+                        <li class="topic-item"><a href="thorium-ai/23/23-4.html" class="topic-link"><span class="topic-number">23.4</span> Fully Connected Networks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/23/23-5.html" class="topic-link"><span class="topic-number">23.5</span> Depth vs Width</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 24 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="24">
+                        <span>24. Activation Functions</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-24">
+                        <li class="topic-item"><a href="thorium-ai/24/24-0.html" class="topic-link intro-link"><span class="topic-number">24.0</span> Introduction: Neuron Activation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/24/24-1.html" class="topic-link"><span class="topic-number">24.1</span> Step Function</a></li>
+                        <li class="topic-item"><a href="thorium-ai/24/24-2.html" class="topic-link"><span class="topic-number">24.2</span> Sigmoid</a></li>
+                        <li class="topic-item"><a href="thorium-ai/24/24-3.html" class="topic-link"><span class="topic-number">24.3</span> Tanh</a></li>
+                        <li class="topic-item"><a href="thorium-ai/24/24-4.html" class="topic-link"><span class="topic-number">24.4</span> ReLU</a></li>
+                        <li class="topic-item"><a href="thorium-ai/24/24-5.html" class="topic-link"><span class="topic-number">24.5</span> Leaky ReLU, ELU, SELU</a></li>
+                        <li class="topic-item"><a href="thorium-ai/24/24-6.html" class="topic-link"><span class="topic-number">24.6</span> Softmax</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 25 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="25">
+                        <span>25. Backpropagation</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-25">
+                        <li class="topic-item"><a href="thorium-ai/25/25-0.html" class="topic-link intro-link"><span class="topic-number">25.0</span> Introduction: How Neural Networks Learn</a></li>
+                        <li class="topic-item"><a href="thorium-ai/25/25-1.html" class="topic-link"><span class="topic-number">25.1</span> Forward Propagation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/25/25-2.html" class="topic-link"><span class="topic-number">25.2</span> Error Calculation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/25/25-3.html" class="topic-link"><span class="topic-number">25.3</span> Backward Propagation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/25/25-4.html" class="topic-link"><span class="topic-number">25.4</span> Gradient Descent</a></li>
+                        <li class="topic-item"><a href="thorium-ai/25/25-5.html" class="topic-link"><span class="topic-number">25.5</span> Stochastic Gradient Descent</a></li>
+                        <li class="topic-item"><a href="thorium-ai/25/25-6.html" class="topic-link"><span class="topic-number">25.6</span> Optimizers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 26 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="26">
+                        <span>26. Learning Problems</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-26">
+                        <li class="topic-item"><a href="thorium-ai/26/26-0.html" class="topic-link intro-link"><span class="topic-number">26.0</span> Introduction: Challenges in Training</a></li>
+                        <li class="topic-item"><a href="thorium-ai/26/26-1.html" class="topic-link"><span class="topic-number">26.1</span> Vanishing Gradients</a></li>
+                        <li class="topic-item"><a href="thorium-ai/26/26-2.html" class="topic-link"><span class="topic-number">26.2</span> Exploding Gradients</a></li>
+                        <li class="topic-item"><a href="thorium-ai/26/26-3.html" class="topic-link"><span class="topic-number">26.3</span> Overfitting</a></li>
+                        <li class="topic-item"><a href="thorium-ai/26/26-4.html" class="topic-link"><span class="topic-number">26.4</span> Local Minima vs Global</a></li>
+                        <li class="topic-item"><a href="thorium-ai/26/26-5.html" class="topic-link"><span class="topic-number">26.5</span> Mode Collapse</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 27 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="27">
+                        <span>27. Regularization</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-27">
+                        <li class="topic-item"><a href="thorium-ai/27/27-0.html" class="topic-link intro-link"><span class="topic-number">27.0</span> Introduction: Preventing Overfitting</a></li>
+                        <li class="topic-item"><a href="thorium-ai/27/27-1.html" class="topic-link"><span class="topic-number">27.1</span> L1 and L2 Regularization</a></li>
+                        <li class="topic-item"><a href="thorium-ai/27/27-2.html" class="topic-link"><span class="topic-number">27.2</span> Dropout</a></li>
+                        <li class="topic-item"><a href="thorium-ai/27/27-3.html" class="topic-link"><span class="topic-number">27.3</span> Batch Normalization</a></li>
+                        <li class="topic-item"><a href="thorium-ai/27/27-4.html" class="topic-link"><span class="topic-number">27.4</span> Data Augmentation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/27/27-5.html" class="topic-link"><span class="topic-number">27.5</span> Early Stopping</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Part 6: Deep Learning -->
+            <div class="topic-category">
+                <div class="category-title">DEEP LEARNING</div>
+
+                <!-- Topic 28 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="28">
+                        <span>28. Convolutional Neural Networks (CNN)</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-28">
+                        <li class="topic-item"><a href="thorium-ai/28/28-0.html" class="topic-link intro-link"><span class="topic-number">28.0</span> Introduction: What are CNNs?</a></li>
+                        <li class="topic-item"><a href="thorium-ai/28/28-1.html" class="topic-link"><span class="topic-number">28.1</span> Convolution Principle</a></li>
+                        <li class="topic-item"><a href="thorium-ai/28/28-2.html" class="topic-link"><span class="topic-number">28.2</span> Convolutional Layers</a></li>
+                        <li class="topic-item"><a href="thorium-ai/28/28-3.html" class="topic-link"><span class="topic-number">28.3</span> Pooling Layers</a></li>
+                        <li class="topic-item"><a href="thorium-ai/28/28-4.html" class="topic-link"><span class="topic-number">28.4</span> Filters and Feature Maps</a></li>
+                        <li class="topic-item"><a href="thorium-ai/28/28-5.html" class="topic-link"><span class="topic-number">28.5</span> CNN Architectures</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 29 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="29">
+                        <span>29. CNN Applications</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-29">
+                        <li class="topic-item"><a href="thorium-ai/29/29-0.html" class="topic-link intro-link"><span class="topic-number">29.0</span> Introduction: Where CNNs are Used</a></li>
+                        <li class="topic-item"><a href="thorium-ai/29/29-1.html" class="topic-link"><span class="topic-number">29.1</span> Edge Detection</a></li>
+                        <li class="topic-item"><a href="thorium-ai/29/29-2.html" class="topic-link"><span class="topic-number">29.2</span> Object Recognition</a></li>
+                        <li class="topic-item"><a href="thorium-ai/29/29-3.html" class="topic-link"><span class="topic-number">29.3</span> Semantic Segmentation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/29/29-4.html" class="topic-link"><span class="topic-number">29.4</span> Style Transfer</a></li>
+                        <li class="topic-item"><a href="thorium-ai/29/29-5.html" class="topic-link"><span class="topic-number">29.5</span> Autoencoders</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 30 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="30">
+                        <span>30. Recurrent Neural Networks (RNN)</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-30">
+                        <li class="topic-item"><a href="thorium-ai/30/30-0.html" class="topic-link intro-link"><span class="topic-number">30.0</span> Introduction: What are RNNs?</a></li>
+                        <li class="topic-item"><a href="thorium-ai/30/30-1.html" class="topic-link"><span class="topic-number">30.1</span> Working with Sequences</a></li>
+                        <li class="topic-item"><a href="thorium-ai/30/30-2.html" class="topic-link"><span class="topic-number">30.2</span> Recurrent Connections</a></li>
+                        <li class="topic-item"><a href="thorium-ai/30/30-3.html" class="topic-link"><span class="topic-number">30.3</span> Hidden State</a></li>
+                        <li class="topic-item"><a href="thorium-ai/30/30-4.html" class="topic-link"><span class="topic-number">30.4</span> Long-term Dependencies</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 31 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="31">
+                        <span>31. LSTM and GRU</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-31">
+                        <li class="topic-item"><a href="thorium-ai/31/31-0.html" class="topic-link intro-link"><span class="topic-number">31.0</span> Introduction: Advanced RNNs</a></li>
+                        <li class="topic-item"><a href="thorium-ai/31/31-1.html" class="topic-link"><span class="topic-number">31.1</span> Long Short-Term Memory</a></li>
+                        <li class="topic-item"><a href="thorium-ai/31/31-2.html" class="topic-link"><span class="topic-number">31.2</span> Gate Mechanisms</a></li>
+                        <li class="topic-item"><a href="thorium-ai/31/31-3.html" class="topic-link"><span class="topic-number">31.3</span> Cell State</a></li>
+                        <li class="topic-item"><a href="thorium-ai/31/31-4.html" class="topic-link"><span class="topic-number">31.4</span> Gated Recurrent Units</a></li>
+                        <li class="topic-item"><a href="thorium-ai/31/31-5.html" class="topic-link"><span class="topic-number">31.5</span> Bidirectional RNN</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 32 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="32">
+                        <span>32. Transformer Architecture</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-32">
+                        <li class="topic-item"><a href="thorium-ai/32/32-0.html" class="topic-link intro-link"><span class="topic-number">32.0</span> Introduction: What are Transformers?</a></li>
+                        <li class="topic-item"><a href="thorium-ai/32/32-1.html" class="topic-link"><span class="topic-number">32.1</span> Attention Mechanism</a></li>
+                        <li class="topic-item"><a href="thorium-ai/32/32-2.html" class="topic-link"><span class="topic-number">32.2</span> Self-attention</a></li>
+                        <li class="topic-item"><a href="thorium-ai/32/32-3.html" class="topic-link"><span class="topic-number">32.3</span> Multi-head Attention</a></li>
+                        <li class="topic-item"><a href="thorium-ai/32/32-4.html" class="topic-link"><span class="topic-number">32.4</span> Positional Encoding</a></li>
+                        <li class="topic-item"><a href="thorium-ai/32/32-5.html" class="topic-link"><span class="topic-number">32.5</span> Encoder-decoder</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 33 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="33">
+                        <span>33. Transformer Architectures</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-33">
+                        <li class="topic-item"><a href="thorium-ai/33/33-0.html" class="topic-link intro-link"><span class="topic-number">33.0</span> Introduction: Models Based on Transformer</a></li>
+                        <li class="topic-item"><a href="thorium-ai/33/33-1.html" class="topic-link"><span class="topic-number">33.1</span> BERT</a></li>
+                        <li class="topic-item"><a href="thorium-ai/33/33-2.html" class="topic-link"><span class="topic-number">33.2</span> GPT</a></li>
+                        <li class="topic-item"><a href="thorium-ai/33/33-3.html" class="topic-link"><span class="topic-number">33.3</span> T5</a></li>
+                        <li class="topic-item"><a href="thorium-ai/33/33-4.html" class="topic-link"><span class="topic-number">33.4</span> Vision Transformer</a></li>
+                        <li class="topic-item"><a href="thorium-ai/33/33-5.html" class="topic-link"><span class="topic-number">33.5</span> Multimodal Transformers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 34 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="34">
+                        <span>34. Generative Models</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-34">
+                        <li class="topic-item"><a href="thorium-ai/34/34-0.html" class="topic-link intro-link"><span class="topic-number">34.0</span> Introduction: AI that Creates</a></li>
+                        <li class="topic-item"><a href="thorium-ai/34/34-1.html" class="topic-link"><span class="topic-number">34.1</span> Autoencoders</a></li>
+                        <li class="topic-item"><a href="thorium-ai/34/34-2.html" class="topic-link"><span class="topic-number">34.2</span> Variational Autoencoders</a></li>
+                        <li class="topic-item"><a href="thorium-ai/34/34-3.html" class="topic-link"><span class="topic-number">34.3</span> Generative Adversarial Networks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/34/34-4.html" class="topic-link"><span class="topic-number">34.4</span> Diffusion Models</a></li>
+                        <li class="topic-item"><a href="thorium-ai/34/34-5.html" class="topic-link"><span class="topic-number">34.5</span> Normalizing Flows</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Part 7: Applied Directions -->
+            <div class="topic-category">
+                <div class="category-title">APPLIED DIRECTIONS</div>
+
+                <!-- Topic 35 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="35">
+                        <span>35. Natural Language Processing (NLP)</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-35">
+                        <li class="topic-item"><a href="thorium-ai/35/35-0.html" class="topic-link intro-link"><span class="topic-number">35.0</span> Introduction: AI Understanding Language</a></li>
+                        <li class="topic-item"><a href="thorium-ai/35/35-1.html" class="topic-link"><span class="topic-number">35.1</span> Text Tokenization</a></li>
+                        <li class="topic-item"><a href="thorium-ai/35/35-2.html" class="topic-link"><span class="topic-number">35.2</span> Bag of Words</a></li>
+                        <li class="topic-item"><a href="thorium-ai/35/35-3.html" class="topic-link"><span class="topic-number">35.3</span> TF-IDF</a></li>
+                        <li class="topic-item"><a href="thorium-ai/35/35-4.html" class="topic-link"><span class="topic-number">35.4</span> Word Embeddings</a></li>
+                        <li class="topic-item"><a href="thorium-ai/35/35-5.html" class="topic-link"><span class="topic-number">35.5</span> Contextual Embeddings</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 36 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="36">
+                        <span>36. Modern NLP Models</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-36">
+                        <li class="topic-item"><a href="thorium-ai/36/36-0.html" class="topic-link intro-link"><span class="topic-number">36.0</span> Introduction: State of NLP Today</a></li>
+                        <li class="topic-item"><a href="thorium-ai/36/36-1.html" class="topic-link"><span class="topic-number">36.1</span> seq2seq Models</a></li>
+                        <li class="topic-item"><a href="thorium-ai/36/36-2.html" class="topic-link"><span class="topic-number">36.2</span> Transformer for NLP</a></li>
+                        <li class="topic-item"><a href="thorium-ai/36/36-3.html" class="topic-link"><span class="topic-number">36.3</span> Multilingual Models</a></li>
+                        <li class="topic-item"><a href="thorium-ai/36/36-4.html" class="topic-link"><span class="topic-number">36.4</span> Task-specific Models</a></li>
+                        <li class="topic-item"><a href="thorium-ai/36/36-5.html" class="topic-link"><span class="topic-number">36.5</span> Model Limitations</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 37 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="37">
+                        <span>37. Computer Vision (CV)</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-37">
+                        <li class="topic-item"><a href="thorium-ai/37/37-0.html" class="topic-link intro-link"><span class="topic-number">37.0</span> Introduction: AI Seeing the World</a></li>
+                        <li class="topic-item"><a href="thorium-ai/37/37-1.html" class="topic-link"><span class="topic-number">37.1</span> Image Representation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/37/37-2.html" class="topic-link"><span class="topic-number">37.2</span> Filters and Detectors</a></li>
+                        <li class="topic-item"><a href="thorium-ai/37/37-3.html" class="topic-link"><span class="topic-number">37.3</span> Object Detection</a></li>
+                        <li class="topic-item"><a href="thorium-ai/37/37-4.html" class="topic-link"><span class="topic-number">37.4</span> Instance Segmentation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/37/37-5.html" class="topic-link"><span class="topic-number">37.5</span> Pose Estimation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/37/37-6.html" class="topic-link"><span class="topic-number">37.6</span> Image Generation</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 38 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="38">
+                        <span>38. Reinforcement Learning (RL)</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-38">
+                        <li class="topic-item"><a href="thorium-ai/38/38-0.html" class="topic-link intro-link"><span class="topic-number">38.0</span> Introduction: Learning by Trial and Error</a></li>
+                        <li class="topic-item"><a href="thorium-ai/38/38-1.html" class="topic-link"><span class="topic-number">38.1</span> Agent, Environment, Reward</a></li>
+                        <li class="topic-item"><a href="thorium-ai/38/38-2.html" class="topic-link"><span class="topic-number">38.2</span> Markov Decision Processes</a></li>
+                        <li class="topic-item"><a href="thorium-ai/38/38-3.html" class="topic-link"><span class="topic-number">38.3</span> Policy and Value Functions</a></li>
+                        <li class="topic-item"><a href="thorium-ai/38/38-4.html" class="topic-link"><span class="topic-number">38.4</span> Q-learning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/38/38-5.html" class="topic-link"><span class="topic-number">38.5</span> Policy Gradients</a></li>
+                        <li class="topic-item"><a href="thorium-ai/38/38-6.html" class="topic-link"><span class="topic-number">38.6</span> Actor-critic Methods</a></li>
+                        <li class="topic-item"><a href="thorium-ai/38/38-7.html" class="topic-link"><span class="topic-number">38.7</span> RL Applications</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 39 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="39">
+                        <span>39. Transfer Learning</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-39">
+                        <li class="topic-item"><a href="thorium-ai/39/39-0.html" class="topic-link intro-link"><span class="topic-number">39.0</span> Introduction: Knowledge Transfer</a></li>
+                        <li class="topic-item"><a href="thorium-ai/39/39-1.html" class="topic-link"><span class="topic-number">39.1</span> Pre-trained Models</a></li>
+                        <li class="topic-item"><a href="thorium-ai/39/39-2.html" class="topic-link"><span class="topic-number">39.2</span> Fine-tuning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/39/39-3.html" class="topic-link"><span class="topic-number">39.3</span> Domain Adaptation</a></li>
+                        <li class="topic-item"><a href="thorium-ai/39/39-4.html" class="topic-link"><span class="topic-number">39.4</span> Few-shot Learning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/39/39-5.html" class="topic-link"><span class="topic-number">39.5</span> Meta-learning</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Part 8: Advanced Topics -->
+            <div class="topic-category">
+                <div class="category-title">ADVANCED TOPICS</div>
+
+                <!-- Topic 40 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="40">
+                        <span>40. Explainable AI (XAI)</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-40">
+                        <li class="topic-item"><a href="thorium-ai/40/40-0.html" class="topic-link intro-link"><span class="topic-number">40.0</span> Introduction: Understanding AI Decisions</a></li>
+                        <li class="topic-item"><a href="thorium-ai/40/40-1.html" class="topic-link"><span class="topic-number">40.1</span> Black Box Problem</a></li>
+                        <li class="topic-item"><a href="thorium-ai/40/40-2.html" class="topic-link"><span class="topic-number">40.2</span> Feature Importance</a></li>
+                        <li class="topic-item"><a href="thorium-ai/40/40-3.html" class="topic-link"><span class="topic-number">40.3</span> LIME</a></li>
+                        <li class="topic-item"><a href="thorium-ai/40/40-4.html" class="topic-link"><span class="topic-number">40.4</span> SHAP</a></li>
+                        <li class="topic-item"><a href="thorium-ai/40/40-5.html" class="topic-link"><span class="topic-number">40.5</span> Attention Visualization</a></li>
+                        <li class="topic-item"><a href="thorium-ai/40/40-6.html" class="topic-link"><span class="topic-number">40.6</span> Surrogate Models</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 41 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="41">
+                        <span>41. Few-shot and Zero-shot Learning</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-41">
+                        <li class="topic-item"><a href="thorium-ai/41/41-0.html" class="topic-link intro-link"><span class="topic-number">41.0</span> Introduction: Learning with Little Data</a></li>
+                        <li class="topic-item"><a href="thorium-ai/41/41-1.html" class="topic-link"><span class="topic-number">41.1</span> Learning with Small Data</a></li>
+                        <li class="topic-item"><a href="thorium-ai/41/41-2.html" class="topic-link"><span class="topic-number">41.2</span> Metric Learning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/41/41-3.html" class="topic-link"><span class="topic-number">41.3</span> Prototypical Networks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/41/41-4.html" class="topic-link"><span class="topic-number">41.4</span> Zero-shot Inference</a></li>
+                        <li class="topic-item"><a href="thorium-ai/41/41-5.html" class="topic-link"><span class="topic-number">41.5</span> Prompt Engineering</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 42 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="42">
+                        <span>42. Multimodal AI</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-42">
+                        <li class="topic-item"><a href="thorium-ai/42/42-0.html" class="topic-link intro-link"><span class="topic-number">42.0</span> Introduction: AI Working with Multiple Modalities</a></li>
+                        <li class="topic-item"><a href="thorium-ai/42/42-1.html" class="topic-link"><span class="topic-number">42.1</span> Combining Data Types</a></li>
+                        <li class="topic-item"><a href="thorium-ai/42/42-2.html" class="topic-link"><span class="topic-number">42.2</span> CLIP</a></li>
+                        <li class="topic-item"><a href="thorium-ai/42/42-3.html" class="topic-link"><span class="topic-number">42.3</span> DALL-E, Stable Diffusion</a></li>
+                        <li class="topic-item"><a href="thorium-ai/42/42-4.html" class="topic-link"><span class="topic-number">42.4</span> Audio-visual Models</a></li>
+                        <li class="topic-item"><a href="thorium-ai/42/42-5.html" class="topic-link"><span class="topic-number">42.5</span> Multimodal Understanding</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 43 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="43">
+                        <span>43. Neuromorphic Computing</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-43">
+                        <li class="topic-item"><a href="thorium-ai/43/43-0.html" class="topic-link intro-link"><span class="topic-number">43.0</span> Introduction: Brain-inspired Computing</a></li>
+                        <li class="topic-item"><a href="thorium-ai/43/43-1.html" class="topic-link"><span class="topic-number">43.1</span> Architecture Differences</a></li>
+                        <li class="topic-item"><a href="thorium-ai/43/43-2.html" class="topic-link"><span class="topic-number">43.2</span> Memristors</a></li>
+                        <li class="topic-item"><a href="thorium-ai/43/43-3.html" class="topic-link"><span class="topic-number">43.3</span> Spiking Neural Networks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/43/43-4.html" class="topic-link"><span class="topic-number">43.4</span> Energy Efficiency</a></li>
+                        <li class="topic-item"><a href="thorium-ai/43/43-5.html" class="topic-link"><span class="topic-number">43.5</span> Neuromorphic Chips</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 44 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="44">
+                        <span>44. Ethical Issues</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-44">
+                        <li class="topic-item"><a href="thorium-ai/44/44-0.html" class="topic-link intro-link"><span class="topic-number">44.0</span> Introduction: AI Ethics and Society</a></li>
+                        <li class="topic-item"><a href="thorium-ai/44/44-1.html" class="topic-link"><span class="topic-number">44.1</span> Bias in Data and Algorithms</a></li>
+                        <li class="topic-item"><a href="thorium-ai/44/44-2.html" class="topic-link"><span class="topic-number">44.2</span> Privacy and Personal Data</a></li>
+                        <li class="topic-item"><a href="thorium-ai/44/44-3.html" class="topic-link"><span class="topic-number">44.3</span> Automation and Unemployment</a></li>
+                        <li class="topic-item"><a href="thorium-ai/44/44-4.html" class="topic-link"><span class="topic-number">44.4</span> Autonomous Weapons</a></li>
+                        <li class="topic-item"><a href="thorium-ai/44/44-5.html" class="topic-link"><span class="topic-number">44.5</span> Responsibility for AI Decisions</a></li>
+                        <li class="topic-item"><a href="thorium-ai/44/44-6.html" class="topic-link"><span class="topic-number">44.6</span> Transparency and Audit</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 45 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="45">
+                        <span>45. Technical Limitations</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-45">
+                        <li class="topic-item"><a href="thorium-ai/45/45-0.html" class="topic-link intro-link"><span class="topic-number">45.0</span> Introduction: What AI Can't Do Yet</a></li>
+                        <li class="topic-item"><a href="thorium-ai/45/45-1.html" class="topic-link"><span class="topic-number">45.1</span> Adversarial Attacks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/45/45-2.html" class="topic-link"><span class="topic-number">45.2</span> Data Poisoning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/45/45-3.html" class="topic-link"><span class="topic-number">45.3</span> Computational Complexity</a></li>
+                        <li class="topic-item"><a href="thorium-ai/45/45-4.html" class="topic-link"><span class="topic-number">45.4</span> Energy Consumption</a></li>
+                        <li class="topic-item"><a href="thorium-ai/45/45-5.html" class="topic-link"><span class="topic-number">45.5</span> Lack of Generalization</a></li>
+                        <li class="topic-item"><a href="thorium-ai/45/45-6.html" class="topic-link"><span class="topic-number">45.6</span> Lack of Common Sense</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 46 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="46">
+                        <span>46. Path to AGI</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-46">
+                        <li class="topic-item"><a href="thorium-ai/46/46-0.html" class="topic-link intro-link"><span class="topic-number">46.0</span> Introduction: Artificial General Intelligence</a></li>
+                        <li class="topic-item"><a href="thorium-ai/46/46-1.html" class="topic-link"><span class="topic-number">46.1</span> Technological Barriers</a></li>
+                        <li class="topic-item"><a href="thorium-ai/46/46-2.html" class="topic-link"><span class="topic-number">46.2</span> Theories of Consciousness and Intelligence</a></li>
+                        <li class="topic-item"><a href="thorium-ai/46/46-3.html" class="topic-link"><span class="topic-number">46.3</span> Integrating Different Modules</a></li>
+                        <li class="topic-item"><a href="thorium-ai/46/46-4.html" class="topic-link"><span class="topic-number">46.4</span> Data and Computation Requirements</a></li>
+                        <li class="topic-item"><a href="thorium-ai/46/46-5.html" class="topic-link"><span class="topic-number">46.5</span> AGI Timeline Estimates</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 47 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="47">
+                        <span>47. Quantum Computing and AI</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-47">
+                        <li class="topic-item"><a href="thorium-ai/47/47-0.html" class="topic-link intro-link"><span class="topic-number">47.0</span> Introduction: Quantum AI</a></li>
+                        <li class="topic-item"><a href="thorium-ai/47/47-1.html" class="topic-link"><span class="topic-number">47.1</span> Quantum Bits (qubits)</a></li>
+                        <li class="topic-item"><a href="thorium-ai/47/47-2.html" class="topic-link"><span class="topic-number">47.2</span> Quantum Superposition</a></li>
+                        <li class="topic-item"><a href="thorium-ai/47/47-3.html" class="topic-link"><span class="topic-number">47.3</span> Quantum Neural Networks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/47/47-4.html" class="topic-link"><span class="topic-number">47.4</span> Quantum Machine Learning</a></li>
+                        <li class="topic-item"><a href="thorium-ai/47/47-5.html" class="topic-link"><span class="topic-number">47.5</span> Practical Status (2020s)</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 48 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="48">
+                        <span>48. Future of AI</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-48">
+                        <li class="topic-item"><a href="thorium-ai/48/48-0.html" class="topic-link intro-link"><span class="topic-number">48.0</span> Introduction: AI Development Scenarios</a></li>
+                        <li class="topic-item"><a href="thorium-ai/48/48-1.html" class="topic-link"><span class="topic-number">48.1</span> Optimistic Scenario</a></li>
+                        <li class="topic-item"><a href="thorium-ai/48/48-2.html" class="topic-link"><span class="topic-number">48.2</span> Pessimistic Scenario</a></li>
+                        <li class="topic-item"><a href="thorium-ai/48/48-3.html" class="topic-link"><span class="topic-number">48.3</span> Realistic Scenario</a></li>
+                        <li class="topic-item"><a href="thorium-ai/48/48-4.html" class="topic-link"><span class="topic-number">48.4</span> Economic Impact</a></li>
+                        <li class="topic-item"><a href="thorium-ai/48/48-5.html" class="topic-link"><span class="topic-number">48.5</span> Social Changes</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 49 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="49">
+                        <span>49. Reading AI Research Papers</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-49">
+                        <li class="topic-item"><a href="thorium-ai/49/49-0.html" class="topic-link intro-link"><span class="topic-number">49.0</span> Introduction: How to Read Scientific Papers</a></li>
+                        <li class="topic-item"><a href="thorium-ai/49/49-1.html" class="topic-link"><span class="topic-number">49.1</span> Scientific Paper Structure</a></li>
+                        <li class="topic-item"><a href="thorium-ai/49/49-2.html" class="topic-link"><span class="topic-number">49.2</span> Abstract and Introduction</a></li>
+                        <li class="topic-item"><a href="thorium-ai/49/49-3.html" class="topic-link"><span class="topic-number">49.3</span> Related Work</a></li>
+                        <li class="topic-item"><a href="thorium-ai/49/49-4.html" class="topic-link"><span class="topic-number">49.4</span> Methodology</a></li>
+                        <li class="topic-item"><a href="thorium-ai/49/49-5.html" class="topic-link"><span class="topic-number">49.5</span> Experiments and Results</a></li>
+                        <li class="topic-item"><a href="thorium-ai/49/49-6.html" class="topic-link"><span class="topic-number">49.6</span> Conclusion and Future Work</a></li>
+                        <li class="topic-item"><a href="thorium-ai/49/49-7.html" class="topic-link"><span class="topic-number">49.7</span> Finding and Selecting Papers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Topic 50 -->
+                <div class="topic-section">
+                    <div class="section-title" data-section="50">
+                        <span>50. AI Tools and Ecosystem</span>
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-50">
+                        <li class="topic-item"><a href="thorium-ai/50/50-0.html" class="topic-link intro-link"><span class="topic-number">50.0</span> Introduction: AI Development Tools</a></li>
+                        <li class="topic-item"><a href="thorium-ai/50/50-1.html" class="topic-link"><span class="topic-number">50.1</span> Frameworks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/50/50-2.html" class="topic-link"><span class="topic-number">50.2</span> Platforms</a></li>
+                        <li class="topic-item"><a href="thorium-ai/50/50-3.html" class="topic-link"><span class="topic-number">50.3</span> Cloud Services</a></li>
+                        <li class="topic-item"><a href="thorium-ai/50/50-4.html" class="topic-link"><span class="topic-number">50.4</span> Datasets and Benchmarks</a></li>
+                        <li class="topic-item"><a href="thorium-ai/50/50-5.html" class="topic-link"><span class="topic-number">50.5</span> Communities and Conferences</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <script>
+        // Mobile menu
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Close menu when clicking on links (mobile)
+        document.querySelectorAll('.topic-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                }
+            });
+        });
+
+        // Accordion for sections
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.addEventListener('click', () => {
+                title.classList.toggle('active');
+            });
+        });
+
+        // Open first section by default
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstSection = document.querySelector('.section-title');
+            if (firstSection) {
+                firstSection.classList.add('active');
+            }
+        });
+
+        // Handle Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

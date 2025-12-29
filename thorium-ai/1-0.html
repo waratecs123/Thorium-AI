@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.0 Introduction: Where AI Already Works - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header will be loaded here -->
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">1.0 Introduction: Where AI Already Works</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-book"></i> Section 1: AI Around Us</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 4 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>Hello! If you think artificial intelligence (AI) is something from a distant future, like humanoid robots or supercomputers taking over the world, I have good news for you: you already use AI every day, and most likely, you don't even notice it.</p>
+
+                <p>Think of electricity. You don't see electrons flowing through the wires, but you flip a switch – and the light comes on. You charge your phone, watch a series, heat up food in the microwave. Electricity is an invisible but fundamental part of modern life. It's the same with AI. It has become "digital electricity" – an invisible force that powers the most ordinary and the most popular services.</p>
+
+                <div class="note">
+                    <p>AI is not necessarily "intelligence" in the human sense. In most cases around us, it is simply very complex and smart tools that have learned to find patterns in vast amounts of data.</p>
+                </div>
+
+                <p>Let's draw a small analogy. Imagine you are the owner of a huge bookstore, and thousands of people come to you every day. Over time, you start to notice:</p>
+
+                <ul>
+                    <li>People who bought a cookbook about pasta often later show interest in books about Italian wines.</li>
+                    <li>Someone who picked up a detective novel by author "A" will almost certainly later pick up a detective novel by author "B".</li>
+                    <li>A customer who loves science fiction rarely looks towards romance novels.</li>
+                </ul>
+
+                <p>If you were a super-seller with a phenomenal memory for thousands of such connections, you could give perfect recommendations to every new customer: "Did you like this book? Then you should definitely take this one!". You would earn more, and the customer would be happy.</p>
+
+                <p>But a person cannot keep millions of such connections between millions of products and billions of users in their head. And AI can. Moreover, it does it constantly, automatically, and incredibly fast.</p>
+
+                <div class="highlight">
+                    <p>This is exactly what modern "everyday" AI is busy with – finding hidden patterns, regularities, and predicting our actions based on past experience.</p>
+                </div>
+
+                <p>In this first section, we won't delve into complex mathematical formulas or neural network architectures. We will simply open our eyes to what already surrounds us. We will break down how AI:</p>
+
+                <ol>
+                    <li>Guesses what you'll want to watch next.</li>
+                    <li>Understands your voice (well, or tries to).</li>
+                    <li>Turns your face into a cat's face or ages you by 50 years.</li>
+                    <li>Corrects your typos, sometimes in very funny ways.</li>
+                </ol>
+
+                <p>The goal of this introduction is to change your perspective. To stop looking for AI in science fiction movies and start noticing it in your smartphone, laptop, and even in the smart speaker in your kitchen. The future is already here, it's just unevenly distributed. And we are living right in its epicenter.</p>
+
+                <div class="tip">
+                    <p><strong>Ready to find out where exactly it's hiding?</strong> Then let's move on to the first concrete example – YouTube and Netflix recommendations.</p>
+                </div>
+            </div>
+
+            <!-- Navigation between articles -->
+            <div class="article-navigation">
+                <a href="/index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+                <a href="/thorium-ai/1/1-1.html" class="nav-link">
+                    Next: 1.1 YouTube/Netflix Recommendations <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Tags for categorization -->
+            <div class="article-tags">
+                <span class="tag">Introduction</span>
+                <span class="tag">AI Basics</span>
+                <span class="tag">Everyday AI</span>
+                <span class="tag">Pattern Recognition</span>
+                <span class="tag">Practical AI</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        // Load header
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+
+                // Initialize mobile menu
+                setupMobileMenu();
+
+                // Highlight current article in navigation
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            // Accordion functionality for section titles
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking on links (mobile)
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            // Close menu on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            // Auto-close menu on desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    // Open the parent section
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        // Auto-open the first section (Section 1) for this article
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstSection = document.querySelector('.section-title');
+            if (firstSection) {
+                firstSection.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
