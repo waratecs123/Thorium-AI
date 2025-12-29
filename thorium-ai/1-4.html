@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.4 Social Media Filters - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">1.4 Social Media Filters</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-book"></i> Section 1: AI Around Us</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 8 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>Social media filters (Snapchat, Instagram, TikTok) are not just overlays or funny effects. They are complex computer vision systems operating in real-time on your smartphone. Their magic is based on three fundamental technologies: facial recognition, tracking, and augmented reality (AR).</p>
+
+                <h2>Stage 1: Face Detection — "Find the Face in the Frame"</h2>
+                <p>Before applying cat ears, the system must understand where in the stream of pixels from the camera a face is located.</p>
+
+                <h3>Haar-based Algorithms</h3>
+                <p>Early filters used Haar cascades. Imagine looking for a face using simple templates: "a dark area (eyebrows) above a light one (eyes)" or "a vertical dark line (nose) between light areas (cheeks)." The algorithm quickly scans the image with different "windows," applying these templates. It's fast but not very accurate and sensitive to head rotation.</p>
+
+                <h3>Neural Network Detectors</h3>
+                <p>Modern filters use Convolutional Neural Networks (CNNs) trained on millions of images with faces. Such a network doesn't search for templates but has independently learned to identify abstract facial features: contours, skin texture, the proportions of parts. It determines a bounding box around the face and outputs the coordinates of its corners.</p>
+
+                <h2>Stage 2: Keypoint Localization — "Create a Face Map"</h2>
+                <p>A detected face is just a rectangle. To put on glasses or change the shape of lips, the exact location of each feature is needed.</p>
+
+                <h3>Finding 68 Key Points</h3>
+                <p>This is a standard model. The algorithm determines (x, y) coordinates for eyebrow contours (5 points each), eyes (6 points each), nose (9 points), lips (20 points), and face oval (17 points). Together, these points form a dense mesh stretched over the face.</p>
+
+                <h3>How does it work?</h3>
+                <p>A model similar to Human Pose Estimation is used, but for the face. Neural networks with architectures optimized for this task are often employed (e.g., MobileNet, as it must work fast on a phone). The network is trained to predict point coordinates from an image patch containing a face.</p>
+
+                <h2>Stage 3: Tracking and Stabilization — "Don't Lose Sight of the Face"</h2>
+                <p>When you move your head, the filter must follow it without lag or jitter.</p>
+
+                <h3>Optical Flow</h3>
+                <p>The algorithm tracks how groups of pixels (features) move from frame to frame. Knowing the displacement of key points in the previous frame, their position in the next one can be predicted.</p>
+
+                <h3>Prediction and Correction</h3>
+                <p>The system uses Kalman filters or simple physical models (inertia, acceleration) to predict where the points will be in the next moment and then corrects the prediction based on new frame data. This ensures smoothness.</p>
+
+                <h2>Stage 4: Applying the AR Effect — "Creating the Magic"</h2>
+                <p>This is the final stage, where geometric data turns into a visual effect.</p>
+
+                <h3>Geometric Transformations</h3>
+                <p>Suppose a virtual hat needs to be placed. The system knows where the crown of the head is (via points). The 3D model of the hat is "attached" to that point. When the head rotates, the system calculates a transformation matrix (yaw, pitch, roll angles) and applies it to the hat model so it rotates synchronously with the head. This is real-time rendering.</p>
+
+                <h3>Segmentation and Masking</h3>
+                <p>Effects like "changing hair color" or "space background" require semantic segmentation—precise determination of which pixels belong to hair, skin, lips, or background. A neural network (e.g., U-Net) is used for this, classifying each pixel of the image. Then, a new color or texture is applied to the segment (e.g., hair).</p>
+
+                <h3>Neural Style Transfer</h3>
+                <p>The most complex filters (like "aging" from FaceApp) use Generative Adversarial Networks (GANs) or diffusion models. They don't just overlay a wrinkle texture but completely generate a new, realistic image of the face, considering given parameters (age, weight, hairstyle). A simplified version of such a model, trained on thousands of "young face — aged face" pairs, runs on the phone.</p>
+
+                <h2>Technical Stack on the Example of Popular Platforms:</h2>
+                <ul>
+                    <li><strong>ARKit (Apple) and ARCore (Google)</strong> provide low-level APIs for precise surface, lighting, and camera movement tracking. Facial tracking is built on top of them.</li>
+                    <li><strong>ML Kit (Google) and Core ML (Apple)</strong> are frameworks for running pre-trained computer vision models (face detection, key points, segmentation) directly on the device. This is critical for speed and privacy (data doesn't leave the device).</li>
+                    <li><strong>Spark AR (Instagram/Facebook) and Lens Studio (Snapchat)</strong> are environments for creating filters where developers can use ready-made models and tools without delving into the complexities of neural networks.</li>
+                </ul>
+
+                <h2>Ethical and Social Implications:</h2>
+                <div class="warning">
+                    <p>Filters have ceased to be mere entertainment. They are creating a new standard of beauty — a digital, flawless, and often unattainable one in reality ("Instagram face"). Problems include:</p>
+                </div>
+
+                <h3>1. Dysmorphia</h3>
+                <p>Constant use of filters that smooth skin, enlarge eyes, and slim the face can lead to dissatisfaction with one's real appearance (Snapchat dysmorphia).</p>
+
+                <h3>2. Content Authenticity</h3>
+                <p>Filters blur the line between reality and its digital manipulation, making any visual content potentially unreliable.</p>
+
+                <h3>3. Biometric Data</h3>
+                <p>The process of working with a face is the collection of biometric information. Although processing often occurs on the device, the data can be used for model training or targeted advertising.</p>
+
+                <div class="highlight">
+                    <p>Social media filters are the most widespread and accessible example of artificial intelligence in real-time for the user, demonstrating how complex computer vision technologies have become part of everyday digital communication, shaping new aesthetic norms and creating ethical challenges.</p>
+                </div>
+            </div>
+
+            <div class="article-navigation">
+                <a href="1-3.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 1.3 Voice Assistants
+                </a>
+                <a href="1-5.html" class="nav-link">
+                    Next: 1.5 Text Autocorrection <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="article-tags">
+                <span class="tag">Social Media</span>
+                <span class="tag">Filters</span>
+                <span class="tag">Augmented Reality</span>
+                <span class="tag">Computer Vision</span>
+                <span class="tag">Face Detection</span>
+                <span class="tag">ARKit</span>
+                <span class="tag">ARCore</span>
+                <span class="tag">Ethics</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+                setupMobileMenu();
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstSection = document.querySelector('.section-title');
+            if (firstSection) {
+                firstSection.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

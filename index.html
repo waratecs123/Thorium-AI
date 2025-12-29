@@ -4,15 +4,372 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thorium-AI - Free AI Encyclopedia</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            background-color: #ffffff;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        .site-header {
+            border-bottom: 1px solid #e1e4e8;
+            padding: 16px 0;
+            margin-bottom: 32px;
+            background-color: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brain-icon {
+            font-size: 28px;
+            color: #0366d6;
+        }
+
+        .site-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #24292e;
+            text-decoration: none;
+        }
+
+        .site-title span {
+            color: #0366d6;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .support-btn {
+            background-color: #f6f8fa;
+            color: #24292e;
+            border: 1px solid #d1d5da;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .support-btn:hover {
+            background-color: #e1e4e8;
+            border-color: #959da5;
+            text-decoration: none;
+        }
+
+        .start-course-btn {
+            background-color: #2ea44f;
+            color: white;
+            border: 1px solid rgba(27, 31, 35, 0.15);
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+
+        .start-course-btn:hover {
+            background-color: #2c974b;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Main content styles */
+        .main-content {
+            padding: 0 0 48px 0;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 64px;
+            padding: 32px 0;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .hero-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #24292e;
+        }
+
+        .hero-brain-icon {
+            font-size: 48px;
+            color: #0366d6;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #586069;
+            max-width: 800px;
+            margin: 0 auto 32px;
+            line-height: 1.8;
+        }
+
+        /* Stats container */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 24px;
+            max-width: 800px;
+            margin: 48px auto 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            background-color: #f6f8fa;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0366d6;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #586069;
+        }
+
+        /* Section styles */
+        .project-info, .content-preview {
+            margin-bottom: 64px;
+            padding: 32px 0;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .project-title, .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #24292e;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .project-description {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #24292e;
+        }
+
+        .project-description p {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            background-color: #f6f8fa;
+            border-left: 4px solid #0366d6;
+            padding: 16px 20px;
+            margin: 24px 0;
+        }
+
+        /* Lists */
+        ul {
+            margin: 24px 0 24px 32px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        /* Features grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .feature-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 24px;
+            background-color: #ffffff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            color: #0366d6;
+            margin-bottom: 16px;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #24292e;
+        }
+
+        .feature-text {
+            font-size: 14px;
+            color: #586069;
+            line-height: 1.6;
+        }
+
+        /* Support section */
+        .support-section {
+            text-align: center;
+            margin: 64px 0;
+            padding: 32px;
+            background-color: #f6f8fa;
+            border-radius: 8px;
+            border: 1px solid #e1e4e8;
+        }
+
+        .support-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+
+        .support-description {
+            color: #586069;
+            max-width: 600px;
+            margin: 0 auto 24px;
+            line-height: 1.6;
+        }
+
+        .support-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 0 16px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .project-title, .section-title {
+                font-size: 24px;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .site-header {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .header-actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .support-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .support-btn, .start-course-btn {
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .stat-number {
+                font-size: 24px;
+            }
+        }
+
+        /* Animation for sections */
+        section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        section.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </head>
 <body>
-    <div id="header-container"></div>
 
     <div class="main-content">
         <section class="hero-section">
-            <h1 class="hero-title">Thorium-AI</h1>
+            <br>
+            <h1 class="hero-title">
+                <span>Thorium AI</span>
+            </h1>
             <p class="hero-subtitle">
                 A comprehensive, free encyclopedia of Artificial Intelligence.
                 From basic concepts to advanced neural networks, explained in
@@ -24,6 +381,10 @@
                 conceptual understanding, Thorium-AI offers a code-free learning
                 journey.
             </p>
+
+            <a href="thorium-ai/1-0.html" class="start-course-btn" style="font-size: 16px; padding: 12px 32px; margin-bottom: 32px;">
+                Start Learning Now
+            </a>
 
             <div class="stats-container">
                 <div class="stat-item">
@@ -79,7 +440,7 @@
 
             <div class="features-grid">
                 <div class="feature-card">
-                    <i class="fas fa-graduation-cap feature-icon"></i>
+                    <div class="feature-icon">📚</div>
                     <h3 class="feature-title">For Beginners</h3>
                     <p class="feature-text">Start with zero technical knowledge. We use everyday analogies,
                     simple explanations, and gradual concept building. Learn what AI actually
@@ -87,7 +448,7 @@
                     complex mathematics. Perfect for absolute beginners.</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fas fa-lightbulb feature-icon"></i>
+                    <div class="feature-icon">💡</div>
                     <h3 class="feature-title">For Thinkers</h3>
                     <p class="feature-text">Philosophical foundations, ethical considerations, societal impact,
                     and future implications. Explore AI through the lens of philosophy,
@@ -95,7 +456,7 @@
                     what it means for humanity.</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fas fa-briefcase feature-icon"></i>
+                    <div class="feature-icon">💼</div>
                     <h3 class="feature-title">For Professionals</h3>
                     <p class="feature-text">Business applications, strategic implications, industry trends,
                     and decision-making frameworks. Learn enough about AI to make
@@ -103,13 +464,29 @@
                     technical expert.</p>
                 </div>
                 <div class="feature-card">
-                    <i class="fas fa-globe feature-icon"></i>
+                    <div class="feature-icon">🌍</div>
                     <h3 class="feature-title">For Everyone</h3>
                     <p class="feature-text">AI's impact on daily life, job market changes, social implications,
                     and what it means for our collective future. Become an informed
                     citizen in an AI-driven world. No technical background needed —
                     just curiosity.</p>
                 </div>
+            </div>
+        </section>
+
+        <section class="support-section">
+            <h3 class="support-title">Support the Project</h3>
+            <p class="support-description">
+                This project is created and maintained by one person. Your support helps keep
+                Thorium AI free and accessible to everyone.
+            </p>
+            <div class="support-buttons">
+                <a href="https://www.donationalerts.com/r/mobius_org" target="_blank" class="support-btn">
+                    💝 Support on Donation Alerts
+                </a>
+                <a href="https://t.me/mobius_org" target="_blank" class="support-btn">
+                    📢 Join Telegram Channel
+                </a>
             </div>
         </section>
 
@@ -195,178 +572,14 @@
                     of the most important technologies of our time.</li>
                 </ul>
 
-                <p>If you find this project valuable, you can support it through the
-                <strong>Support Project</strong> button in the sidebar. Your support helps keep
-                this resource free and accessible to everyone.</p>
-
-                <p>Most importantly — use this resource. Share it with friends who are
-                curious about AI but intimidated by technical courses. Suggest topics
-                you'd like to understand better. Let's build a community of people
-                who understand AI at a human level, not just a technical one.</p>
-
-                <p>Thank you for visiting. Remember: you don't need to be a programmer
-                to understand artificial intelligence. You just need curiosity, and
-                maybe a guide who speaks your language. That's what Thorium-AI aims
-                to be.</p>
             </div>
         </section>
     </div>
 
-    <!-- Весь JavaScript код остается точно таким же -->
     <script>
-        // Загрузка хедера
-        fetch('header.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Network response was not ok');
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('header-container').innerHTML = data;
-
-                // Настройка мобильного меню
-                setupMobileMenu();
-
-                // Активация первого аккордеона
-                activateFirstAccordion();
-            })
-            .catch(error => {
-                console.error('Error loading header:', error);
-                document.getElementById('header-container').innerHTML = `
-                    <div style="padding: 20px; text-align: center; color: #666;">
-                        <p>Error loading navigation. Please refresh the page.</p>
-                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
-                    </div>
-                `;
-            });
-
-        function setupMobileMenu() {
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-
-            if (!mobileMenuToggle || !sidebar || !overlay) {
-                console.warn('Mobile menu elements not found. Check your header.html structure.');
-                return;
-            }
-
-            mobileMenuToggle.addEventListener('click', () => {
-                sidebar.classList.toggle('active');
-                overlay.classList.toggle('active');
-                document.body.classList.toggle('mobile-menu-open');
-                console.log('Mobile menu toggled');
-            });
-
-            overlay.addEventListener('click', () => {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.classList.remove('mobile-menu-open');
-            });
-
-            // Accordion functionality for section titles
-            document.querySelectorAll('.section-title').forEach(title => {
-                title.addEventListener('click', () => {
-                    title.classList.toggle('active');
-                });
-            });
-
-            // Закрытие меню при клике на ссылку (мобильные устройства)
-            document.querySelectorAll('.topic-link').forEach(link => {
-                link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        sidebar.classList.remove('active');
-                        overlay.classList.remove('active');
-                        document.body.classList.remove('mobile-menu-open');
-                    }
-                });
-            });
-
-            // Закрытие меню при нажатии клавиши Escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    sidebar.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.classList.remove('mobile-menu-open');
-                }
-            });
-
-            // Автоматическое закрытие меню при изменении размера окна на десктоп
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    sidebar.classList.remove('active');
-                    overlay.classList.remove('active');
-                    document.body.classList.remove('mobile-menu-open');
-                }
-            });
-        }
-
-        function activateFirstAccordion() {
-            const firstSection = document.querySelector('.section-title');
-            if (firstSection) {
-                firstSection.classList.add('active');
-                console.log('First accordion section activated');
-            }
-        }
-
-        // Автоматически закрываем меню на мобильных при клике вне его области
-        document.addEventListener('click', (e) => {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-            const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-
-            if (window.innerWidth <= 768 && sidebar && overlay && mobileMenuToggle &&
-                sidebar.classList.contains('active') &&
-                !sidebar.contains(e.target) &&
-                !mobileMenuToggle.contains(e.target)) {
-
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.classList.remove('mobile-menu-open');
-            }
-        });
-
-        // Отслеживание свайпов для открытия/закрытия меню на мобильных устройствах
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        document.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-
-        function handleSwipe() {
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('overlay');
-
-            if (!sidebar || !overlay) return;
-
-            // Свайп вправо (открыть меню) - работает только если начать от левого края экрана
-            if (touchEndX - touchStartX > 50 && touchStartX < 50) {
-                if (!sidebar.classList.contains('active')) {
-                    sidebar.classList.add('active');
-                    overlay.classList.add('active');
-                    document.body.classList.add('mobile-menu-open');
-                }
-            }
-            // Свайп влево (закрыть меню) - работает только если меню открыто
-            else if (touchStartX - touchEndX > 50 && sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.classList.remove('mobile-menu-open');
-            }
-        }
-
-        // Функция для плавной прокрутки к началу страницы
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Дополнительная функция для улучшения пользовательского опыта
+        // Scroll animations
         document.addEventListener('DOMContentLoaded', function() {
-            // Добавляем интерактивность для статистических элементов
+            // Add interactivity to stat items
             const statItems = document.querySelectorAll('.stat-item');
             statItems.forEach(item => {
                 item.addEventListener('mouseenter', function() {
@@ -377,7 +590,7 @@
                 });
             });
 
-            // Добавляем плавное появление элементов при прокрутке
+            // Add smooth scroll animation for sections
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
@@ -391,10 +604,17 @@
                 });
             }, observerOptions);
 
-            // Наблюдаем за основными секциями
+            // Observe all sections
             document.querySelectorAll('section').forEach(section => {
                 observer.observe(section);
             });
+
+            // Initialize all sections as not animated
+            setTimeout(() => {
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.add('animated');
+                });
+            }, 100);
         });
     </script>
 </body>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.3 Voice Assistants - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">1.3 Voice Assistants</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-book"></i> Section 1: AI Around Us</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 9 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>Voice assistants — Siri, Google Assistant, Alice, Alexa — are not just speech recognition programs. They are complex systems that create the illusion of communicating with an intelligent being, hiding a chain of four strictly sequential and interconnected technological processes behind this facade.</p>
+
+                <h2>Process 1: Speech Recognition — "Hearing Sound as Words"</h2>
+                <p>When you say "Alice, turn on the light," your voice for the microphone is simply fluctuations in air pressure. The first task is to convert this analog wave into digital data and understand which words were spoken.</p>
+
+                <h3>1. Digitization and Cleaning</h3>
+                <p>The microphone converts sound into an electrical signal, which is digitized. Background noise (a working TV, street noise) is filtered out using noise suppression algorithms.</p>
+
+                <h3>2. Segmentation into Phonemes</h3>
+                <p>The digitized sound is sliced into frames of 20-30 milliseconds. For each frame, a neural network determines which phoneme (the smallest meaning-distinguishing unit of sound) was most likely pronounced. For example, the sound "a" in the word "Alice" and the sound "a" in the word "light" are the same phoneme.</p>
+
+                <h3>3. Forming Words and Sentences</h3>
+                <p>The sequence of phonemes is fed into a language model (most often a transformer-based model, like in GPT, but trained on speech). This model, knowing language statistics, "glues" phonemes into words. It decides that the phoneme sequence [a-l-i-s-a] is much more likely to be the word "Alice" (trigger) than a meaningless set of sounds. Importantly: at this stage, the system does not yet understand the meaning; it only converts sound into text.</p>
+
+                <h2>Process 2: Natural Language Understanding (NLU) — "Understanding the Meaning of Words"</h2>
+                <p>Now the system has text: "Alice, turn on the light." The task is to extract intent and entities from it.</p>
+
+                <h3>1. Intent Recognition</h3>
+                <p>The algorithm classifies the request. This is not a keyword search in a database, but an analysis of structure. Requests like "Turn on the light," "Light, turn on," "Make it brighter" should all be assigned to the same intent: ACTION_TURN_ON_LIGHT.</p>
+
+                <h3>2. Entity Extraction</h3>
+                <p>In the request "set an alarm for seven a.m. tomorrow," the entities would be: ACTION: set_alarm, TIME: 07:00, PERIOD: AM, DATE: tomorrow. The algorithm must be resilient to different word orders and synonyms.</p>
+
+                <h3>3. Accounting for Dialogue Context</h3>
+                <p>This is the most complex stage. If you said "Find pizza restaurants," and then "Show the ones nearby," the system must keep the entity QUERY: pizza_restaurants in memory and understand that "the ones" refers to them, and "nearby" is a new entity FILTER: nearby. Modern assistants struggle with long, multi-layered dialogues because their context window is limited.</p>
+
+                <h2>Process 3: Executing the Intent — "Doing Something in the Real World"</h2>
+                <p>After the intent and entities are extracted, the system must turn them into an action.</p>
+
+                <h3>1. Routing</h3>
+                <p>The assistant determines which service or device is responsible for execution. A request for "what's the weather" is routed to a weather service (e.g., Yandex.Weather), "turn on the light" — to a smart home API (e.g., a Philips Hue smart lamp via Yandex.Station).</p>
+
+                <h3>2. Forming an API Request</h3>
+                <p>The abstract intent TURN_ON_LIGHT becomes a specific HTTP request to a specific device with the unique identifier of your lamp. If the "where" entity was not specified, the system may use a default value (e.g., the living room light) or clarify with a question.</p>
+
+                <h2>Process 4: Speech Synthesis — "Responding with a Voice"</h2>
+                <p>The final stage is creating the illusion of dialogue.</p>
+
+                <h3>1. Response Planning</h3>
+                <p>The system decides what to say. A template is often used: Action Confirmation + Additional Information. For example: "[Turning on the light] + [Brightness set to 70%]."</p>
+
+                <h3>2. Text-to-Speech (TTS) Conversion</h3>
+                <p>Modern TTS is not a splicing of pre-recorded phrases. It is neural network synthesis. A model (e.g., DeepMind's WaveNet) generates speech "from scratch," taking context into account to make intonations natural. The most advanced systems can convey emotions (joy, sympathy) in their voice.</p>
+
+                <h2>Key Architectural Limitations:</h2>
+
+                <h3>1. The "Cold Start" Problem for New Requests</h3>
+                <div class="example">
+                    <p>The assistant handles a million well-practiced scenarios perfectly ("weather," "alarm," "timer"). But if you ask "Should I take an umbrella today?", it needs to: a) understand this is a weather question, b) get the forecast, c) interpret the data (is there a >30% chance of rain?), d) make a decision, e) formulate a detailed recommendation. Most assistants fail at step "c" or "d" and either respond with a template or redirect to a search.</p>
+                </div>
+
+                <h3>2. Operating Under Uncertainty</h3>
+                <p>In a noisy environment, the system might recognize "Alice, turn off the light" as "Alice, turn off everything." It must assess the recognition confidence and either execute the command or ask for clarification ("Please repeat"). Balancing erroneous execution and annoying clarifications is a complex engineering task.</p>
+
+                <h3>3. Privacy and "Always Listening"</h3>
+                <div class="warning">
+                    <p>To hear the trigger word ("Okay, Google"), the microphone must analyze all surrounding sound in real time. A local chip recognizes only the trigger, and only after activation is the recording sent to the cloud. However, the very fact of constant listening raises justified concerns.</p>
+                </div>
+
+                <h2>Evolution: From Commands to Dialogue</h2>
+                <p>The first stage was voice commands (like a command line). We are now entering the stage of voice dialogue, where context is preserved. The next stage is proactive assistants, which, based on analysis of calendars, location, and habits, suggest actions themselves: "You are leaving for a meeting now. Considering traffic, it's better to leave 15 minutes earlier. Should I order a taxi?"</p>
+
+                <div class="highlight">
+                    <p>A voice assistant is the most vivid example of "narrow AI," which, by combining several narrow technologies (speech recognition, NLU, TTS), creates a powerful illusion of interacting with an intelligent entity for the user, while remaining a complex but predictable tool.</p>
+                </div>
+            </div>
+
+            <div class="article-navigation">
+                <a href="1-2.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 1.2 TikTok/Reels Algorithms
+                </a>
+                <a href="1-4.html" class="nav-link">
+                    Next: 1.4 Social Media Filters <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="article-tags">
+                <span class="tag">Voice Assistants</span>
+                <span class="tag">Speech Recognition</span>
+                <span class="tag">Natural Language Understanding</span>
+                <span class="tag">TTS</span>
+                <span class="tag">Siri</span>
+                <span class="tag">Google Assistant</span>
+                <span class="tag">Alexa</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+                setupMobileMenu();
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstSection = document.querySelector('.section-title');
+            if (firstSection) {
+                firstSection.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

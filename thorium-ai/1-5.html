@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.5 Text Autocorrection - Thorium-AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main class="main-content">
+        <article class="article-content">
+            <header class="article-header">
+                <h1 class="article-title">1.5 Text Autocorrection</h1>
+                <div class="article-meta">
+                    <span><i class="fas fa-book"></i> Section 1: AI Around Us</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 7 minutes</span>
+                    <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
+                </div>
+            </header>
+
+            <div class="reading-section">
+                <p>Text autocorrection and autocompletion are not just about fixing obvious typos. This is a complex system for predicting intent, operating at the intersection of linguistics, statistics, and machine learning. Its task is not just to correct a word, but to predict and generate the most likely continuation of your thought.</p>
+
+                <h2>Level 1: Statistical and Dictionary Model (Classic Autocorrection)</h2>
+                <p>This is the foundation that works even on simple phones.</p>
+
+                <h3>Levenshtein Distance</h3>
+                <p>When you type "солнце" (sun) and the system sees "сонце," it calculates how many actions (add, delete, replace a character) are needed to turn one into the other. The distance between "солнце" and "сонце" is 1 (replacing "л" with "н"). The algorithm searches the dictionary for the word with the minimum distance and suggests it.</p>
+
+                <h3>N-gram Models (Bigrams, Trigrams)</h3>
+                <p>The system analyzes the frequency of word combinations in huge text corpora. If after the word "очень" (very) the word "хорошо" (good) most often follows in the language, then when typing "очень хор" it will suggest "хорошо." This is prediction based on a local context of 2-3 previous words.</p>
+
+                <h3>Keyboard Geometry</h3>
+                <p>The algorithm considers that you might have pressed a neighboring key. The error "пртвет" (instead of "привет" - hello) is easily corrected because "р" and "и" are next to each other on a QWERTY keyboard.</p>
+
+                <h2>Level 2: Contextual Model Based on Machine Learning</h2>
+                <p>Modern systems (Google Gboard, SwiftKey, iOS) use more sophisticated approaches.</p>
+
+                <h3>Language Models (LM)</h3>
+                <div class="example">
+                    <p>These are neural networks (often based on the transformer architecture, like in BERT or GPT, but much smaller), trained to predict a missing word in a sentence. They analyze not 2-3 previous words, but the entire context.</p>
+                    <p><strong>Example:</strong> Input: "Buy milk and [gap] at the store." A classical model, seeing "and," might suggest "bread." But a neural network, seeing "milk," might suggest "cookies" or "eggs" as a more likely combination in real shopping lists.</p>
+                </div>
+
+                <h3>Real-time Personalization</h3>
+                <p>The system learns your personal style:</p>
+                <ul>
+                    <li><strong>Vocabulary:</strong> If you often use the word "нейросеть" (neural network), it stops being underlined as an error and is suggested in autocomplete.</li>
+                    <li><strong>Style:</strong> If you start letters with "Приветствую!" (Greetings!) instead of "Привет" (Hello), the system remembers that.</li>
+                    <li><strong>App Context:</strong> In a messenger you more often write "ок" (k), in email — "окей, понял" (okay, got it). The system adapts suggestions.</li>
+                </ul>
+
+                <h2>Level 3: Predictive Input and Generation (The Most Modern Stage)</h2>
+                <p>Here, the system doesn't wait for a mistake but tries to guess entire phrases.</p>
+
+                <h3>Smart Suggestions (Smart Compose in Gmail)</h3>
+                <p>When you start typing "Добрый..." (Good...), the system in grey text might suggest "...день! Надеюсь, у вас всё хорошо." (...day! Hope you're doing well.). This works thanks to a huge language model trained on billions of emails, which understands patterns of business and personal correspondence.</p>
+
+                <h3>Continuation Generation</h3>
+                <p>In some keyboards (e.g., from OpenAI), after your sentence, several options for its continuation might be offered. This is already a generative model working on the GPT principle.</p>
+
+                <h2>How is This Technically Implemented on Your Phone?</h2>
+                <ol>
+                    <li><strong>Tokenization.</strong> Your input is split into tokens (words, parts of words, punctuation).</li>
+                    <li><strong>Vectorization.</strong> Each token is converted into a vector (a set of numbers) that represents its meaning. Words with similar meanings have close vectors.</li>
+                    <li><strong>Context Analysis.</strong> A neural network (often Recurrent - RNN or Transformer) processes the sequence of vectors, creating a "contextual representation" of everything written.</li>
+                    <li><strong>Prediction.</strong> The network's output is a probability distribution over the entire vocabulary. For the position of the next word, the top 3 most likely candidates are calculated.</li>
+                    <li><strong>Ranking and Output.</strong> Candidates are filtered by grammar rules, your history, and context, then offered to you.</li>
+                </ol>
+
+                <h2>Problems and Limitations:</h2>
+
+                <h3>1. Contextual Traps</h3>
+                <div class="example">
+                    <p>The phrase "У меня нет ничего против синих [gap]" (I have nothing against blue [gap]). A model trained on news might suggest "ворот" (collars - meaning police), but in the context of laundry, "носков" (socks) is needed. The system lacks common sense and understanding of the real world.</p>
+                </div>
+
+                <h3>2. Echo Chamber</h3>
+                <p>Autocompletion can reinforce your speech patterns and clichés, making language more standardized and less unique.</p>
+
+                <h3>3. The "Black Box" Problem</h3>
+                <p>The user doesn't understand why the system suggests a particular word. This can lead to unexpected and sometimes awkward corrections (the well-known problem with "offensive" autocorrection).</p>
+
+                <h3>4. Data Dependency</h3>
+                <p>The quality of predictions directly depends on the texts the model was trained on. If they were biased in a certain direction, the bias will manifest in the suggestions too.</p>
+
+                <h2>Evolution: From Correction to Co-Creation</h2>
+                <div class="highlight">
+                    <p>Autocorrection is evolving from an error-fixing tool to an assisted writing tool. It is starting to understand not just words, but intentions:</p>
+                    <ul>
+                        <li>If you start a list, it will suggest formatting.</li>
+                        <li>If you write about a meeting, it will suggest inserting a date from the calendar.</li>
+                        <li>If you use professional jargon, it will adapt to it.</li>
+                    </ul>
+                    <p>This makes it a prototype of future personal AI communication assistants that will operate at the level of meaning, not symbols, helping to formulate thoughts faster and more accurately, while simultaneously raising questions about preserving the authenticity of the human voice in digital communication.</p>
+                </div>
+            </div>
+
+            <div class="article-navigation">
+                <a href="1-4.html" class="nav-link">
+                    <i class="fas fa-arrow-left"></i> Previous: 1.4 Social Media Filters
+                </a>
+                <a href="../2/2-0.html" class="nav-link">
+                    Next Section: 2.0 ChatGPT and Neural Networks <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="article-tags">
+                <span class="tag">Autocorrection</span>
+                <span class="tag">Autocomplete</span>
+                <span class="tag">Language Models</span>
+                <span class="tag">NLP</span>
+                <span class="tag">Predictive Text</span>
+                <span class="tag">Levenshtein Distance</span>
+                <span class="tag">Transformer</span>
+            </div>
+        </article>
+    </main>
+
+    <script>
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+                setupMobileMenu();
+                highlightCurrentArticle();
+            })
+            .catch(error => {
+                console.error('Error loading header:', error);
+                document.getElementById('header-container').innerHTML = `
+                    <div style="padding: 20px; text-align: center; color: #666;">
+                        <p>Error loading navigation. Please refresh the page.</p>
+                        <p>If the problem persists, please check if header.html exists in the same directory.</p>
+                    </div>
+                `;
+            });
+
+        function setupMobileMenu() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+
+            if (!mobileMenuToggle || !sidebar || !overlay) {
+                console.warn('Mobile menu elements not found.');
+                return;
+            }
+
+            mobileMenuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-menu-open');
+            });
+
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('mobile-menu-open');
+            });
+
+            document.querySelectorAll('.section-title').forEach(title => {
+                title.addEventListener('click', () => {
+                    title.classList.toggle('active');
+                });
+            });
+
+            document.querySelectorAll('.topic-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebar.classList.remove('active');
+                        overlay.classList.remove('active');
+                        document.body.classList.remove('mobile-menu-open');
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.classList.remove('mobile-menu-open');
+                }
+            });
+        }
+
+        function highlightCurrentArticle() {
+            const currentPath = window.location.pathname;
+            const articleLinks = document.querySelectorAll('.topic-link');
+
+            articleLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath ||
+                    link.getAttribute('href') === currentPath.replace('/thorium-ai/', '')) {
+                    link.classList.add('active');
+
+                    const parentSection = link.closest('.topic-list');
+                    if (parentSection) {
+                        const sectionTitle = parentSection.previousElementSibling;
+                        if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+                            sectionTitle.classList.add('active');
+                        }
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstSection = document.querySelector('.section-title');
+            if (firstSection) {
+                firstSection.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
