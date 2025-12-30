@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Knowledge Test - Thorium-AI</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            background-color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        .test-header {
+            padding: 32px 0;
+            border-bottom: 1px solid #e1e4e8;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .test-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #24292e;
+        }
+
+        .test-subtitle {
+            font-size: 16px;
+            color: #586069;
+            margin-bottom: 24px;
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background-color: #e1e4e8;
+            border-radius: 4px;
+            margin: 24px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #0366d6;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 14px;
+            color: #586069;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        /* Question Container */
+        .question-container {
+            margin-bottom: 48px;
+            display: none;
+        }
+
+        .question-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-number {
+            font-size: 14px;
+            color: #0366d6;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            color: #24292e;
+            line-height: 1.5;
+        }
+
+        /* Options */
+        .options-container {
+            display: grid;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .option {
+            background: #f6f8fa;
+            border: 2px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .option:hover {
+            background: #ebf0f5;
+            border-color: #0366d6;
+            transform: translateY(-2px);
+        }
+
+        .option.selected {
+            background: #f1f8ff;
+            border-color: #0366d6;
+            box-shadow: 0 0 0 3px rgba(3, 102, 214, 0.1);
+        }
+
+        .option.correct {
+            background: #f0fff4;
+            border-color: #2ea44f;
+        }
+
+        .option.incorrect {
+            background: #fff0f0;
+            border-color: #d73a49;
+        }
+
+        .option-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .option-label-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: #0366d6;
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .option-text {
+            color: #24292e;
+            line-height: 1.6;
+        }
+
+        /* Navigation Buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid #e1e4e8;
+        }
+
+        .nav-button {
+            background: #ffffff;
+            color: #24292e;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-button:hover:not(:disabled) {
+            background: #f6f8fa;
+            border-color: #0366d6;
+            color: #0366d6;
+            transform: translateY(-2px);
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-button.primary {
+            background-color: #2ea44f;
+            color: white;
+            border-color: rgba(27, 31, 35, 0.15);
+        }
+
+        .nav-button.primary:hover:not(:disabled) {
+            background-color: #2c974b;
+            border-color: rgba(27, 31, 35, 0.15);
+            color: white;
+        }
+
+        /* Results Screen */
+        .results-container {
+            text-align: center;
+            padding: 48px 32px;
+            display: none;
+        }
+
+        .results-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #24292e;
+        }
+
+        .score-circle {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            position: relative;
+            border: 8px solid #e1e4e8;
+        }
+
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 8px solid;
+            border-top-color: #0366d6;
+            border-right-color: #0366d6;
+            border-bottom-color: #0366d6;
+            border-left-color: #e1e4e8;
+            transform: rotate(-45deg);
+        }
+
+        .score-circle.excellent {
+            color: #2ea44f;
+        }
+
+        .score-circle.excellent::before {
+            border-color: #2ea44f;
+        }
+
+        .score-circle.good {
+            color: #0366d6;
+        }
+
+        .score-circle.average {
+            color: #f0db4f;
+        }
+
+        .score-circle.needs-improvement {
+            color: #d73a49;
+        }
+
+        .score-value {
+            position: relative;
+            z-index: 1;
+        }
+
+        .score-description {
+            font-size: 20px;
+            color: #586069;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .results-breakdown {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: left;
+        }
+
+        .results-breakdown h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e1e4e8;
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-label {
+            color: #586069;
+        }
+
+        .breakdown-value {
+            font-weight: 600;
+            color: #24292e;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 48px;
+            flex-wrap: wrap;
+        }
+
+        .action-button {
+            background: #ffffff;
+            color: #24292e;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .action-button:hover {
+            background: #f6f8fa;
+            border-color: #0366d6;
+            color: #0366d6;
+            transform: translateY(-2px);
+        }
+
+        .action-button.primary {
+            background-color: #2ea44f;
+            color: white;
+            border-color: rgba(27, 31, 35, 0.15);
+        }
+
+        .action-button.primary:hover {
+            background-color: #2c974b;
+            border-color: rgba(27, 31, 35, 0.15);
+            color: white;
+        }
+
+        .action-button.secondary {
+            background-color: #0366d6;
+            color: white;
+            border-color: rgba(27, 31, 35, 0.15);
+        }
+
+        .action-button.secondary:hover {
+            background-color: #0256b8;
+            border-color: rgba(27, 31, 35, 0.15);
+            color: white;
+        }
+
+        /* Feedback */
+        .feedback {
+            margin-top: 32px;
+            padding: 20px;
+            background: #f6f8fa;
+            border-radius: 8px;
+            border-left: 4px solid #0366d6;
+        }
+
+        .feedback-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #24292e;
+        }
+
+        .feedback-text {
+            color: #586069;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+
+            .test-title {
+                font-size: 28px;
+            }
+
+            .question-text {
+                font-size: 18px;
+            }
+
+            .option {
+                padding: 16px;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .nav-button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .action-button {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .score-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .test-title {
+                font-size: 24px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .option-label {
+                font-size: 14px;
+            }
+
+            .option-text {
+                font-size: 14px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .navigation-buttons,
+            .action-buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1 class="test-title">AI & Neural Networks Knowledge Test</h1>
+        <p class="test-subtitle">Test your understanding of artificial intelligence concepts</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="progress-text" id="progressText">Question 1 of 20</div>
+    </div>
+
+    <!-- Question Container -->
+    <div id="questionsContainer">
+        <!-- Questions will be inserted here by JavaScript -->
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+        <button class="nav-button" id="prevButton" disabled>
+            ← Previous Question
+        </button>
+        <button class="nav-button primary" id="nextButton">
+            Next Question →
+        </button>
+    </div>
+
+    <!-- Results Screen -->
+    <div class="results-container" id="resultsContainer">
+        <h2 class="results-title">Test Results</h2>
+        
+        <div class="score-circle" id="scoreCircle">
+            <div class="score-value" id="scoreValue">0%</div>
+        </div>
+        
+        <p class="score-description" id="scoreDescription"></p>
+        
+        <div class="results-breakdown">
+            <h3>Your Performance</h3>
+            <div class="breakdown-item">
+                <span class="breakdown-label">Correct Answers:</span>
+                <span class="breakdown-value" id="correctAnswers">0</span>
+            </div>
+            <div class="breakdown-item">
+                <span class="breakdown-label">Total Questions:</span>
+                <span class="breakdown-value">20</span>
+            </div>
+            <div class="breakdown-item">
+                <span class="breakdown-label">Accuracy:</span>
+                <span class="breakdown-value" id="accuracy">0%</span>
+            </div>
+            <div class="breakdown-item">
+                <span class="breakdown-label">Time Completed:</span>
+                <span class="breakdown-value" id="completionTime">0s</span>
+            </div>
+        </div>
+
+        <div class="feedback" id="feedbackSection">
+            <div class="feedback-title" id="feedbackTitle"></div>
+            <div class="feedback-text" id="feedbackText"></div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/index.html" class="action-button">
+                ← Return Home
+            </a>
+            <a href="1-0.html" class="action-button primary">
+                Start Learning Course →
+            </a>
+            <button class="action-button secondary" id="retakeButton">
+                ↻ Retake Test
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Questions data
+        const questions = [
+            {
+                question: "What is a neural network inspired by?",
+                options: [
+                    "Human brain structure",
+                    "Computer processors",
+                    "Mathematical formulas",
+                    "Electric circuits"
+                ],
+                correct: 0,
+                explanation: "Neural networks are inspired by the structure and function of the human brain, specifically how neurons connect and communicate."
+            },
+            {
+                question: "What does 'AI' stand for?",
+                options: [
+                    "Artificial Intelligence",
+                    "Automated Interface",
+                    "Advanced Integration",
+                    "Artificial Interface"
+                ],
+                correct: 0,
+                explanation: "AI stands for Artificial Intelligence, which refers to machines or software that can perform tasks typically requiring human intelligence."
+            },
+            {
+                question: "Which of these is a popular AI chatbot?",
+                options: [
+                    "ChatGPT",
+                    "Excel",
+                    "Photoshop",
+                    "Windows"
+                ],
+                correct: 0,
+                explanation: "ChatGPT is a popular AI chatbot developed by OpenAI that can engage in conversational dialogue and answer questions."
+            },
+            {
+                question: "What is machine learning?",
+                options: [
+                    "A subset of AI where machines learn from data",
+                    "Teaching computers to code",
+                    "Making computers physically move",
+                    "Programming robots manually"
+                ],
+                correct: 0,
+                explanation: "Machine learning is a subset of AI where algorithms learn patterns from data and improve their performance over time without explicit programming."
+            },
+            {
+                question: "What does 'training' mean in AI?",
+                options: [
+                    "Teaching an AI model using data",
+                    "Making AI exercise",
+                    "Programming step by step",
+                    "Testing AI capabilities"
+                ],
+                correct: 0,
+                explanation: "Training in AI refers to the process of teaching a model by feeding it data so it can learn patterns and make predictions."
+            },
+            {
+                question: "Which company created ChatGPT?",
+                options: [
+                    "OpenAI",
+                    "Google",
+                    "Microsoft",
+                    "Apple"
+                ],
+                correct: 0,
+                explanation: "ChatGPT was created by OpenAI, an AI research and deployment company."
+            },
+            {
+                question: "What is a deepfake?",
+                options: [
+                    "AI-generated fake media",
+                    "A type of computer virus",
+                    "Programming error",
+                    "Hardware malfunction"
+                ],
+                correct: 0,
+                explanation: "Deepfake refers to synthetic media where a person's likeness is replaced with someone else's using artificial intelligence."
+            },
+            {
+                question: "What is the main purpose of recommendation algorithms?",
+                options: [
+                    "Suggest content you might like",
+                    "Fix computer errors",
+                    "Speed up internet",
+                    "Protect from viruses"
+                ],
+                correct: 0,
+                explanation: "Recommendation algorithms analyze your behavior and preferences to suggest content, products, or services you might enjoy."
+            },
+            {
+                question: "Which AI program beat a world champion at Go?",
+                options: [
+                    "AlphaGo",
+                    "Deep Blue",
+                    "Watson",
+                    "Siri"
+                ],
+                correct: 0,
+                explanation: "AlphaGo, developed by DeepMind, defeated world champion Lee Sedol at the game of Go in 2016."
+            },
+            {
+                question: "What does 'GPT' stand for in ChatGPT?",
+                options: [
+                    "Generative Pre-trained Transformer",
+                    "General Processing Technology",
+                    "Google Programming Tool",
+                    "Global Processing Terminal"
+                ],
+                correct: 0,
+                explanation: "GPT stands for Generative Pre-trained Transformer, which describes the architecture and training method of the model."
+            },
+            {
+                question: "What is computer vision?",
+                options: [
+                    "AI that understands visual information",
+                    "Computer screen technology",
+                    "Virtual reality glasses",
+                    "3D modeling software"
+                ],
+                correct: 0,
+                explanation: "Computer vision is a field of AI that enables computers to derive meaningful information from digital images, videos, and other visual inputs."
+            },
+            {
+                question: "Which of these uses AI to generate images from text?",
+                options: [
+                    "DALL-E",
+                    "Excel",
+                    "Word",
+                    "PowerPoint"
+                ],
+                correct: 0,
+                explanation: "DALL-E is an AI system developed by OpenAI that can create realistic images and art from a description in natural language."
+            },
+            {
+                question: "What is natural language processing (NLP)?",
+                options: [
+                    "AI understanding human language",
+                    "Computer translation software",
+                    "Voice recording technology",
+                    "Text formatting"
+                ],
+                correct: 0,
+                explanation: "Natural Language Processing (NLP) is a branch of AI that helps computers understand, interpret, and manipulate human language."
+            },
+            {
+                question: "What does 'bias' in AI refer to?",
+                options: [
+                    "Unfair outcomes from training data",
+                    "Computer leaning physically",
+                    "Programming preference",
+                    "Software cost"
+                ],
+                correct: 0,
+                explanation: "AI bias refers to systematic and unfair discrimination in the output of AI systems, often stemming from biased training data."
+            },
+            {
+                question: "Which AI technology helps self-driving cars?",
+                options: [
+                    "Computer vision and sensors",
+                    "Big speakers",
+                    "Touch screens",
+                    "Radio signals"
+                ],
+                correct: 0,
+                explanation: "Self-driving cars use computer vision, sensors, and machine learning algorithms to navigate and make driving decisions."
+            },
+            {
+                question: "What is reinforcement learning?",
+                options: [
+                    "AI learning through trial and error",
+                    "Studying for exams",
+                    "Computer maintenance",
+                    "Data backup process"
+                ],
+                correct: 0,
+                explanation: "Reinforcement learning is a type of machine learning where an AI agent learns to make decisions by receiving rewards or penalties for its actions."
+            },
+            {
+                question: "Which AI system helps in medical diagnosis?",
+                options: [
+                    "AI analyzing medical images",
+                    "Hospital scheduling software",
+                    "Patient records database",
+                    "Medical billing system"
+                ],
+                correct: 0,
+                explanation: "AI systems can analyze medical images like X-rays and MRIs to help doctors detect diseases and make diagnoses."
+            },
+            {
+                question: "What is a chatbot?",
+                options: [
+                    "AI program that simulates conversation",
+                    "Computer repair tool",
+                    "Video game character",
+                    "Email program"
+                ],
+                correct: 0,
+                explanation: "A chatbot is an AI program designed to simulate conversation with human users, typically over the internet."
+            },
+            {
+                question: "What does 'API' stand for in AI context?",
+                options: [
+                    "Application Programming Interface",
+                    "Advanced Programming Interface",
+                    "Artificial Programming Intelligence",
+                    "Automated Programming Interface"
+                ],
+                correct: 0,
+                explanation: "API stands for Application Programming Interface, which allows different software applications to communicate with each other, including AI services."
+            },
+            {
+                question: "Which everyday device commonly uses AI?",
+                options: [
+                    "Smartphone voice assistant",
+                    "Microwave oven",
+                    "Digital clock",
+                    "Calculator"
+                ],
+                correct: 0,
+                explanation: "Smartphone voice assistants like Siri, Google Assistant, and Alexa use AI to understand and respond to voice commands."
+            }
+        ];
+
+        // Test state
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+        let testStartTime = Date.now();
+        let score = 0;
+
+        // DOM Elements
+        const questionsContainer = document.getElementById('questionsContainer');
+        const progressBar = document.getElementById('progressBar');
+        const progressText = document.getElementById('progressText');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const scoreValue = document.getElementById('scoreValue');
+        const scoreCircle = document.getElementById('scoreCircle');
+        const scoreDescription = document.getElementById('scoreDescription');
+        const correctAnswersEl = document.getElementById('correctAnswers');
+        const accuracyEl = document.getElementById('accuracy');
+        const completionTimeEl = document.getElementById('completionTime');
+        const feedbackTitle = document.getElementById('feedbackTitle');
+        const feedbackText = document.getElementById('feedbackText');
+        const feedbackSection = document.getElementById('feedbackSection');
+        const retakeButton = document.getElementById('retakeButton');
+
+        // Initialize test
+        function initTest() {
+            renderQuestions();
+            updateProgress();
+            updateNavigation();
+            showQuestion(currentQuestion);
+        }
+
+        // Render all questions
+        function renderQuestions() {
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+                questionDiv.id = `question-${index}`;
+                
+                const letters = ['A', 'B', 'C', 'D'];
+                
+                const optionsHTML = q.options.map((option, optIndex) => `
+                    <div class="option" data-index="${optIndex}">
+                        <div class="option-label">
+                            <span class="option-label-letter">${letters[optIndex]}</span>
+                            <span>${option}</span>
+                        </div>
+                    </div>
+                `).join('');
+                
+                questionDiv.innerHTML = `
+                    <div class="question-number">Question ${index + 1} of ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options-container">
+                        ${optionsHTML}
+                    </div>
+                `;
+                
+                questionsContainer.appendChild(questionDiv);
+                
+                // Add click event to options
+                questionDiv.querySelectorAll('.option').forEach(option => {
+                    option.addEventListener('click', () => selectOption(index, parseInt(option.dataset.index)));
+                });
+            });
+        }
+
+        // Show specific question
+        function showQuestion(index) {
+            document.querySelectorAll('.question-container').forEach((container, i) => {
+                container.classList.toggle('active', i === index);
+            });
+        }
+
+        // Select an option
+        function selectOption(questionIndex, optionIndex) {
+            userAnswers[questionIndex] = optionIndex;
+            
+            // Remove selected class from all options
+            const questionDiv = document.getElementById(`question-${questionIndex}`);
+            questionDiv.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Add selected class to chosen option
+            const selectedOption = questionDiv.querySelector(`.option[data-index="${optionIndex}"]`);
+            selectedOption.classList.add('selected');
+            
+            updateNavigation();
+        }
+
+        // Update progress bar and text
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+        }
+
+        // Update navigation buttons
+        function updateNavigation() {
+            prevButton.disabled = currentQuestion === 0;
+            
+            if (currentQuestion === questions.length - 1) {
+                nextButton.textContent = 'Show Results →';
+                nextButton.classList.add('primary');
+            } else {
+                nextButton.textContent = 'Next Question →';
+                nextButton.classList.add('primary');
+            }
+            
+            // Enable next button if current question is answered
+            nextButton.disabled = userAnswers[currentQuestion] === null;
+        }
+
+        // Calculate results
+        function calculateResults() {
+            score = 0;
+            userAnswers.forEach((answer, index) => {
+                if (answer === questions[index].correct) {
+                    score++;
+                }
+            });
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            const timeTaken = Math.round((Date.now() - testStartTime) / 1000);
+            
+            // Update results display
+            scoreValue.textContent = `${percentage}%`;
+            correctAnswersEl.textContent = `${score} / ${questions.length}`;
+            accuracyEl.textContent = `${percentage}%`;
+            completionTimeEl.textContent = `${timeTaken} seconds`;
+            
+            // Set score circle class and description
+            let description = '';
+            let title = '';
+            
+            if (percentage >= 90) {
+                scoreCircle.className = 'score-circle excellent';
+                description = 'Excellent! You have a strong understanding of AI concepts. You\'re ready to dive deeper into advanced topics.';
+                title = 'AI Expert Level';
+            } else if (percentage >= 75) {
+                scoreCircle.className = 'score-circle good';
+                description = 'Great job! You have a good grasp of AI fundamentals. Keep learning to become an AI pro.';
+                title = 'Solid Understanding';
+            } else if (percentage >= 60) {
+                scoreCircle.className = 'score-circle average';
+                description = 'Good start! You know the basics but could benefit from more learning. The course will help fill gaps.';
+                title = 'Developing Knowledge';
+            } else {
+                scoreCircle.className = 'score-circle needs-improvement';
+                description = 'Don\'t worry! AI can be complex. This is the perfect starting point for your learning journey.';
+                title = 'Beginner Level';
+            }
+            
+            scoreDescription.textContent = description;
+            feedbackTitle.textContent = title;
+            feedbackText.textContent = 'Based on your results, we recommend starting with the course to build a solid foundation in AI concepts.';
+            
+            // Show results
+            questionsContainer.style.display = 'none';
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            resultsContainer.classList.add('active');
+        }
+
+        // Event Listeners
+        prevButton.addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion(currentQuestion);
+                updateProgress();
+                updateNavigation();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                showQuestion(currentQuestion);
+                updateProgress();
+                updateNavigation();
+            } else {
+                calculateResults();
+            }
+        });
+
+        retakeButton.addEventListener('click', () => {
+            // Reset test state
+            currentQuestion = 0;
+            userAnswers.fill(null);
+            testStartTime = Date.now();
+            score = 0;
+            
+            // Reset UI
+            document.querySelectorAll('.question-container').forEach(container => {
+                container.querySelectorAll('.option').forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect');
+                });
+            });
+            
+            questionsContainer.style.display = 'block';
+            document.querySelector('.navigation-buttons').style.display = 'flex';
+            resultsContainer.classList.remove('active');
+            
+            showQuestion(currentQuestion);
+            updateProgress();
+            updateNavigation();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentQuestion > 0) {
+                prevButton.click();
+            } else if (e.key === 'ArrowRight' && currentQuestion < questions.length - 1) {
+                if (!nextButton.disabled) {
+                    nextButton.click();
+                }
+            } else if (e.key >= '1' && e.key <= '4') {
+                const optionIndex = parseInt(e.key) - 1;
+                selectOption(currentQuestion, optionIndex);
+            }
+        });
+
+        // Initialize test on load
+        document.addEventListener('DOMContentLoaded', initTest);
+
+        // Add timer display
+        const timerDisplay = document.createElement('div');
+        timerDisplay.className = 'progress-text';
+        timerDisplay.style.fontSize = '12px';
+        timerDisplay.style.marginTop = '-20px';
+        timerDisplay.textContent = 'Time: 0s';
+        document.querySelector('.test-header').appendChild(timerDisplay);
+
+        // Update timer every second
+        setInterval(() => {
+            const seconds = Math.floor((Date.now() - testStartTime) / 1000);
+            timerDisplay.textContent = `Time: ${seconds}s`;
+        }, 1000);
+    </script>
+</body>
+</html>
