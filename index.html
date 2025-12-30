@@ -91,6 +91,28 @@
             color: white;
         }
 
+        /* Test Button in Navigation */
+        .test-button {
+            background-color: #0366d6;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .test-button:hover {
+            background-color: #0256b8;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(3, 102, 214, 0.2);
+        }
+
         /* Hero Section */
         .hero-section {
             margin-bottom: 64px;
@@ -299,6 +321,56 @@
             font-size: 16px;
         }
 
+        /* Test CTA Section */
+        .test-cta-section {
+            background: linear-gradient(135deg, #f6f8fa 0%, #e1e4e8 100%);
+            border-radius: 16px;
+            padding: 64px 48px;
+            margin: 64px 0;
+            text-align: center;
+            border: 1px solid #d1d5da;
+        }
+
+        .test-cta-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #24292e;
+        }
+
+        .test-cta-description {
+            color: #586069;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+            font-size: 18px;
+        }
+
+        .test-cta-stats {
+            display: flex;
+            justify-content: center;
+            gap: 48px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .test-stat {
+            text-align: center;
+        }
+
+        .test-stat-number {
+            font-size: 40px;
+            font-weight: 700;
+            color: #0366d6;
+            margin-bottom: 8px;
+        }
+
+        .test-stat-label {
+            font-size: 14px;
+            color: #586069;
+            font-weight: 500;
+        }
+
         /* Support Section */
         .support-section {
             background: #f6f8fa;
@@ -469,6 +541,29 @@
             transform: translateY(-2px);
         }
 
+        .test-cta-button {
+            background-color: #0366d6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .test-cta-button:hover {
+            background-color: #0256b8;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(3, 102, 214, 0.3);
+            color: white;
+        }
+
         /* Code snippet styling */
         .code-snippet {
             background: #f6f8fa;
@@ -519,6 +614,14 @@
                 grid-template-columns: 1fr;
             }
 
+            .test-cta-section {
+                padding: 48px 24px;
+            }
+
+            .test-cta-title {
+                font-size: 28px;
+            }
+
             .support-section {
                 padding: 32px 24px;
             }
@@ -534,15 +637,21 @@
             }
 
             .primary-button,
-            .secondary-button {
+            .secondary-button,
+            .test-cta-button {
                 width: 100%;
                 text-align: center;
                 max-width: 300px;
+                justify-content: center;
             }
 
             .creator-header {
                 flex-direction: column;
                 text-align: center;
+            }
+
+            .test-cta-stats {
+                gap: 24px;
             }
         }
 
@@ -577,9 +686,18 @@
                 font-size: 14px;
             }
 
-            .github-button {
+            .github-button,
+            .test-button {
                 padding: 6px 12px;
                 font-size: 13px;
+            }
+
+            .test-cta-title {
+                font-size: 24px;
+            }
+
+            .test-stat-number {
+                font-size: 32px;
             }
         }
 
@@ -616,7 +734,7 @@
 
         /* Print styles */
         @media print {
-            .site-header, .cta-buttons, .support-section {
+            .site-header, .cta-buttons, .support-section, .test-cta-section {
                 display: none;
             }
             
@@ -641,6 +759,9 @@
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#topics" class="nav-link">Topics</a>
                 <a href="#creator" class="nav-link">Creator</a>
+                <a href="thorium-ai/test.html" class="test-button">
+                    📝 Take AI Test
+                </a>
                 <a href="https://github.com/waratecs123/Thorium-AI" target="_blank" class="github-button">
                     <span>★</span> Star on GitHub
                 </a>
@@ -682,8 +803,8 @@
 
         <div class="cta-buttons">
             <a href="#topics" class="primary-button">Explore Topics</a>
-            <a href="https://github.com/waratecs123/Thorium-AI" target="_blank" class="secondary-button">
-                View on GitHub
+            <a href="thorium-ai/test.html" class="secondary-button">
+                📝 Take Knowledge Test
             </a>
         </div>
     </section>
@@ -784,6 +905,35 @@
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Test CTA Section -->
+    <section class="test-cta-section fade-in" id="test">
+        <h2 class="test-cta-title">Test Your AI Knowledge</h2>
+        <p class="test-cta-description">
+            Take our interactive 20-question test to assess your current understanding of 
+            artificial intelligence and neural networks. Get personalized feedback and 
+            discover which areas to focus on.
+        </p>
+
+        <div class="test-cta-stats">
+            <div class="test-stat">
+                <div class="test-stat-number">20</div>
+                <div class="test-stat-label">Questions</div>
+            </div>
+            <div class="test-stat">
+                <div class="test-stat-number">4</div>
+                <div class="test-stat-label">Answer Choices Each</div>
+            </div>
+            <div class="test-stat">
+                <div class="test-stat-number">Instant</div>
+                <div class="test-stat-label">Results & Feedback</div>
+            </div>
+        </div>
+
+        <a href="thorium-ai/test.html" class="test-cta-button">
+            🧠 Start AI Knowledge Test
+        </a>
     </section>
 
     <!-- Course Structure -->
@@ -901,6 +1051,15 @@
         <div class="highlight-box">
             <p>Each topic starts with what you already know or experience. We use simple analogies, real examples, and practical exercises. You'll not only understand AI — you'll learn how to use it, how to spot it, and how to make it work for you.</p>
         </div>
+
+        <div class="cta-buttons">
+            <a href="thorium-ai/test.html" class="primary-button">
+                📝 Test Your Knowledge First
+            </a>
+            <a href="1-0.html" class="secondary-button">
+                Start Learning Course
+            </a>
+        </div>
     </section>
 
     <!-- Creator Section -->
@@ -958,6 +1117,7 @@
             <a href="#course" class="footer-link">Course Overview</a>
             <a href="#features" class="footer-link">Features</a>
             <a href="#topics" class="footer-link">Topics</a>
+            <a href="#test" class="footer-link">Knowledge Test</a>
             <a href="#creator" class="footer-link">Creator</a>
             <a href="https://github.com/waratecs123/Thorium-AI" target="_blank" class="footer-link">GitHub</a>
             <a href="https://t.me/mobius_org" target="_blank" class="footer-link">Telegram</a>
@@ -1008,7 +1168,9 @@
                         document.querySelectorAll('.nav-link').forEach(link => {
                             link.style.fontWeight = 'normal';
                         });
-                        this.style.fontWeight = '600';
+                        if (this.classList.contains('nav-link')) {
+                            this.style.fontWeight = '600';
+                        }
                     }
                 });
             });
@@ -1065,6 +1227,21 @@
                 setTimeout(() => {
                     document.body.style.opacity = '1';
                 }, 100);
+            });
+
+            // Test button animation
+            const testButtons = document.querySelectorAll('a[href="thorium-ai/test.html"]');
+            testButtons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (this.classList.contains('test-cta-button')) {
+                        this.innerHTML = '🧠 Start AI Knowledge Test →';
+                    }
+                });
+                button.addEventListener('mouseleave', function() {
+                    if (this.classList.contains('test-cta-button')) {
+                        this.innerHTML = '🧠 Start AI Knowledge Test';
+                    }
+                });
             });
         });
     </script>
