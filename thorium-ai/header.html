@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thorium-AI</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -11,7 +11,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -19,34 +18,26 @@
             color: #222222;
             min-height: 100vh;
             display: flex;
-            overflow-x: hidden;
         }
 
-        /* Mobile Menu Toggle - улучшен для удобства */
+        /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
             position: fixed;
             top: 16px;
             left: 16px;
             z-index: 1002;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0);
             border: 1px solid rgba(221, 221, 221, 0.4);
-            border-radius: 12px;
-            width: 48px;
-            height: 48px;
+            border-radius: 4px;
+            width: 40px;
+            height: 40px;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            -webkit-touch-callout: none;
-        }
-
-        .mobile-menu-toggle:active {
-            transform: scale(0.95);
-            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .mobile-menu-toggle i {
@@ -54,7 +45,7 @@
             color: rgba(51, 51, 51, 0.9);
         }
 
-        /* Overlay для мобильной навигации */
+        /* Overlay for mobile */
         .overlay {
             display: none;
             position: fixed;
@@ -62,16 +53,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.3);
             z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            touch-action: none;
         }
 
         .overlay.active {
             display: block;
-            opacity: 1;
         }
 
         /* Sidebar Navigation */
@@ -85,18 +72,7 @@
             bottom: 0;
             overflow-y: auto;
             z-index: 1000;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: thin;
-        }
-
-        .sidebar::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .sidebar::-webkit-scrollbar-thumb {
-            background: #ddd;
-            border-radius: 2px;
+            transition: transform 0.3s ease;
         }
 
         .sidebar-header {
@@ -106,8 +82,6 @@
             position: sticky;
             top: 0;
             z-index: 10;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
         }
 
         .logo-section {
@@ -119,65 +93,52 @@
         .logo-icon {
             color: #333;
             font-size: 22px;
-            flex-shrink: 0;
         }
 
         .site-title {
             font-size: 18px;
             font-weight: 600;
             color: #222;
-            line-height: 1.2;
         }
 
         .site-subtitle {
             font-size: 12px;
             color: #666;
             margin-top: 4px;
-            line-height: 1.3;
         }
 
-        /* Support Buttons - оптимизированы для мобильных */
-        .support-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding: 0 20px;
-            margin: 20px 0;
-        }
-
+        /* Support Button */
         .support-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 14px 20px;
+            display: block;
+            padding: 12px 20px;
+            margin: 20px;
             background: #f0f0f0;
             color: #333;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 4px;
             font-weight: 500;
-            font-size: 15px;
+            font-size: 14px;
             border: 1px solid #ddd;
-            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s;
             text-align: center;
-            min-height: 48px;
-            -webkit-tap-highlight-color: rgba(0,0,0,0.1);
-            user-select: none;
         }
 
-        .support-btn:active {
-            background: #e0e0e0;
-            transform: translateY(1px);
+        .support-btn:hover {
+            background: #e8e8e8;
+            border-color: #ccc;
         }
 
         .support-icon {
             color: #e25555;
-            font-size: 16px;
         }
 
         /* Topics Navigation */
         .topics-nav {
-            padding: 0 0 30px 0;
+            padding: 0 0 20px 0;
         }
 
         .topic-category {
@@ -185,18 +146,12 @@
         }
 
         .category-title {
-            padding: 12px 20px;
-            font-size: 12px;
+            padding: 8px 20px;
+            font-size: 11px;
             font-weight: 600;
             color: #666;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            background: #fafafa;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            position: sticky;
-            top: 100px;
-            z-index: 5;
         }
 
         .topic-section {
@@ -204,8 +159,8 @@
         }
 
         .section-title {
-            padding: 16px 20px;
-            font-size: 15px;
+            padding: 12px 20px;
+            font-size: 14px;
             font-weight: 600;
             color: #333;
             cursor: pointer;
@@ -217,19 +172,16 @@
             background: #f8f8f8;
             border-left: 4px solid #4285f4;
             margin: 8px 0;
-            min-height: 52px;
-            -webkit-tap-highlight-color: rgba(66, 133, 244, 0.1);
         }
 
-        .section-title:active {
+        .section-title:hover {
             background: #f0f0f0;
         }
 
         .toggle-icon {
             font-size: 12px;
             color: #666;
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
+            transition: transform 0.2s;
         }
 
         .section-title.active .toggle-icon {
@@ -238,12 +190,6 @@
 
         .topic-list {
             display: none;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .section-title.active + .topic-list {
@@ -256,20 +202,19 @@
 
         .topic-link {
             display: flex;
-            align-items: center;
-            padding: 14px 20px 14px 32px;
+            align-items: flex-start;
+            padding: 8px 20px 8px 28px;
             color: #444;
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.4;
             transition: background 0.2s;
             border-left: 1px solid transparent;
-            min-height: 48px;
-            -webkit-tap-highlight-color: rgba(66, 133, 244, 0.1);
         }
 
-        .topic-link:active {
+        .topic-link:hover {
             background: #f9f9f9;
+            border-left-color: #ccc;
         }
 
         .topic-link.active {
@@ -281,11 +226,11 @@
 
         .topic-number {
             color: #666;
-            font-size: 12px;
-            min-width: 28px;
-            margin-right: 10px;
+            font-size: 11px;
+            min-width: 24px;
+            margin-right: 8px;
             font-variant-numeric: tabular-nums;
-            font-weight: 500;
+            margin-top: 1px;
         }
 
         .intro-link {
@@ -327,7 +272,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.2;
         }
 
         .welcome-subtitle {
@@ -349,15 +293,15 @@
         .feature-card {
             background: white;
             border: 1px solid #e5e5e5;
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 24px;
             text-align: left;
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .feature-card:active {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
 
         .feature-icon {
@@ -371,7 +315,6 @@
             font-weight: 600;
             color: #222;
             margin-bottom: 8px;
-            line-height: 1.3;
         }
 
         .feature-description {
@@ -380,7 +323,7 @@
             line-height: 1.5;
         }
 
-        /* Мобильные стили - улучшены для удобства */
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .mobile-menu-toggle {
                 display: flex;
@@ -390,8 +333,7 @@
                 transform: translateX(-100%);
                 width: 100%;
                 max-width: 320px;
-                box-shadow: 4px 0 20px rgba(0,0,0,0.15);
-                border-right: none;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.1);
             }
 
             .sidebar.active {
@@ -401,106 +343,57 @@
             .main-content {
                 margin-left: 0;
                 width: 100%;
-                min-height: 100vh;
-                padding-top: env(safe-area-inset-top);
             }
 
             .welcome-container {
                 padding: 20px;
-                padding-top: calc(80px + env(safe-area-inset-top));
-                padding-bottom: calc(20px + env(safe-area-inset-bottom));
-                justify-content: flex-start;
-                min-height: 100vh;
+                padding-top: 80px;
             }
 
             .welcome-title {
-                font-size: 28px;
-                margin-top: 10px;
-                margin-bottom: 12px;
+                font-size: 24px;
+                margin-top: 20px;
             }
 
             .welcome-subtitle {
                 font-size: 16px;
-                padding: 0 10px;
             }
 
             .welcome-features {
                 grid-template-columns: 1fr;
-                gap: 16px;
-                margin-top: 30px;
-                padding: 0 10px;
-                width: 100%;
-            }
-
-            .feature-card {
-                padding: 20px;
-            }
-
-            .sidebar-header {
-                padding-top: 70px;
-                padding-left: 20px;
-                padding-right: 20px;
-                min-height: 120px;
-            }
-
-            .mobile-menu-toggle {
-                width: 52px;
-                height: 52px;
-                top: max(16px, env(safe-area-inset-top));
-                left: 16px;
-                border-radius: 14px;
             }
 
             .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.3);
+                z-index: 999;
+            }
+
+            .overlay.active {
                 display: block;
-                opacity: 0;
-                transition: opacity 0.3s ease;
             }
 
-            .support-buttons {
-                padding: 0 16px;
-                margin: 16px 0;
-                gap: 8px;
+            .sidebar-header {
+                padding-top: 60px;
+                min-height: 100px;
             }
 
-            .support-btn {
-                padding: 16px 20px;
-                font-size: 15px;
-                min-height: 52px;
-                border-radius: 12px;
-            }
-
-            .category-title {
-                padding: 14px 20px;
-                font-size: 13px;
-                top: 120px;
-            }
-
-            .section-title {
-                padding: 18px 20px;
-                font-size: 16px;
-                min-height: 56px;
-                margin: 6px 0;
-                border-left-width: 5px;
-            }
-
-            .topic-link {
-                padding: 16px 20px 16px 36px;
-                font-size: 15px;
-                min-height: 52px;
-            }
-
-            .topic-number {
-                min-width: 30px;
-                font-size: 13px;
+            .mobile-menu-toggle {
+                width: 44px;
+                height: 44px;
             }
         }
 
         @media (max-width: 480px) {
             .mobile-menu-toggle {
-                width: 48px;
-                height: 48px;
-                top: max(12px, env(safe-area-inset-top));
+                width: 36px;
+                height: 36px;
+                top: 12px;
                 left: 12px;
             }
 
@@ -508,132 +401,68 @@
                 font-size: 18px;
             }
 
-            .sidebar {
-                max-width: 280px;
+            .topic-link {
+                padding: 8px 16px 8px 20px;
+                font-size: 12px;
+            }
+
+            .topic-number {
+                min-width: 20px;
+                margin-right: 6px;
+            }
+
+            .section-title {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+
+            .category-title {
+                padding: 8px 16px;
             }
 
             .sidebar-header {
                 padding: 16px;
-                padding-top: 80px;
-                min-height: 110px;
-            }
-
-            .site-title {
-                font-size: 17px;
-            }
-
-            .support-buttons {
-                padding: 0 12px;
-                margin: 12px 0;
+                padding-top: 70px;
             }
 
             .support-btn {
-                padding: 14px 16px;
-                font-size: 14px;
-                min-height: 48px;
-                border-radius: 10px;
-            }
-
-            .topic-link {
-                padding: 14px 16px 14px 28px;
-                font-size: 14px;
-                min-height: 46px;
-            }
-
-            .topic-number {
-                min-width: 26px;
-                margin-right: 8px;
-                font-size: 12px;
-            }
-
-            .section-title {
-                padding: 16px 16px;
-                font-size: 15px;
-                min-height: 52px;
-            }
-
-            .category-title {
-                padding: 12px 16px;
-                font-size: 12px;
+                margin: 16px;
+                padding: 10px 16px;
+                font-size: 13px;
             }
 
             .welcome-container {
-                padding-top: calc(70px + env(safe-area-inset-top));
+                padding-top: 70px;
             }
 
             .welcome-title {
-                font-size: 24px;
-                margin-top: 5px;
-            }
-
-            .welcome-subtitle {
-                font-size: 15px;
-                padding: 0;
-            }
-
-            .feature-card {
-                padding: 18px;
-            }
-
-            .feature-title {
-                font-size: 15px;
-            }
-
-            .feature-description {
-                font-size: 13px;
+                font-size: 22px;
+                margin-top: 15px;
             }
         }
 
         @media (max-width: 360px) {
             .mobile-menu-toggle {
-                top: max(10px, env(safe-area-inset-top));
+                top: 10px;
                 left: 10px;
-                width: 44px;
-                height: 44px;
+                width: 34px;
+                height: 34px;
             }
 
             .mobile-menu-toggle i {
                 font-size: 16px;
             }
 
-            .sidebar {
-                max-width: 100%;
-            }
-
             .sidebar-header {
-                padding-top: 70px;
-                min-height: 100px;
+                padding-top: 60px;
             }
 
             .welcome-container {
-                padding-top: calc(60px + env(safe-area-inset-top));
-            }
-
-            .welcome-title {
-                font-size: 22px;
-            }
-
-            .welcome-subtitle {
-                font-size: 14px;
+                padding-top: 60px;
             }
         }
 
-        /* Оптимизация для очень высоких экранов */
-        @media (min-height: 800px) and (max-width: 768px) {
-            .welcome-container {
-                justify-content: center;
-                padding-top: 40px;
-            }
-        }
-
-        /* Предотвращение zoom при двойном тапе на iOS */
-        @media (hover: none) and (pointer: coarse) {
-            input, textarea, select, .support-btn, .section-title, .topic-link {
-                font-size: 16px !important;
-            }
-        }
-
-        /* Поддержка темной темы */
+        /* Dark mode support */
         @media (prefers-color-scheme: dark) {
             body {
                 background: #1a1a1a;
@@ -664,17 +493,13 @@
                 color: #e0e0e0;
             }
 
-            .support-btn:active {
-                background: #333;
-            }
-
             .section-title {
                 background: #2a2a2a;
                 color: #e0e0e0;
                 border-left-color: #4285f4;
             }
 
-            .section-title:active {
+            .section-title:hover {
                 background: #333;
             }
 
@@ -682,8 +507,9 @@
                 color: #bbb;
             }
 
-            .topic-link:active {
+            .topic-link:hover {
                 background: #2a2a2a;
+                border-left-color: #666;
             }
 
             .topic-link.active {
@@ -698,12 +524,6 @@
 
             .intro-link .topic-number {
                 color: #8ab4f8;
-            }
-
-            .category-title {
-                background: #222;
-                border-color: #333;
-                color: #aaa;
             }
 
             .welcome-container {
@@ -732,46 +552,30 @@
             }
 
             .mobile-menu-toggle {
-                background: rgba(42, 42, 42, 0.95);
+                background: rgba(42, 42, 42, 0.7);
                 border-color: rgba(68, 68, 68, 0.4);
             }
 
             .mobile-menu-toggle i {
                 color: rgba(224, 224, 224, 0.9);
             }
-
-            .overlay {
-                background: rgba(0,0,0,0.6);
-            }
-        }
-
-        /* Улучшение для устройств с вырезом (notch) */
-        @supports (padding: max(0px)) {
-            .sidebar {
-                padding-top: env(safe-area-inset-top);
-                padding-bottom: env(safe-area-inset-bottom);
-            }
-            
-            .sidebar-header {
-                padding-top: calc(20px + env(safe-area-inset-top));
-            }
         }
     </style>
 </head>
 <body>
     <!-- Mobile Menu Toggle -->
-    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu" aria-expanded="false">
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
         <i class="fas fa-bars"></i>
-    </button>
+    </div>
 
-    <!-- Overlay для мобильной навигации -->
-    <div class="overlay" id="overlay" aria-hidden="true"></div>
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
 
     <!-- Sidebar Navigation -->
-    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <div class="logo-section">
-                <i class="fas fa-brain logo-icon" aria-hidden="true"></i>
+                <i class="fas fa-brain logo-icon"></i>
                 <div>
                     <div class="site-title">Thorium-AI</div>
                     <div class="site-subtitle">Distribution under the MIT license</div>
@@ -779,35 +583,30 @@
             </div>
         </div>
 
-        <div class="support-buttons">
-            <a href="https://www.donationalerts.com/r/mobius_org" target="_blank" class="support-btn" rel="noopener">
-                <i class="fas fa-heart support-icon" aria-hidden="true"></i>
-                Support Project
-            </a>
+        <a href="https://www.donationalerts.com/r/mobius_org" target="_blank" class="support-btn">
+            Support Project
+        </a>
 
-            <a href="https://t.me/mobius_org" target="_blank" class="support-btn" rel="noopener">
-                <i class="fab fa-telegram support-icon" aria-hidden="true"></i>
-                Telegram Channel
-            </a>
+        <a href="https://t.me/mobius_org" target="_blank" class="support-btn">
+            Telegram Channel
+        </a>
 
-            <a href="https://github.com/waratecs123/Thorium-AI/tree/main" target="_blank" class="support-btn" rel="noopener">
-                <i class="fab fa-github support-icon" aria-hidden="true"></i>
-                GitHub Project
-            </a>
-        </div>
+        <a href="https://github.com/waratecs123/Thorium-AI/tree/main" target="_blank" class="support-btn">
+            GitHub Project
+        </a>
 
-        <nav class="topics-nav" aria-label="Course topics">
+        <nav class="topics-nav">
             <!-- Part 1: Practice -->
             <div class="topic-category">
                 <div class="category-title">PRACTICAL AI</div>
 
                 <!-- Topic 1 -->
                 <div class="topic-section">
-                    <button class="section-title" data-section="1" aria-expanded="true">
+                    <div class="section-title" data-section="1">
                         <span>1. AI Around Us</span>
-                        <i class="fas fa-chevron-right toggle-icon" aria-hidden="true"></i>
-                    </button>
-                    <ul class="topic-list" id="section-1" aria-label="AI Around Us topics">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-1">
                         <li class="topic-item"><a href="1-0.html" class="topic-link intro-link"><span class="topic-number">1.0</span> Introduction: Where AI Already Works</a></li>
                         <li class="topic-item"><a href="1-1.html" class="topic-link"><span class="topic-number">1.1</span> YouTube/Netflix Recommendations</a></li>
                         <li class="topic-item"><a href="1-2.html" class="topic-link"><span class="topic-number">1.2</span> TikTok/Reels Algorithms</a></li>
@@ -819,11 +618,11 @@
 
                 <!-- Topic 2 -->
                 <div class="topic-section">
-                    <button class="section-title" data-section="2" aria-expanded="false">
+                    <div class="section-title" data-section="2">
                         <span>2. ChatGPT and Neural Networks</span>
-                        <i class="fas fa-chevron-right toggle-icon" aria-hidden="true"></i>
-                    </button>
-                    <ul class="topic-list" id="section-2" aria-label="ChatGPT and Neural Networks topics">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-2">
                         <li class="topic-item"><a href="2-0.html" class="topic-link intro-link"><span class="topic-number">2.0</span> Introduction: ChatGPT Explained Simply</a></li>
                         <li class="topic-item"><a href="2-1.html" class="topic-link"><span class="topic-number">2.1</span> ChatGPT: How It Works</a></li>
                         <li class="topic-item"><a href="2-2.html" class="topic-link"><span class="topic-number">2.2</span> Midjourney/Stable Diffusion</a></li>
@@ -835,11 +634,11 @@
 
                 <!-- Topic 3 -->
                 <div class="topic-section">
-                    <button class="section-title" data-section="3" aria-expanded="false">
+                    <div class="section-title" data-section="3">
                         <span>3. AI Sensations</span>
-                        <i class="fas fa-chevron-right toggle-icon" aria-hidden="true"></i>
-                    </button>
-                    <ul class="topic-list" id="section-3" aria-label="AI Sensations topics">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-3">
                         <li class="topic-item"><a href="3-0.html" class="topic-link intro-link"><span class="topic-number">3.0</span> Introduction: AI Records and Breakthroughs</a></li>
                         <li class="topic-item"><a href="3-1.html" class="topic-link"><span class="topic-number">3.1</span> AlphaGo vs Lee Sedol</a></li>
                         <li class="topic-item"><a href="3-2.html" class="topic-link"><span class="topic-number">3.2</span> AlphaFold Discovery</a></li>
@@ -851,11 +650,11 @@
 
                 <!-- Topic 4 -->
                 <div class="topic-section">
-                    <button class="section-title" data-section="4" aria-expanded="false">
+                    <div class="section-title" data-section="4">
                         <span>4. Future is Now</span>
-                        <i class="fas fa-chevron-right toggle-icon" aria-hidden="true"></i>
-                    </button>
-                    <ul class="topic-list" id="section-4" aria-label="Future is Now topics">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-4">
                         <li class="topic-item"><a href="4-0.html" class="topic-link intro-link"><span class="topic-number">4.0</span> Introduction: Future That's Already Here</a></li>
                         <li class="topic-item"><a href="4-1.html" class="topic-link"><span class="topic-number">4.1</span> AI Doctor Diagnosis</a></li>
                         <li class="topic-item"><a href="4-2.html" class="topic-link"><span class="topic-number">4.2</span> Personal Teacher</a></li>
@@ -867,11 +666,11 @@
 
                 <!-- Topic 5 -->
                 <div class="topic-section">
-                    <button class="section-title" data-section="5" aria-expanded="false">
+                    <div class="section-title" data-section="5">
                         <span>5. Talking to AI</span>
-                        <i class="fas fa-chevron-right toggle-icon" aria-hidden="true"></i>
-                    </button>
-                    <ul class="topic-list" id="section-5" aria-label="Talking to AI topics">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-5">
                         <li class="topic-item"><a href="5-0.html" class="topic-link intro-link"><span class="topic-number">5.0</span> Introduction: Prompt Engineering for Everyone</a></li>
                         <li class="topic-item"><a href="5-1.html" class="topic-link"><span class="topic-number">5.1</span> Prompt Differences</a></li>
                         <li class="topic-item"><a href="5-2.html" class="topic-link"><span class="topic-number">5.2</span> Magic Phrases</a></li>
@@ -883,11 +682,11 @@
 
                 <!-- Topic 6 -->
                 <div class="topic-section">
-                    <button class="section-title" data-section="6" aria-expanded="false">
+                    <div class="section-title" data-section="6">
                         <span>6. AI for Hobbies</span>
-                        <i class="fas fa-chevron-right toggle-icon" aria-hidden="true"></i>
-                    </button>
-                    <ul class="topic-list" id="section-6" aria-label="AI for Hobbies topics">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-6">
                         <li class="topic-item"><a href="6-0.html" class="topic-link intro-link"><span class="topic-number">6.0</span> Introduction: AI for Creativity and Daily Life</a></li>
                         <li class="topic-item"><a href="6-1.html" class="topic-link"><span class="topic-number">6.1</span> Writing a Book</a></li>
                         <li class="topic-item"><a href="6-2.html" class="topic-link"><span class="topic-number">6.2</span> Creating Music</a></li>
@@ -900,11 +699,11 @@
 
                 <!-- Topic 7 -->
                 <div class="topic-section">
-                    <button class="section-title" data-section="7" aria-expanded="false">
+                    <div class="section-title" data-section="7">
                         <span>7. Dangers and Ethics</span>
-                        <i class="fas fa-chevron-right toggle-icon" aria-hidden="true"></i>
-                    </button>
-                    <ul class="topic-list" id="section-7" aria-label="Dangers and Ethics topics">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-7">
                         <li class="topic-item"><a href="7-0.html" class="topic-link intro-link"><span class="topic-number">7.0</span> Introduction: Risks, Ethics and Protection</a></li>
                         <li class="topic-item"><a href="7-1.html" class="topic-link"><span class="topic-number">7.1</span> Deepfake Fraud</a></li>
                         <li class="topic-item"><a href="7-2.html" class="topic-link"><span class="topic-number">7.2</span> AI Phone Calls</a></li>
@@ -922,11 +721,11 @@
 
                 <!-- Topic 8 -->
                 <div class="topic-section">
-                    <button class="section-title" data-section="8" aria-expanded="false">
+                    <div class="section-title" data-section="8">
                         <span>8. How AI Works (Simply)</span>
-                        <i class="fas fa-chevron-right toggle-icon" aria-hidden="true"></i>
-                    </button>
-                    <ul class="topic-list" id="section-8" aria-label="How AI Works topics">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-8">
                         <li class="topic-item"><a href="8-0.html" class="topic-link intro-link"><span class="topic-number">8.0</span> Introduction: AI Basics Without Math</a></li>
                         <li class="topic-item"><a href="8-1.html" class="topic-link"><span class="topic-number">8.1</span> Programming vs Learning</a></li>
                         <li class="topic-item"><a href="8-2.html" class="topic-link"><span class="topic-number">8.2</span> What is Machine Learning?</a></li>
@@ -938,11 +737,11 @@
 
                 <!-- Topic 9 -->
                 <div class="topic-section">
-                    <button class="section-title" data-section="9" aria-expanded="false">
+                    <div class="section-title" data-section="9">
                         <span>9. First Steps with AI</span>
-                        <i class="fas fa-chevron-right toggle-icon" aria-hidden="true"></i>
-                    </button>
-                    <ul class="topic-list" id="section-9" aria-label="First Steps with AI topics">
+                        <i class="fas fa-chevron-right toggle-icon"></i>
+                    </div>
+                    <ul class="topic-list" id="section-9">
                         <li class="topic-item"><a href="9-0.html" class="topic-link intro-link"><span class="topic-number">9.0</span> Introduction: Start Your AI Journey</a></li>
                         <li class="topic-item"><a href="9-1.html" class="topic-link"><span class="topic-number">9.1</span> Best Free AI Tools</a></li>
                         <li class="topic-item"><a href="9-2.html" class="topic-link"><span class="topic-number">9.2</span> Create Your First AI Image</a></li>
@@ -956,198 +755,59 @@
     </aside>
 
     <script>
-        // Mobile menu functionality
+        // Mobile menu
         const mobileMenuToggle = document.getElementById('mobileMenuToggle');
         const sidebar = document.getElementById('sidebar');
         const overlay = document.getElementById('overlay');
-        const mainContent = document.getElementById('mainContent');
 
-        function toggleMenu() {
-            const isActive = sidebar.classList.toggle('active');
+        mobileMenuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
-            mobileMenuToggle.setAttribute('aria-expanded', isActive);
-            mobileMenuToggle.innerHTML = isActive ? 
-                '<i class="fas fa-times"></i>' : 
-                '<i class="fas fa-bars"></i>';
-            
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = isActive ? 'hidden' : '';
-            
-            // Add focus trap when menu is open
-            if (isActive) {
-                trapFocus(sidebar);
-            }
-        }
+        });
 
-        function closeMenu() {
+        overlay.addEventListener('click', () => {
             sidebar.classList.remove('active');
             overlay.classList.remove('active');
-            mobileMenuToggle.setAttribute('aria-expanded', 'false');
-            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            document.body.style.overflow = '';
-        }
+        });
 
-        // Focus trap for accessibility
-        function trapFocus(element) {
-            const focusableElements = element.querySelectorAll(
-                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-            );
-            const firstFocusable = focusableElements[0];
-            const lastFocusable = focusableElements[focusableElements.length - 1];
-
-            element.addEventListener('keydown', function(e) {
-                if (e.key === 'Tab') {
-                    if (e.shiftKey) {
-                        if (document.activeElement === firstFocusable) {
-                            lastFocusable.focus();
-                            e.preventDefault();
-                        }
-                    } else {
-                        if (document.activeElement === lastFocusable) {
-                            firstFocusable.focus();
-                            e.preventDefault();
-                        }
-                    }
-                }
-                if (e.key === 'Escape') {
-                    closeMenu();
-                    mobileMenuToggle.focus();
-                }
-            });
-        }
-
-        // Event listeners
-        mobileMenuToggle.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', closeMenu);
-
-        // Close menu when clicking on links
+        // Close menu when clicking on links (mobile)
         document.querySelectorAll('.topic-link').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth <= 768) {
-                    closeMenu();
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
                 }
             });
         });
 
-        // Accordion functionality with improved accessibility
+        // Accordion for sections
         document.querySelectorAll('.section-title').forEach(title => {
             title.addEventListener('click', () => {
-                const isActive = title.classList.toggle('active');
-                const sectionId = title.getAttribute('data-section');
-                const topicList = document.getElementById(`section-${sectionId}`);
-                
-                title.setAttribute('aria-expanded', isActive);
-                topicList.setAttribute('aria-hidden', !isActive);
-                
-                // Smooth animation
-                if (isActive) {
-                    topicList.style.display = 'block';
-                    const height = topicList.scrollHeight;
-                    topicList.style.height = '0px';
-                    setTimeout(() => {
-                        topicList.style.height = height + 'px';
-                        setTimeout(() => {
-                            topicList.style.height = 'auto';
-                        }, 300);
-                    }, 10);
-                } else {
-                    topicList.style.height = topicList.scrollHeight + 'px';
-                    setTimeout(() => {
-                        topicList.style.height = '0px';
-                        setTimeout(() => {
-                            topicList.style.display = 'none';
-                            topicList.style.height = '';
-                        }, 300);
-                    }, 10);
-                }
+                title.classList.toggle('active');
             });
         });
 
-        // Open first section by default on desktop
+        // Open first section by default
         document.addEventListener('DOMContentLoaded', () => {
-            if (window.innerWidth > 768) {
-                const firstSection = document.querySelector('.section-title');
-                if (firstSection) {
-                    firstSection.click();
-                }
+            const firstSection = document.querySelector('.section-title');
+            if (firstSection) {
+                firstSection.classList.add('active');
             }
-            
-            // Handle active link based on current page
-            const currentPage = window.location.pathname.split('/').pop();
-            document.querySelectorAll('.topic-link').forEach(link => {
-                const href = link.getAttribute('href');
-                if (href === currentPage || (currentPage === '' && href === '1-0.html')) {
-                    link.classList.add('active');
-                    // Expand parent section
-                    const parentSection = link.closest('.topic-section');
-                    const sectionTitle = parentSection.querySelector('.section-title');
-                    if (sectionTitle && !sectionTitle.classList.contains('active')) {
-                        sectionTitle.click();
-                    }
-                }
-            });
+        });
+
+        // Handle Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
         });
 
         // Handle window resize
-        let resizeTimer;
         window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(() => {
-                if (window.innerWidth > 768) {
-                    closeMenu();
-                    // Reset all sections to proper state
-                    document.querySelectorAll('.section-title').forEach(title => {
-                        const topicList = title.nextElementSibling;
-                        if (title.classList.contains('active')) {
-                            topicList.style.display = 'block';
-                            topicList.style.height = 'auto';
-                        }
-                    });
-                } else {
-                    // On mobile, collapse all sections except first
-                    document.querySelectorAll('.section-title').forEach((title, index) => {
-                        if (index > 0) {
-                            title.classList.remove('active');
-                            title.setAttribute('aria-expanded', 'false');
-                            const topicList = title.nextElementSibling;
-                            topicList.setAttribute('aria-hidden', 'true');
-                            topicList.style.display = 'none';
-                            topicList.style.height = '';
-                        }
-                    });
-                }
-            }, 250);
-        });
-
-        // Handle swipe to close sidebar on mobile
-        let touchStartX = 0;
-        let touchEndX = 0;
-
-        sidebar.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-
-        sidebar.addEventListener('touchmove', e => {
-            if (touchStartX < 50) { // Only if starting from near edge
-                touchEndX = e.changedTouches[0].screenX;
-                const diff = touchStartX - touchEndX;
-                if (diff > 50) { // Swipe left
-                    closeMenu();
-                }
-            }
-        }, { passive: true });
-
-        // Improve touch experience
-        document.addEventListener('touchstart', function() {}, {passive: true});
-
-        // Add loading state for better UX
-        document.body.classList.add('loaded');
-
-        // Keyboard navigation improvements
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeMenu();
-                mobileMenuToggle.focus();
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
             }
         });
     </script>
