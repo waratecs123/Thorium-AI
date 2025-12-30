@@ -29,7 +29,87 @@
             padding: 32px 0;
             border-bottom: 1px solid #e1e4e8;
             margin-bottom: 32px;
-            text-align: center;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .platform-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #24292e;
+            text-decoration: none;
+        }
+
+        .platform-title:hover {
+            color: #0366d6;
+        }
+
+        .license-badge {
+            background: #f6f8fa;
+            color: #586069;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid #e1e4e8;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .start-course-button {
+            background-color: #2ea44f;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .start-course-button:hover {
+            background-color: #2c974b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 164, 79, 0.2);
+        }
+
+        .home-button {
+            background-color: #f6f8fa;
+            color: #24292e;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #e1e4e8;
+            transition: all 0.2s ease;
+        }
+
+        .home-button:hover {
+            background-color: #e1e4e8;
+            border-color: #0366d6;
+            color: #0366d6;
         }
 
         .test-title {
@@ -416,10 +496,61 @@
             line-height: 1.6;
         }
 
+        /* MIT License Notice */
+        .license-notice {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            color: #586069;
+            font-size: 13px;
+        }
+
+        .license-notice a {
+            color: #0366d6;
+            text-decoration: none;
+        }
+
+        .license-notice a:hover {
+            text-decoration: underline;
+        }
+
+        /* Early Course Access */
+        .early-access {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+            text-align: center;
+        }
+
+        .early-access h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #24292e;
+        }
+
+        .early-access p {
+            color: #586069;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
                 padding: 16px;
+            }
+
+            .header-top {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 20px;
+            }
+
+            .header-actions {
+                justify-content: center;
             }
 
             .test-title {
@@ -459,6 +590,13 @@
                 height: 120px;
                 font-size: 36px;
             }
+
+            .start-course-button,
+            .home-button {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -477,26 +615,62 @@
             .option-text {
                 font-size: 14px;
             }
+
+            .platform-title {
+                font-size: 24px;
+            }
+
+            .license-badge {
+                font-size: 11px;
+                padding: 4px 10px;
+            }
         }
 
         /* Print styles */
         @media print {
             .navigation-buttons,
-            .action-buttons {
+            .action-buttons,
+            .header-actions,
+            .early-access {
                 display: none;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <div class="test-header">
+        <div class="header-top">
+            <div>
+                <a href="/index.html" class="platform-title">Thorium-AI</a>
+                <span class="license-badge">📜 MIT Licensed</span>
+            </div>
+            <div class="header-actions">
+                <a href="/index.html" class="home-button">
+                    ← Return Home
+                </a>
+                <a href="1-0.html" class="start-course-button">
+                    🚀 Start Course Now
+                </a>
+            </div>
+        </div>
+        
         <h1 class="test-title">AI & Neural Networks Knowledge Test</h1>
-        <p class="test-subtitle">Test your understanding of artificial intelligence concepts</p>
+        <p class="test-subtitle">Test your understanding of artificial intelligence concepts. All content is open source and distributed under MIT License.</p>
         
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
         <div class="progress-text" id="progressText">Question 1 of 20</div>
+    </div>
+
+    <!-- Early Course Access Banner -->
+    <div class="early-access">
+        <h3>Want to start learning immediately?</h3>
+        <p>You can begin the course at any time. The test is optional but recommended to assess your current knowledge.</p>
+        <a href="1-0.html" class="nav-button primary" style="display: inline-flex;">
+            🚀 Start Course Immediately
+        </a>
     </div>
 
     <!-- Question Container -->
@@ -551,15 +725,27 @@
 
         <div class="action-buttons">
             <a href="/index.html" class="action-button">
-                ← Return Home
+                ← Return to Home
             </a>
             <a href="1-0.html" class="action-button primary">
-                Start Learning Course →
+                🚀 Start Learning Course →
             </a>
             <button class="action-button secondary" id="retakeButton">
                 ↻ Retake Test
             </button>
         </div>
+    </div>
+
+    <!-- MIT License Notice -->
+    <div class="license-notice">
+        <p>
+            <strong>Thorium-AI</strong> is an open-source educational project distributed under the 
+            <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+        </p>
+        <p>
+            All content is freely available for learning, modification, and distribution.
+            © 2024 Thorium-AI Project Contributors
+        </p>
     </div>
 
     <script>
@@ -817,6 +1003,15 @@
             updateProgress();
             updateNavigation();
             showQuestion(currentQuestion);
+            
+            // Add current year to license notice
+            const yearElements = document.querySelectorAll('.license-notice p');
+            yearElements.forEach(el => {
+                if (el.textContent.includes('2024')) {
+                    const currentYear = new Date().getFullYear();
+                    el.innerHTML = el.innerHTML.replace('2024', currentYear);
+                }
+            });
         }
 
         // Render all questions
@@ -943,11 +1138,12 @@
             
             scoreDescription.textContent = description;
             feedbackTitle.textContent = title;
-            feedbackText.textContent = 'Based on your results, we recommend starting with the course to build a solid foundation in AI concepts.';
+            feedbackText.textContent = 'Based on your results, we recommend starting with the course to build a solid foundation in AI concepts. All content is open source and freely available under MIT License.';
             
             // Show results
             questionsContainer.style.display = 'none';
             document.querySelector('.navigation-buttons').style.display = 'none';
+            document.querySelector('.early-access').style.display = 'none';
             resultsContainer.classList.add('active');
         }
 
@@ -988,6 +1184,7 @@
             
             questionsContainer.style.display = 'block';
             document.querySelector('.navigation-buttons').style.display = 'flex';
+            document.querySelector('.early-access').style.display = 'block';
             resultsContainer.classList.remove('active');
             
             showQuestion(currentQuestion);
@@ -1021,10 +1218,17 @@
         document.querySelector('.test-header').appendChild(timerDisplay);
 
         // Update timer every second
-        setInterval(() => {
+        const timerInterval = setInterval(() => {
             const seconds = Math.floor((Date.now() - testStartTime) / 1000);
             timerDisplay.textContent = `Time: ${seconds}s`;
         }, 1000);
+
+        // Stop timer when test is completed
+        const originalCalculateResults = calculateResults;
+        calculateResults = function() {
+            clearInterval(timerInterval);
+            originalCalculateResults();
+        };
     </script>
 </body>
 </html>
