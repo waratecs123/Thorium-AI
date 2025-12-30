@@ -992,96 +992,72 @@ kbd {
         line-height: 1.7;
         display: block;
         max-width: 100%;
-        -webkit-text-size-adjust: 100%;
-        touch-action: manipulation;
     }
 
     .main-content {
         margin-left: 0;
-        padding: 20px;
-        padding-top: 70px;
-        padding-bottom: 40px;
+        padding: var(--spacing-md);
         width: 100%;
         max-width: 100%;
-        min-height: 100vh;
-        display: block;
-        overflow-x: hidden;
+        padding-top: 70px;
+        min-height: auto;
     }
 
-    /* Улучшенная типографика для мобильных */
     h1 {
         font-size: 1.8em;
-        margin: 0 0 20px;
-        padding-bottom: 10px;
+        margin-bottom: var(--spacing-lg);
+        padding-bottom: var(--spacing-sm);
         border-bottom-width: 2px;
         line-height: 1.2;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-        word-wrap: break-word;
+        margin-top: var(--spacing-lg);
     }
 
     h2 {
         font-size: 1.5em;
-        margin: 30px 0 15px;
-        padding-bottom: 8px;
-        border-bottom: 1px solid var(--border-color);
-        line-height: 1.3;
-        font-weight: 600;
+        margin-top: var(--spacing-lg);
+        padding-bottom: var(--spacing-xs);
     }
 
     h3 {
         font-size: 1.3em;
-        margin: 25px 0 12px;
-        font-weight: 600;
-        line-height: 1.3;
+        margin-top: var(--spacing-md);
     }
 
     h4 {
-        font-size: 1.15em;
-        margin: 20px 0 10px;
-        font-weight: 600;
+        font-size: 1.1em;
+        margin-top: var(--spacing-md);
+    }
+
+    h5, h6 {
+        font-size: 1em;
     }
 
     p {
         font-size: 1.05em;
         line-height: 1.7;
-        margin: 18px 0;
         text-align: left;
+        hyphens: auto;
+        margin: var(--spacing-md) 0;
         word-wrap: break-word;
         overflow-wrap: break-word;
-        hyphens: auto;
     }
 
-    /* Улучшенная навигация */
+    /* Mobile Menu - улучшенная доступность */
     .mobile-menu-toggle {
         display: flex;
-        position: fixed;
         top: 12px;
         left: 12px;
         width: 44px;
         height: 44px;
         border-radius: 8px;
         z-index: 1003;
-        background: var(--bg-color);
-        border: 1px solid var(--border-color);
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
+        transform: translateX(-100%);
         width: 85%;
         max-width: 320px;
-        height: 100vh;
-        transform: translateX(-100%);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1001;
         box-shadow: 4px 0 20px rgba(0,0,0,0.2);
-        overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         overscroll-behavior: contain;
     }
@@ -1091,499 +1067,311 @@ kbd {
     }
 
     .sidebar-header {
-        padding: 20px 16px;
+        padding: 16px;
         padding-top: 70px;
-        position: relative;
+        min-height: auto;
     }
 
-    .overlay.active {
-        display: block;
-        background: rgba(0,0,0,0.6);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        z-index: 1000;
+    /* Улучшенная навигация на мобильных */
+    .topic-link {
+        padding: 10px 16px 10px 24px;
+        font-size: 14px;
+        line-height: 1.4;
+        min-height: 44px;
+        align-items: center;
     }
 
-    /* Улучшенная навигация для тапов */
+    .topic-number {
+        min-width: 22px;
+        margin-right: 8px;
+        font-size: 12px;
+    }
+
     .nav-section-title {
         padding: 14px 16px;
         font-size: 15px;
         min-height: 48px;
-        display: flex;
         align-items: center;
-        cursor: pointer;
-        user-select: none;
-        -webkit-tap-highlight-color: transparent;
-        border-left: 4px solid var(--accent-color);
-        margin: 4px 0;
-        background: var(--sidebar-bg);
     }
 
-    .topic-link {
-        padding: 12px 16px 12px 32px;
-        font-size: 14px;
-        line-height: 1.4;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
-        -webkit-tap-highlight-color: transparent;
-        border-left: 1px solid transparent;
-        transition: all 0.2s ease;
-    }
-
-    .topic-link.active {
-        background: var(--code-bg);
-        color: var(--text-color);
-        border-left-color: var(--accent-color);
-        font-weight: 500;
-    }
-
-    .topic-number {
-        min-width: 24px;
-        margin-right: 10px;
+    .category-title {
+        padding: 10px 16px;
         font-size: 12px;
-        font-weight: 500;
     }
 
     .support-btn {
         margin: 16px;
-        padding: 14px;
+        padding: 14px 16px;
         font-size: 15px;
         min-height: 48px;
-        border-radius: 8px;
-        -webkit-tap-highlight-color: transparent;
     }
 
-    /* Улучшенный Hero section */
+    /* Hero section - улучшенная для мобильных */
     .hero-section {
-        padding: 0 0 20px;
-        border-bottom: 1px solid var(--border-color);
-        margin-bottom: 25px;
+        padding: var(--spacing-md) 0;
+        margin-bottom: var(--spacing-lg);
     }
 
     .hero-title {
         font-size: 1.8em;
-        line-height: 1.2;
-        margin: 0 0 15px;
         text-align: left;
-        font-weight: 700;
-        word-wrap: break-word;
+        line-height: 1.2;
+        margin-bottom: var(--spacing-md);
     }
 
     .hero-subtitle {
         font-size: 1.1em;
-        line-height: 1.6;
-        margin: 0 0 20px;
         text-align: left;
-        color: var(--muted-color);
+        margin: 0 0 var(--spacing-md);
+        line-height: 1.6;
     }
 
-    /* Адаптивные статистики */
+    /* Stats - адаптивная сетка */
     .stats-container {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        margin: 20px 0;
+        gap: var(--spacing-sm);
+        margin: var(--spacing-md) 0;
     }
 
     .stat-item {
-        padding: 16px 12px;
-        border-radius: 8px;
-        text-align: center;
-        transition: all 0.3s ease;
-        border: 1px solid var(--border-color);
-        background: var(--sidebar-bg);
+        padding: var(--spacing-md);
+        min-height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .stat-number {
-        font-size: 1.8em;
-        font-weight: 700;
-        color: var(--accent-color);
-        margin-bottom: 4px;
-        line-height: 1.2;
+        font-size: 1.6em;
+        margin-bottom: var(--spacing-xs);
     }
 
     .stat-label {
         font-size: 0.85em;
-        color: var(--muted-color);
-        text-transform: uppercase;
-        letter-spacing: 0.3px;
-        font-weight: 500;
-        line-height: 1.3;
     }
 
-    /* Проектная информация */
+    /* Project info - лучшая читаемость */
     .project-info {
-        padding: 20px;
-        margin: 20px 0;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        background: var(--sidebar-bg);
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
     }
 
     .project-title {
         font-size: 1.4em;
-        margin: 0 0 15px;
-        line-height: 1.3;
-        font-weight: 600;
+        text-align: left;
+        margin-bottom: var(--spacing-md);
     }
 
     .project-description {
         font-size: 1.05em;
         line-height: 1.6;
-        margin: 0;
-    }
-
-    /* Особые блоки для лучшей читаемости */
-    .note,
-    .warning,
-    .tip,
-    .danger {
-        padding: 16px;
-        margin: 20px 0;
-        border-radius: 0 8px 8px 0;
-        font-size: 0.95em;
-        line-height: 1.6;
-        border-left-width: 4px;
-        position: relative;
-    }
-
-    .note:before,
-    .warning:before,
-    .tip:before,
-    .danger:before {
-        font-size: 0.85em;
-        margin-bottom: 8px;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-
-    /* Таблицы с горизонтальной прокруткой */
-    table {
-        display: block;
-        width: 100%;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        border-radius: 8px;
-        margin: 20px 0;
-        border: 1px solid var(--border-color);
-    }
-
-    table::-webkit-scrollbar {
-        height: 6px;
-    }
-
-    table::-webkit-scrollbar-track {
-        background: var(--sidebar-bg);
-    }
-
-    table::-webkit-scrollbar-thumb {
-        background: var(--border-color);
-        border-radius: 3px;
-    }
-
-    th, td {
-        padding: 12px 14px;
-        min-width: 100px;
-        font-size: 0.95em;
-        line-height: 1.5;
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    /* Code blocks с оптимизированной читаемостью */
-    pre {
-        padding: 16px;
-        margin: 20px 0;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        background: var(--code-bg);
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        font-size: 0.9em;
-        line-height: 1.6;
-    }
-
-    pre::-webkit-scrollbar {
-        height: 6px;
-    }
-
-    code {
-        font-size: 0.9em;
-        word-break: break-word;
-        padding: 2px 6px;
-        border-radius: 4px;
-        border: 1px solid var(--border-color);
-        background: var(--code-bg);
-    }
-
-    /* Навигация по статьям */
-    .article-navigation {
-        flex-direction: column;
-        gap: 12px;
-        margin: 20px 0;
-        padding: 20px 0;
-        border-top: 1px solid var(--border-color);
-        border-bottom: 1px solid var(--border-color);
-    }
-
-    .nav-link {
-        width: 100%;
-        padding: 14px;
-        text-align: center;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        font-size: 1em;
-        -webkit-tap-highlight-color: transparent;
-        transition: all 0.2s ease;
-        background: var(--bg-color);
-    }
-
-    .nav-link:hover {
-        background: var(--sidebar-bg);
-        border-color: var(--accent-color);
-        color: var(--accent-color);
-    }
-
-    /* Изображения с адаптивными отступами */
-    img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        margin: 20px 0;
-        display: block;
-    }
-
-    figure {
-        margin: 20px 0;
-        text-align: center;
-    }
-
-    figcaption {
-        margin-top: 8px;
-        font-size: 0.9em;
-        color: var(--muted-color);
-        line-height: 1.4;
-        padding: 0 10px;
-    }
-
-    /* Blockquotes */
-    blockquote {
-        margin: 20px 0;
-        padding: 16px 20px;
-        border-left: 4px solid var(--blockquote-border);
-        background: var(--sidebar-bg);
-        border-radius: 0 8px 8px 0;
-        font-size: 1em;
-        line-height: 1.6;
-        font-style: italic;
-    }
-
-    blockquote p {
-        margin: 0;
-        font-style: italic;
     }
 
     /* Features grid - одна колонка */
     .features-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
-        margin: 20px 0;
+        gap: var(--spacing-md);
+        margin: var(--spacing-md) 0;
     }
 
     .feature-card {
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        background: var(--bg-color);
-        transition: all 0.3s ease;
+        padding: var(--spacing-md);
+        min-height: auto;
     }
 
     .feature-icon {
-        font-size: 1.8em;
-        margin-bottom: 12px;
-        color: var(--accent-color);
+        font-size: 1.6em;
+        margin-bottom: var(--spacing-sm);
     }
 
     .feature-title {
-        font-size: 1.15em;
-        margin: 0 0 10px;
-        font-weight: 600;
-        line-height: 1.3;
+        font-size: 1.1em;
+        margin-bottom: var(--spacing-sm);
     }
 
     .feature-text {
         font-size: 0.95em;
         line-height: 1.6;
-        color: var(--muted-color);
-        margin: 0;
     }
 
-    /* Welcome page оптимизация */
+    /* Special blocks - лучшее отображение */
+    .note,
+    .warning,
+    .tip,
+    .danger {
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+        font-size: 0.95em;
+        line-height: 1.6;
+    }
+
+    /* Tables - горизонтальная прокрутка */
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        font-size: 0.9em;
+    }
+
+    th, td {
+        padding: var(--spacing-sm);
+        min-width: 80px;
+    }
+
+    /* Code blocks - лучшая читаемость */
+    pre {
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
+        font-size: 0.9em;
+    }
+
+    code {
+        font-size: 0.9em;
+        word-break: break-word;
+    }
+
+    /* Navigation links - удобные кнопки */
+    .article-navigation {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        margin: var(--spacing-md) 0;
+        padding: var(--spacing-md) 0;
+    }
+
+    .nav-link {
+        min-width: 100%;
+        padding: var(--spacing-md);
+        font-size: 1em;
+        text-align: center;
+    }
+
+    /* Images - оптимальное отображение */
+    img {
+        margin: var(--spacing-md) 0;
+        border-radius: var(--border-radius-sm);
+    }
+
+    figure {
+        margin: var(--spacing-md) 0;
+    }
+
+    figcaption {
+        font-size: 0.85em;
+        padding: 0 var(--spacing-sm);
+    }
+
+    /* Blockquotes - компактнее */
+    blockquote {
+        margin: var(--spacing-md) 0;
+        padding: var(--spacing-md);
+        font-size: 1em;
+    }
+
+    /* Welcome page - адаптивная */
     .welcome-container {
-        padding: 30px 20px;
+        padding: 20px;
         padding-top: 80px;
         min-height: calc(100vh - 80px);
-        text-align: center;
-        background: var(--sidebar-bg);
     }
 
     .welcome-title {
         font-size: 1.8em;
-        line-height: 1.2;
-        margin: 0 0 15px;
-        font-weight: 700;
-        background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        margin-top: 0;
+        margin-bottom: var(--spacing-md);
     }
 
     .welcome-subtitle {
         font-size: 1.1em;
         line-height: 1.6;
-        margin: 0 0 25px;
-        color: var(--muted-color);
-        max-width: 100%;
+        margin-bottom: var(--spacing-lg);
     }
 
     .welcome-features {
         grid-template-columns: 1fr;
-        gap: 16px;
-        margin-top: 25px;
-        max-width: 100%;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-lg);
     }
 
     .welcome-feature-card {
-        padding: 20px;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        background: var(--bg-color);
-        text-align: left;
-        transition: all 0.3s ease;
+        padding: var(--spacing-md);
     }
 
     .welcome-feature-icon {
         font-size: 1.8em;
-        margin-bottom: 12px;
-        color: var(--accent-color);
+        margin-bottom: var(--spacing-sm);
     }
 
     .welcome-feature-title {
         font-size: 1.1em;
-        margin: 0 0 8px;
-        font-weight: 600;
-        color: var(--text-color);
+        margin-bottom: var(--spacing-xs);
     }
 
     .welcome-feature-description {
         font-size: 0.95em;
         line-height: 1.5;
-        color: var(--muted-color);
-        margin: 0;
     }
 
-    /* Tags */
+    /* Reading sections - лучшее разделение */
+    .reading-section {
+        margin: var(--spacing-md) 0;
+        padding: var(--spacing-md) 0;
+    }
+
+    .paragraph-group {
+        margin: var(--spacing-md) 0;
+    }
+
+    .paragraph-group p {
+        margin: var(--spacing-sm) 0;
+    }
+
+    /* Tags - компактнее */
     .article-tags {
-        gap: 8px;
-        margin: 15px 0;
+        gap: var(--spacing-xs);
+        margin: var(--spacing-md) 0;
     }
 
     .tag {
-        padding: 6px 10px;
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+
+    /* Article meta - адаптивная */
+    .article-meta {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
         font-size: 0.85em;
-        border-radius: 4px;
-        border: 1px solid var(--border-color);
-        background: var(--sidebar-bg);
-        color: var(--muted-color);
-        text-decoration: none;
-        transition: all 0.2s ease;
     }
 
     /* Highlight blocks */
     .highlight {
-        padding: 20px;
-        margin: 20px 0;
-        border-left: 4px solid var(--accent-color);
-        background: var(--sidebar-bg);
-        border-radius: 0 8px 8px 0;
-        line-height: 1.6;
+        padding: var(--spacing-md);
+        margin: var(--spacing-md) 0;
     }
 
     /* Math formulas */
     .math-formula {
-        padding: 16px;
-        margin: 20px 0;
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        background: var(--sidebar-bg);
-        font-family: "Times New Roman", serif;
-        font-style: italic;
-        text-align: center;
+        padding: var(--spacing-sm);
+        margin: var(--spacing-md) 0;
+        font-size: 0.9em;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        font-size: 0.95em;
     }
 
-    /* Article meta */
-    .article-meta {
-        flex-wrap: wrap;
-        gap: 10px;
-        font-size: 0.9em;
-        margin: 10px 0 20px;
-        color: var(--muted-color);
-    }
-
-    .article-meta span {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    /* Чтение секций */
-    .reading-section {
-        margin: 20px 0;
-        padding: 20px 0;
-        border-top: 1px solid var(--border-color);
-    }
-
-    .reading-section:first-of-type {
-        border-top: none;
-        padding-top: 0;
-    }
-
-    .paragraph-group {
-        margin: 20px 0;
-    }
-
-    .paragraph-group p {
-        margin: 12px 0;
-        text-align: left;
-        line-height: 1.7;
-    }
-
-    /* Сноски */
+    /* Footnotes */
     .footnotes {
-        margin-top: 20px;
-        padding-top: 20px;
-        border-top: 2px solid var(--border-color);
-        font-size: 0.9em;
-        color: var(--muted-color);
-        line-height: 1.5;
+        margin-top: var(--spacing-md);
+        padding-top: var(--spacing-md);
+        font-size: 0.85em;
     }
 
-    /* Keyboard shortcuts */
-    kbd {
-        padding: 4px 8px;
-        font-size: 0.85em;
-        border-radius: 4px;
-        border: 1px solid var(--border-color);
-        background: var(--code-bg);
-        color: var(--text-color);
-        box-shadow: 0 1px 0 var(--border-color);
+    /* Overlay для мобильного меню */
+    .overlay.active {
+        display: block;
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
     }
 }
 
-/* ============ Small Mobile Devices (до 480px) ============ */
 @media (max-width: 480px) {
     body {
         font-size: 15px;
@@ -1591,61 +1379,57 @@ kbd {
     }
 
     .main-content {
-        padding: 16px;
-        padding-top: 65px;
-        padding-bottom: 30px;
+        padding: 14px;
+        padding-top: 70px;
     }
 
     h1 {
         font-size: 1.6em;
-        margin: 0 0 18px;
-        padding-bottom: 8px;
-        line-height: 1.2;
+        margin-top: var(--spacing-md);
+        margin-bottom: var(--spacing-md);
     }
 
     h2 {
         font-size: 1.3em;
-        margin: 25px 0 12px;
-        padding-bottom: 6px;
+        margin-top: var(--spacing-md);
     }
 
     h3 {
-        font-size: 1.15em;
-        margin: 20px 0 10px;
+        font-size: 1.2em;
     }
 
     p {
         font-size: 1em;
         line-height: 1.6;
-        margin: 16px 0;
     }
 
-    /* Статистики в одну колонку */
+    /* Еще более компактные stats */
     .stats-container {
         grid-template-columns: 1fr;
         gap: 10px;
     }
 
     .stat-item {
-        padding: 14px 12px;
+        padding: 12px;
+        min-height: 80px;
     }
 
     .stat-number {
-        font-size: 1.6em;
+        font-size: 1.4em;
     }
 
     .hero-title {
-        font-size: 1.6em;
+        font-size: 1.5em;
     }
 
     .hero-subtitle {
-        font-size: 1.05em;
+        font-size: 1em;
     }
 
-    /* Улучшенные тапы */
+    /* Кнопка меню - больше для удобства тапа */
     .mobile-menu-toggle {
-        width: 42px;
-        height: 42px;
+        width: 46px;
+        height: 46px;
         top: 10px;
         left: 10px;
     }
@@ -1654,106 +1438,54 @@ kbd {
         width: 90%;
     }
 
-    .nav-section-title {
-        padding: 12px 14px;
-        font-size: 14px;
-        min-height: 44px;
-    }
-
+    /* Улучшенные отступы для навигации */
     .topic-link {
-        padding: 10px 14px 10px 30px;
+        padding: 12px 16px 12px 24px;
         font-size: 13px;
-        min-height: 42px;
     }
 
-    /* Карточки */
+    .nav-section-title {
+        padding: 16px;
+        font-size: 14px;
+    }
+
+    /* Более компактные карточки */
     .feature-card,
     .welcome-feature-card {
         padding: 16px;
     }
 
-    .feature-icon,
-    .welcome-feature-icon {
-        font-size: 1.6em;
-    }
-
-    /* Таблицы */
+    /* Таблицы - еще компактнее */
     th, td {
-        padding: 10px 12px;
-        font-size: 0.9em;
+        padding: 8px 10px;
+        font-size: 0.85em;
     }
 
     /* Code blocks */
     pre {
-        padding: 14px;
+        padding: 12px;
         font-size: 0.85em;
     }
 
-    code {
-        font-size: 0.85em;
-        padding: 2px 5px;
-    }
-
-    /* Welcome page */
+    /* Welcome page - оптимизация */
     .welcome-title {
         font-size: 1.6em;
     }
 
     .welcome-subtitle {
-        font-size: 1.05em;
-    }
-
-    .welcome-container {
-        padding: 25px 16px;
-        padding-top: 70px;
-    }
-
-    /* Специальные блоки */
-    .note,
-    .warning,
-    .tip,
-    .danger {
-        padding: 14px;
-        font-size: 0.9em;
-    }
-
-    /* Навигационные ссылки */
-    .nav-link {
-        padding: 12px;
-        font-size: 0.95em;
-    }
-
-    /* Изображения */
-    img {
-        margin: 16px 0;
-        border-radius: 6px;
-    }
-
-    /* Blockquotes */
-    blockquote {
-        padding: 14px 16px;
-        margin: 16px 0;
-        font-size: 0.95em;
-    }
-
-    /* Tags */
-    .tag {
-        padding: 5px 8px;
-        font-size: 0.8em;
+        font-size: 1em;
     }
 }
 
-/* ============ Very Small Mobile Devices (до 360px) ============ */
 @media (max-width: 360px) {
     .main-content {
-        padding: 14px;
-        padding-top: 60px;
-        padding-bottom: 25px;
+        padding: 12px;
+        padding-top: 65px;
     }
 
     .mobile-menu-toggle {
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
         top: 8px;
         left: 8px;
     }
@@ -1767,69 +1499,19 @@ kbd {
     }
 
     .stat-item {
-        padding: 12px 10px;
-    }
-
-    .stat-number {
-        font-size: 1.5em;
-    }
-
-    .stat-label {
-        font-size: 0.8em;
+        padding: 10px;
     }
 
     h1 {
         font-size: 1.4em;
-        margin: 0 0 15px;
     }
 
     h2 {
         font-size: 1.2em;
-        margin: 20px 0 10px;
-    }
-
-    h3 {
-        font-size: 1.1em;
     }
 
     .hero-title {
         font-size: 1.4em;
-    }
-
-    .hero-subtitle {
-        font-size: 1em;
-    }
-
-    .project-title {
-        font-size: 1.3em;
-    }
-
-    .feature-card,
-    .welcome-feature-card {
-        padding: 14px;
-    }
-
-    th, td {
-        padding: 8px 10px;
-        font-size: 0.85em;
-    }
-
-    pre {
-        padding: 12px;
-        font-size: 0.82em;
-    }
-
-    .nav-link {
-        padding: 10px;
-        font-size: 0.9em;
-    }
-
-    .welcome-title {
-        font-size: 1.4em;
-    }
-
-    .welcome-subtitle {
-        font-size: 1em;
     }
 }
 
@@ -1863,16 +1545,16 @@ kbd {
     outline-offset: 2px;
 }
 
+/* Улучшение доступности для мобильных */
 @media (max-width: 768px) {
     :focus {
         outline-offset: 1px;
     }
 
-    a, button, .topic-link, .nav-section-title, .support-btn, .nav-link {
+    a, button, .topic-link, .nav-section-title {
         min-height: 44px;
         display: flex;
         align-items: center;
-        -webkit-tap-highlight-color: transparent;
     }
 }
 
@@ -1971,64 +1653,4 @@ kbd {
     line-height: 0;
     margin-left: 0.1em;
     vertical-align: -0.4em;
-}
-
-/* ============ Mobile Scrollbar Styling ============ */
-@media (max-width: 768px) {
-    ::-webkit-scrollbar {
-        width: 6px;
-        height: 6px;
-    }
-    
-    ::-webkit-scrollbar-track {
-        background: var(--sidebar-bg);
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        background: var(--border-color);
-        border-radius: 3px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-        background: var(--muted-color);
-    }
-}
-
-/* ============ Safe Area Insets for Modern Mobile Devices ============ */
-@supports (padding: max(0px)) {
-    @media (max-width: 768px) {
-        .main-content {
-            padding-left: max(20px, env(safe-area-inset-left));
-            padding-right: max(20px, env(safe-area-inset-right));
-            padding-bottom: max(40px, env(safe-area-inset-bottom));
-        }
-        
-        .mobile-menu-toggle {
-            left: max(12px, env(safe-area-inset-left));
-        }
-        
-        .sidebar {
-            padding-left: env(safe-area-inset-left);
-            padding-right: env(safe-area-inset-right);
-            padding-top: env(safe-area-inset-top);
-        }
-    }
-}
-
-/* ============ Prevent Zoom on Input Focus for Mobile ============ */
-@media (max-width: 768px) {
-    input,
-    select,
-    textarea {
-        font-size: 16px !important;
-    }
-}
-
-/* ============ Optimize Font Display ============ */
-@media (max-width: 768px) {
-    body {
-        font-kerning: normal;
-        font-variant-ligatures: common-ligatures;
-        font-feature-settings: "kern", "liga", "clig", "calt";
-    }
 }
