@@ -1,5 +1,4 @@
 # Thorium-AI — AI for Everyone, No Code Needed
-## [thorium-ai.com](https://thorium-ai.com/)
 
 ## [thorium-ai.com (alternative link)](https://thorium-ai.pages.dev/)
 
