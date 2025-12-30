@@ -60,12 +60,12 @@
 
         .counter-container {
             text-align: center;
-            padding: 8px 16px;
+            padding: 12px 20px;
             background: linear-gradient(135deg, #f6f8fa 0%, #e1e4e8 100%);
             border-radius: 12px;
             border: 2px solid #0366d6;
             box-shadow: 0 4px 12px rgba(3, 102, 214, 0.15);
-            min-width: 180px;
+            min-width: 200px;
             transition: all 0.3s ease;
         }
 
@@ -80,11 +80,11 @@
             color: #586069;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         .counter-value {
-            font-size: 22px;
+            font-size: 24px;
             font-weight: 800;
             color: #0366d6;
             font-family: 'Courier New', monospace;
@@ -92,7 +92,7 @@
         }
 
         .counter-progress {
-            margin-top: 6px;
+            margin-top: 8px;
             height: 4px;
             background: #e1e4e8;
             border-radius: 2px;
@@ -110,7 +110,7 @@
         .counter-goal {
             font-size: 9px;
             color: #586069;
-            margin-top: 4px;
+            margin-top: 6px;
             font-weight: 500;
         }
 
@@ -175,19 +175,10 @@
         }
 
         .hero-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
             font-size: 48px;
             font-weight: 700;
             margin-bottom: 24px;
             color: #24292e;
-        }
-
-        .hero-brain-icon {
-            font-size: 48px;
-            color: #0366d6;
         }
 
         .hero-subtitle {
@@ -408,8 +399,6 @@
 
             .hero-title {
                 font-size: 36px;
-                flex-direction: column;
-                gap: 8px;
             }
 
             .hero-subtitle {
@@ -464,7 +453,7 @@
 
             .counter-container {
                 min-width: auto;
-                padding: 6px 12px;
+                padding: 10px 15px;
             }
 
             .counter-value {
@@ -492,7 +481,7 @@
 <body>
     <header class="site-header">
         <div class="brand-container">
-            <div class="brain-icon">🧠</div>
+            <!-- Убран стикер мозга отсюда -->
             <a href="#" class="site-title">Thorium<span>-AI</span></a>
         </div>
         
@@ -519,8 +508,7 @@
         <section class="hero-section">
             <br>
             <h1 class="hero-title">
-                <span class="hero-brain-icon">🧠</span>
-                <span>Thorium AI</span>
+                Thorium AI
             </h1>
             <p class="hero-subtitle">
                 Your practical guide to Artificial Intelligence in everyday life.
@@ -712,16 +700,13 @@
         // Visitor counter functionality
         document.addEventListener('DOMContentLoaded', function() {
             const GOAL = 100000000000; // 100 billion
-            const MAX_STORED_VISITS = 1000000; // Maximum visits stored in localStorage
-            const RANDOM_INCREMENT_MIN = 1000; // Minimum random increment
-            const RANDOM_INCREMENT_MAX = 5000; // Maximum random increment
             
             const counterElement = document.getElementById('counterValue');
             const progressBar = document.getElementById('progressBar');
             const counterContainer = document.getElementById('visitorCounter');
             
-            // Get current count from localStorage or start with a base number
-            let currentCount = parseInt(localStorage.getItem('thoriumAI_visitors')) || 748326;
+            // Get current count from localStorage or start with 24
+            let currentCount = parseInt(localStorage.getItem('thoriumAI_real_visitors')) || 24;
             
             // Check if we've already reached the goal
             if (currentCount >= GOAL) {
@@ -731,25 +716,19 @@
                 return;
             }
             
-            // Calculate random increment for this visit
-            const randomIncrement = Math.floor(Math.random() * 
-                (RANDOM_INCREMENT_MAX - RANDOM_INCREMENT_MIN + 1)) + RANDOM_INCREMENT_MIN;
-            
-            // Add the increment
-            currentCount += randomIncrement;
+            // Increment by 1 for this visit (real visitor)
+            currentCount += 1;
             
             // Cap at goal
             if (currentCount > GOAL) {
                 currentCount = GOAL;
             }
             
-            // Save to localStorage (capped at MAX_STORED_VISITS to prevent overflow)
-            if (currentCount <= MAX_STORED_VISITS) {
-                localStorage.setItem('thoriumAI_visitors', currentCount.toString());
-            }
+            // Save to localStorage
+            localStorage.setItem('thoriumAI_real_visitors', currentCount.toString());
             
             // Animate the counter
-            animateCounter(currentCount - randomIncrement, currentCount);
+            animateCounter(0, currentCount);
             
             // Update progress bar
             updateProgress(currentCount);
