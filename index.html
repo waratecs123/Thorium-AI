@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thorium-AI - AI for Everyone, No Code Needed</title>
+    <title>Thorium-AI - Practical AI Education for Everyone</title>
     <style>
         /* Reset and base styles */
         * {
@@ -20,237 +20,82 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Counter section - placed separately */
-        .counter-section {
-            text-align: center;
-            margin: 40px 0 60px;
-            padding: 30px 0;
-            position: relative;
-        }
-
-        .counter-container {
-            display: inline-block;
-            text-align: center;
-            padding: 25px 40px;
-            background: linear-gradient(135deg, #f6f8fa 0%, #ffffff 100%);
-            border-radius: 20px;
-            border: 3px solid #0366d6;
-            box-shadow: 0 10px 40px rgba(3, 102, 214, 0.2);
-            min-width: 320px;
-            max-width: 500px;
-            width: 100%;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .counter-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 30%,
-                rgba(3, 102, 214, 0.1) 50%,
-                transparent 70%
-            );
-            animation: shine 8s infinite linear;
-        }
-
-        @keyframes shine {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .counter-label {
-            font-size: 14px;
-            font-weight: 700;
-            color: #586069;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .counter-value {
-            font-size: 42px;
-            font-weight: 900;
-            color: #0366d6;
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin: 15px 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .counter-progress {
-            margin: 20px auto 10px;
-            height: 8px;
-            background: #e1e4e8;
-            border-radius: 4px;
-            overflow: hidden;
-            max-width: 300px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #2ea44f, #0366d6, #f0db4f);
-            border-radius: 4px;
-            width: 0%;
-            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.3),
-                transparent
-            );
-            animation: shimmer 2s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .counter-goal {
-            font-size: 11px;
-            color: #586069;
-            margin-top: 12px;
-            font-weight: 500;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Counter celebration styles */
-        .counter-celebrate {
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 10px 40px rgba(3, 102, 214, 0.2);
-            }
-            50% {
-                transform: scale(1.02);
-                box-shadow: 0 15px 50px rgba(3, 102, 214, 0.4);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 10px 40px rgba(3, 102, 214, 0.2);
-            }
-        }
-
-        .counter-complete {
-            background: linear-gradient(135deg, #2ea44f 0%, #0366d6 100%);
-            border-color: #2c974b;
-        }
-
-        .counter-complete .counter-value {
-            color: white;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .counter-complete .counter-label {
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .counter-complete .counter-goal {
-            color: rgba(255, 255, 255, 0.85);
-        }
-
-        .counter-complete .progress-bar {
-            background: white;
-            width: 100% !important;
-        }
-
-        .counter-complete::before {
-            animation: shine 4s infinite linear;
-        }
-
-        /* Main content styles */
-        .main-content {
-            padding: 0 0 48px 0;
-        }
-
-        /* Call to action buttons */
-        .cta-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-
-        .support-btn {
-            background-color: #f6f8fa;
-            color: #24292e;
-            border: 1px solid #d1d5da;
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-        }
-
-        .support-btn:hover {
-            background-color: #e1e4e8;
-            border-color: #959da5;
-            text-decoration: none;
-            transform: translateY(-2px);
-        }
-
-        .start-course-btn {
-            background-color: #2ea44f;
-            color: white;
-            border: 1px solid rgba(27, 31, 35, 0.15);
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.2s;
-        }
-
-        .start-course-btn:hover {
-            background-color: #2c974b;
-            color: white;
-            text-decoration: none;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(46, 164, 79, 0.3);
-        }
-
-        .hero-section {
-            text-align: center;
-            margin-bottom: 64px;
+        /* Header and Navigation */
+        .site-header {
             padding: 32px 0;
             border-bottom: 1px solid #e1e4e8;
+            margin-bottom: 48px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .site-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #24292e;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .site-title:hover {
+            color: #0366d6;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #24292e;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background-color: #f6f8fa;
+            color: #0366d6;
+        }
+
+        .github-button {
+            background-color: #24292e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.2s ease;
+            font-size: 14px;
+        }
+
+        .github-button:hover {
+            background-color: #2f363d;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            margin-bottom: 64px;
+            padding: 48px 0;
+            text-align: center;
         }
 
         .hero-title {
@@ -258,41 +103,41 @@
             font-weight: 700;
             margin-bottom: 24px;
             color: #24292e;
+            line-height: 1.2;
         }
 
         .hero-subtitle {
-            font-size: 18px;
+            font-size: 20px;
             color: #586069;
             max-width: 800px;
-            margin: 0 auto 32px;
-            line-height: 1.8;
+            margin: 0 auto 40px;
+            line-height: 1.7;
         }
 
-        /* Stats container */
-        .stats-container {
+        .hero-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 24px;
             max-width: 800px;
             margin: 48px auto 0;
         }
 
-        .stat-item {
+        .hero-stat {
             text-align: center;
-            padding: 20px;
+            padding: 24px;
+            background: #f6f8fa;
             border: 1px solid #e1e4e8;
             border-radius: 12px;
-            background-color: #f6f8fa;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.2s ease;
         }
 
-        .stat-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        .hero-stat:hover {
+            border-color: #0366d6;
+            transform: translateY(-2px);
         }
 
         .stat-number {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 700;
             color: #0366d6;
             margin-bottom: 8px;
@@ -301,99 +146,166 @@
         .stat-label {
             font-size: 14px;
             color: #586069;
+            font-weight: 500;
         }
 
-        /* Section styles */
-        .project-info, .content-preview {
+        /* Content Sections */
+        .content-section {
             margin-bottom: 64px;
-            padding: 32px 0;
+            padding: 48px 0;
             border-bottom: 1px solid #e1e4e8;
         }
 
-        .project-title, .section-title {
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .section-title {
             font-size: 32px;
             font-weight: 600;
-            margin-bottom: 24px;
             color: #24292e;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #e1e4e8;
+            line-height: 1.3;
         }
 
-        .project-description {
-            font-size: 16px;
-            line-height: 1.8;
-            color: #24292e;
+        .section-subtitle {
+            font-size: 18px;
+            color: #586069;
+            margin-top: 8px;
+            max-width: 800px;
         }
 
-        .project-description p {
-            margin-bottom: 20px;
-        }
-
-        .highlight {
-            background-color: #f6f8fa;
-            border-left: 4px solid #0366d6;
-            padding: 16px 20px;
-            margin: 24px 0;
-            border-radius: 0 8px 8px 0;
-        }
-
-        /* Lists */
-        ul {
-            margin: 24px 0 24px 32px;
-        }
-
-        li {
-            margin-bottom: 12px;
-            line-height: 1.7;
-        }
-
-        /* Features grid */
+        /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
             margin-top: 48px;
         }
 
         .feature-card {
+            background: #ffffff;
             border: 1px solid #e1e4e8;
             border-radius: 12px;
-            padding: 24px;
-            background-color: #ffffff;
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 32px;
+            transition: all 0.3s ease;
+            height: 100%;
         }
 
         .feature-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            border-color: #0366d6;
         }
 
         .feature-icon {
-            font-size: 32px;
+            font-size: 40px;
+            margin-bottom: 20px;
             color: #0366d6;
-            margin-bottom: 16px;
         }
 
         .feature-title {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             color: #24292e;
         }
 
-        .feature-text {
-            font-size: 14px;
+        .feature-description {
             color: #586069;
-            line-height: 1.6;
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
 
-        /* Support section */
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .feature-tag {
+            background: #f6f8fa;
+            color: #24292e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            border: 1px solid #e1e4e8;
+        }
+
+        /* Content Preview */
+        .topic-list {
+            display: grid;
+            gap: 16px;
+            margin: 32px 0;
+        }
+
+        .topic-item {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .topic-item:hover {
+            border-color: #0366d6;
+            background: #ffffff;
+            transform: translateX(4px);
+        }
+
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .topic-icon {
+            font-size: 20px;
+            color: #0366d6;
+        }
+
+        .topic-title {
+            font-weight: 600;
+            color: #24292e;
+            font-size: 18px;
+        }
+
+        .topic-description {
+            color: #586069;
+            line-height: 1.6;
+            padding-left: 32px;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: #f6f8fa;
+            border-left: 4px solid #0366d6;
+            padding: 24px;
+            margin: 32px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p {
+            color: #24292e;
+            line-height: 1.7;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        /* Support Section */
         .support-section {
-            text-align: center;
+            background: #f6f8fa;
+            border-radius: 12px;
+            padding: 48px;
             margin: 64px 0;
-            padding: 32px;
-            background-color: #f6f8fa;
-            border-radius: 16px;
+            text-align: center;
             border: 1px solid #e1e4e8;
         }
 
@@ -407,8 +319,8 @@
         .support-description {
             color: #586069;
             max-width: 600px;
-            margin: 0 auto 24px;
-            line-height: 1.6;
+            margin: 0 auto 32px;
+            line-height: 1.7;
         }
 
         .support-buttons {
@@ -418,19 +330,177 @@
             flex-wrap: wrap;
         }
 
-        /* Mobile responsiveness */
+        .support-button {
+            background: #ffffff;
+            color: #24292e;
+            border: 1px solid #e1e4e8;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .support-button:hover {
+            background: #f6f8fa;
+            border-color: #0366d6;
+            color: #0366d6;
+            transform: translateY(-2px);
+        }
+
+        /* Creator Section */
+        .creator-section {
+            background: #f6f8fa;
+            border-radius: 12px;
+            padding: 48px;
+            margin: 48px 0;
+            border: 1px solid #e1e4e8;
+        }
+
+        .creator-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .creator-avatar {
+            font-size: 48px;
+        }
+
+        .creator-info h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #24292e;
+        }
+
+        .creator-info p {
+            color: #586069;
+            font-size: 14px;
+        }
+
+        .creator-quote {
+            border-left: 3px solid #0366d6;
+            padding-left: 20px;
+            margin: 24px 0;
+            font-style: italic;
+            color: #24292e;
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid #e1e4e8;
+            text-align: center;
+            color: #586069;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #586069;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-size: 14px;
+        }
+
+        .footer-link:hover {
+            color: #0366d6;
+        }
+
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .primary-button {
+            background-color: #2ea44f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .primary-button:hover {
+            background-color: #2c974b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 164, 79, 0.2);
+            color: white;
+        }
+
+        .secondary-button {
+            background-color: #ffffff;
+            color: #24292e;
+            border: 1px solid #e1e4e8;
+            border-radius: 8px;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .secondary-button:hover {
+            background-color: #f6f8fa;
+            border-color: #0366d6;
+            color: #0366d6;
+            transform: translateY(-2px);
+        }
+
+        /* Code snippet styling */
+        .code-snippet {
+            background: #f6f8fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 24px 0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 14px;
+            overflow-x: auto;
+        }
+
+        .code-comment {
+            color: #6a737d;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             body {
                 padding: 0 16px;
             }
 
-            .counter-container {
-                padding: 20px;
-                min-width: 280px;
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
             }
 
-            .counter-value {
-                font-size: 36px;
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+                overflow-x: auto;
+                padding-bottom: 8px;
             }
 
             .hero-title {
@@ -438,19 +508,24 @@
             }
 
             .hero-subtitle {
-                font-size: 16px;
+                font-size: 18px;
             }
 
-            .project-title, .section-title {
-                font-size: 24px;
-            }
-
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
+            .section-title {
+                font-size: 28px;
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .support-section {
+                padding: 32px 24px;
+            }
+
+            .support-buttons {
+                flex-direction: column;
+                align-items: center;
             }
 
             .cta-buttons {
@@ -458,463 +533,539 @@
                 align-items: center;
             }
 
-            .support-btn, .start-course-btn {
+            .primary-button,
+            .secondary-button {
                 width: 100%;
                 text-align: center;
-                justify-content: center;
+                max-width: 300px;
             }
 
-            .support-buttons {
+            .creator-header {
                 flex-direction: column;
-                align-items: center;
+                text-align: center;
             }
         }
 
         @media (max-width: 480px) {
-            .stats-container {
-                grid-template-columns: 1fr;
-            }
-
             .hero-title {
                 font-size: 28px;
             }
 
+            .hero-stat {
+                padding: 20px;
+            }
+
             .stat-number {
+                font-size: 28px;
+            }
+
+            .section-title {
                 font-size: 24px;
             }
 
-            .counter-container {
-                padding: 16px;
-                min-width: 240px;
+            .feature-card {
+                padding: 24px;
             }
 
-            .counter-value {
-                font-size: 30px;
+            .support-button {
+                width: 100%;
+                justify-content: center;
             }
 
-            .counter-label {
-                font-size: 12px;
+            .nav-link {
+                padding: 6px 8px;
+                font-size: 14px;
             }
 
-            .counter-progress {
-                height: 6px;
+            .github-button {
+                padding: 6px 12px;
+                font-size: 13px;
             }
         }
 
-        /* Animation for sections */
-        section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        section.animated {
-            opacity: 1;
-            transform: translateY(0);
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .staggered > * {
+            animation: fadeIn 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .staggered > *:nth-child(1) { animation-delay: 0.1s; }
+        .staggered > *:nth-child(2) { animation-delay: 0.2s; }
+        .staggered > *:nth-child(3) { animation-delay: 0.3s; }
+        .staggered > *:nth-child(4) { animation-delay: 0.4s; }
+        .staggered > *:nth-child(5) { animation-delay: 0.5s; }
+        .staggered > *:nth-child(6) { animation-delay: 0.6s; }
+        .staggered > *:nth-child(7) { animation-delay: 0.7s; }
+        .staggered > *:nth-child(8) { animation-delay: 0.8s; }
+        .staggered > *:nth-child(9) { animation-delay: 0.9s; }
+
+        /* Print styles */
+        @media print {
+            .site-header, .cta-buttons, .support-section {
+                display: none;
+            }
+            
+            body {
+                max-width: 100%;
+                padding: 20px;
+            }
+            
+            .hero-section, .content-section {
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Counter Section - отдельный блок -->
-    <section class="counter-section">
-        <div class="counter-container" id="visitorCounter">
-            <div class="counter-label">Global Visitors Counter</div>
-            <div class="counter-value" id="counterValue">0</div>
-            <div class="counter-progress">
-                <div class="progress-bar" id="progressBar"></div>
+    <!-- Header -->
+    <header class="site-header fade-in">
+        <div class="header-content">
+            <a href="#" class="site-title">Thorium-AI</a>
+            <div class="nav-links">
+                <a href="#course" class="nav-link">Course</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#topics" class="nav-link">Topics</a>
+                <a href="#creator" class="nav-link">Creator</a>
+                <a href="https://github.com/waratecs123/Thorium-AI" target="_blank" class="github-button">
+                    <span>★</span> Star on GitHub
+                </a>
             </div>
-            <div class="counter-goal">Goal: 100,000,000,000</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section fade-in" id="course">
+        <h1 class="hero-title">Practical AI Education for Everyone</h1>
+        <p class="hero-subtitle">
+            A clear, practical guide to understanding artificial intelligence in everyday life. 
+            No code, no complex theories — just actionable knowledge about the AI that's already 
+            shaping your world. From TikTok algorithms to ChatGPT, from deepfakes to self-driving cars.
+        </p>
+        
+        <div class="hero-stats staggered">
+            <div class="hero-stat">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Practical Sections</div>
+            </div>
+            <div class="hero-stat">
+                <div class="stat-number">40+</div>
+                <div class="stat-label">Real-World Topics</div>
+            </div>
+            <div class="hero-stat">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Lines of Code</div>
+            </div>
+            <div class="hero-stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Practical Focus</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p>This is <strong>AI education for real life</strong> — not for programmers. You'll learn how to actually use AI tools, create your first AI images, write with ChatGPT, spot deepfakes, and understand the AI that's already changing your world.</p>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="#topics" class="primary-button">Explore Topics</a>
+            <a href="https://github.com/waratecs123/Thorium-AI" target="_blank" class="secondary-button">
+                View on GitHub
+            </a>
         </div>
     </section>
 
-        <section class="hero-section">
-            <h1 class="hero-title">
-                Thorium AI
-            </h1>
-            <p class="hero-subtitle">
-                Your practical guide to Artificial Intelligence in everyday life.
-                No code, no complex theories — just clear explanations of how AI
-                already works around you. From TikTok algorithms to ChatGPT,
-                from deepfakes to self-driving cars. Learn how to use AI tools,
-                understand their impact, and navigate the AI-powered world.
-                Start your journey from complete beginner to AI-confident user.
-            </p>
+    <!-- What You'll Learn -->
+    <section class="content-section fade-in" id="features">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">What You'll Learn</h2>
+                <p class="section-subtitle">
+                    Practical AI knowledge that applies to your daily life, not abstract theories.
+                </p>
+            </div>
+        </div>
 
-            <div class="stats-container">
-                <div class="stat-item">
-                    <div class="stat-number">9</div>
-                    <div class="stat-label">Practical Sections</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">40+</div>
-                    <div class="stat-label">Real-World Topics</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Lines of Code</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Practical Focus</div>
+        <div class="features-grid staggered">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">AI in Daily Life</h3>
+                <p class="feature-description">
+                    Understand how AI powers YouTube recommendations, TikTok algorithms, 
+                    voice assistants, and social media. See the invisible AI around you.
+                </p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Recommendations</span>
+                    <span class="feature-tag">Algorithms</span>
+                    <span class="feature-tag">Voice AI</span>
                 </div>
             </div>
-        </section>
 
-        <section class="project-info">
-            <h2 class="project-title">What You'll Learn</h2>
-
-            <div class="project-description">
-                <p><strong>Thorium-AI</strong> is a completely new approach to learning about artificial intelligence.
-                Forget abstract theories and complex mathematics. We start with what you already experience every day:
-                YouTube recommendations, TikTok algorithms, voice assistants, and autocorrect. Then we build from there
-                to ChatGPT, AI image generation, deepfakes, and beyond.</p>
-
-                <div class="highlight">
-                    <p>This is <strong>AI education for real life</strong> — not for programmers. You'll learn how to actually
-                    use AI tools, create your first AI images, write with ChatGPT, spot deepfakes, protect yourself from AI scams,
-                    and understand the AI that's already changing your world. No technical background required — just curiosity
-                    about the technology that's reshaping everything.</p>
-                </div>
-
-                <p>The course is built around 9 practical sections that take you from "What is this AI thing?" to
-                "How can I use it in my daily life?" Each section answers real questions: How does TikTok know what
-                I like? Can I trust AI doctors? How do I create AI art? What jobs might disappear? How do I talk to
-                ChatGPT effectively?</p>
-
-                <p>You won't find a single line of code here. Instead, you'll find clear explanations, practical examples,
-                step-by-step guides, and honest discussions about both the amazing potential and real dangers of AI.
-                This is the AI education you actually need in 2024.</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3 class="feature-title">AI Around You</h3>
-                    <p class="feature-text">Discover how AI already works in your daily apps: YouTube recommendations,
-                    TikTok algorithms, voice assistants, social media filters, and autocorrect. Understand the invisible
-                    AI that's already part of your life.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💬</div>
-                    <h3 class="feature-title">ChatGPT & Neural Networks</h3>
-                    <p class="feature-text">Learn how ChatGPT really works, create AI images with Midjourney, understand
-                    deepfakes and voice cloning, and see how neural networks translate languages. No technical knowledge needed.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🚀</div>
-                    <h3 class="feature-title">AI Breakthroughs</h3>
-                    <p class="feature-text">Explore the most exciting AI achievements: AlphaGo beating world champions,
-                    AlphaFold solving protein folding, Boston Dynamics robots, and ChatGPT's explosive growth.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏥</div>
-                    <h3 class="feature-title">Future is Now</h3>
-                    <p class="feature-text">See the future that's already here: AI doctors diagnosing diseases, personal
-                    AI teachers, self-driving cars, age regression in movies, and smart homes of tomorrow.</p>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3 class="feature-title">ChatGPT & Beyond</h3>
+                <p class="feature-description">
+                    Master ChatGPT, create AI images, understand deepfakes, and explore 
+                    neural networks. All explained in simple terms.
+                </p>
+                <div class="feature-tags">
+                    <span class="feature-tag">ChatGPT</span>
+                    <span class="feature-tag">AI Images</span>
+                    <span class="feature-tag">Neural Networks</span>
                 </div>
             </div>
-        </section>
 
-        <section class="content-preview">
-            <h2 class="section-title">Course Structure</h2>
-
-            <div class="project-description">
-                <p>The course is organized into 9 practical sections, each designed to give you immediately useful
-                knowledge about AI. This isn't theoretical — it's hands-on learning about the AI that affects you right now.</p>
-
-                <ul>
-                    <li><strong>AI Around Us</strong> – Where AI already works in your daily life. YouTube/Netflix recommendations,
-                    TikTok/Reels algorithms, voice assistants, social media filters, and text autocorrection.</li>
-
-                    <li><strong>ChatGPT and Neural Networks</strong> – ChatGPT explained simply. How it works, Midjourney/Stable
-                    Diffusion for images, deepfake technology, voice cloning, and neural network translators.</li>
-
-                    <li><strong>AI Sensations</strong> – The biggest AI records and breakthroughs. AlphaGo vs Lee Sedol,
-                    AlphaFold's discovery, Boston Dynamics robots, OpenAI's valuation, and ChatGPT's growth story.</li>
-
-                    <li><strong>Future is Now</strong> – The future that's already here. AI doctor diagnosis, personal
-                    AI teachers, movies with age regression, self-driving cars, and smart homes.</li>
-
-                    <li><strong>Talking to AI</strong> – Prompt engineering for everyone. Learn the differences in prompts,
-                    discover magic phrases, master ChatGPT writing styles, understand forbidden questions, and use the best prompts.</li>
-
-                    <li><strong>AI for Hobbies</strong> – AI for creativity and daily life. Write a book, create music,
-                    cook with AI, design interiors, garden smarter, and get personalized fitness programs.</li>
-
-                    <li><strong>Dangers and Ethics</strong> – Risks, ethics and protection. Deepfake fraud, AI phone scams,
-                    AI bias, disappearing professions, privacy concerns, and how to detect AI content.</li>
-
-                    <li><strong>How AI Works (Simply)</strong> – AI basics without math. Programming vs learning, what is
-                    machine learning, data and algorithms, training AI models, and testing AI.</li>
-
-                    <li><strong>First Steps with AI</strong> – Start your AI journey. Best free AI tools, create your first
-                    AI image, write with ChatGPT, analyze photos with AI, and discover useful AI services.</li>
-                </ul>
-
-                <p>Each topic starts with what you already know or experience. We use simple analogies, real examples,
-                and practical exercises. You'll not only understand AI — you'll learn how to use it, how to spot it,
-                and how to make it work for you in your daily life and hobbies.</p>
-            </div>
-        </section>
-
-        <section class="support-section" id="support">
-            <h3 class="support-title">Support the Project</h3>
-            <p class="support-description">
-                This project is created and maintained by one person. Your support helps keep
-                Thorium AI free and accessible to everyone.
-            </p>
-            <div class="support-buttons">
-                <a href="https://www.donationalerts.com/r/mobius_org" target="_blank" class="support-btn">
-                    💸 Support on Donation Alerts
-                </a>
-                <a href="https://t.me/mobius_org" target="_blank" class="support-btn">
-                    📢 Join Telegram Channel
-                </a>
-                <a href="https://github.com/waratecs123/Thorium-AI/tree/main" target="_blank" class="support-btn">
-                    🌐 GitHub Project
-                </a>
-            </div>
-        </section>
-
-        <section class="project-info">
-            <h2 class="project-title">From the Creator</h2>
-
-            <div class="project-description">
-                <p>I created Thorium-AI because I was tired of seeing people either fear AI or blindly trust it
-                without understanding what it actually is. Most AI education is either too technical (for programmers)
-                or too vague (just hype). There was nothing for regular people who just want to understand this
-                technology that's changing everything.</p>
-
-                <p>This project requires hundreds of hours of work, but I do it because:</p>
-
-                <ul>
-                    <li>Understanding AI is becoming as essential as using the internet. Everyone deserves access
-                    to clear, practical knowledge about the technology reshaping our world.</li>
-
-                    <li>The conversation about AI shouldn't be left to tech companies alone. We need informed citizens,
-                    not just passive users. Knowledge is power, especially with transformative technology.</li>
-
-                    <li>AI tools can be amazing helpers for creativity, learning, and productivity — if you know
-                    how to use them properly. I want to show people how to harness this power.</li>
-
-                    <li>There are real dangers with AI — scams, deepfakes, bias, job displacement. The best protection
-                    is understanding. I want to equip people with knowledge to protect themselves.</li>
-
-                    <li>Most importantly: AI should be accessible to everyone. You shouldn't need a computer science
-                    degree to understand ChatGPT or know how to spot a deepfake.</li>
-                </ul>
-
-                <div class="highlight">
-                    <p>My goal is simple: to give you the knowledge and confidence to navigate our AI-powered world.
-                    Not as a programmer, but as an informed, capable user who understands both the opportunities
-                    and the risks. Welcome to practical AI education.</p>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3 class="feature-title">AI Safety & Ethics</h3>
+                <p class="feature-description">
+                    Learn to spot deepfake scams, protect your privacy, understand AI bias, 
+                    and navigate ethical questions about AI.
+                </p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Safety</span>
+                    <span class="feature-tag">Ethics</span>
+                    <span class="feature-tag">Privacy</span>
                 </div>
             </div>
-        </section>
-    </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3 class="feature-title">AI Breakthroughs</h3>
+                <p class="feature-description">
+                    Explore groundbreaking AI achievements: AlphaGo, AlphaFold, Boston Dynamics, 
+                    and more. Understand what makes them special.
+                </p>
+                <div class="feature-tags">
+                    <span class="feature-tag">AlphaGo</span>
+                    <span class="feature-tag">AlphaFold</span>
+                    <span class="feature-tag">Innovations</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3 class="feature-title">AI for Creativity</h3>
+                <p class="feature-description">
+                    Use AI for writing, music creation, art, design, cooking, and more. 
+                    Enhance your hobbies with AI tools.
+                </p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Creativity</span>
+                    <span class="feature-tag">Art</span>
+                    <span class="feature-tag">Music</span>
+                </div>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏥</div>
+                <h3 class="feature-title">AI in Healthcare</h3>
+                <p class="feature-description">
+                    Discover how AI is transforming medicine: diagnosis assistance, drug discovery, 
+                    personalized treatment, and medical research.
+                </p>
+                <div class="feature-tags">
+                    <span class="feature-tag">Healthcare</span>
+                    <span class="feature-tag">Medicine</span>
+                    <span class="feature-tag">Diagnosis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Structure -->
+    <section class="content-section fade-in" id="topics">
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">Course Structure</h2>
+                <p class="section-subtitle">
+                    9 practical sections designed to build your AI understanding step by step.
+                </p>
+            </div>
+        </div>
+
+        <div class="topic-list staggered">
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-icon">📱</div>
+                    <h3 class="topic-title">AI Around Us</h3>
+                </div>
+                <p class="topic-description">
+                    YouTube/Netflix recommendations, TikTok algorithms, voice assistants, 
+                    social media filters, and text autocorrection.
+                </p>
+            </div>
+
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-icon">🧠</div>
+                    <h3 class="topic-title">How AI Works (Simply)</h3>
+                </div>
+                <p class="topic-description">
+                    Machine learning basics without math, understanding algorithms, 
+                    and how AI models are trained and tested.
+                </p>
+            </div>
+
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-icon">🚀</div>
+                    <h3 class="topic-title">First Steps with AI</h3>
+                </div>
+                <p class="topic-description">
+                    Best free AI tools, create your first AI image, write with ChatGPT, 
+                    analyze photos, and discover useful AI services.
+                </p>
+            </div>
+
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-icon">💬</div>
+                    <h3 class="topic-title">ChatGPT & Neural Networks</h3>
+                </div>
+                <p class="topic-description">
+                    ChatGPT explained simply, Midjourney/Stable Diffusion, deepfake technology, 
+                    voice cloning, and neural network translators.
+                </p>
+            </div>
+
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-icon">🎨</div>
+                    <h3 class="topic-title">AI for Hobbies</h3>
+                </div>
+                <p class="topic-description">
+                    Write books, create music, cook with AI, design interiors, garden smarter, 
+                    and get personalized fitness programs.
+                </p>
+            </div>
+
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-icon">⚡</div>
+                    <h3 class="topic-title">AI Sensations</h3>
+                </div>
+                <p class="topic-description">
+                    AlphaGo vs Lee Sedol, AlphaFold's discovery, Boston Dynamics robots, 
+                    OpenAI's valuation, and ChatGPT's growth story.
+                </p>
+            </div>
+
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-icon">🛡️</div>
+                    <h3 class="topic-title">Dangers and Ethics</h3>
+                </div>
+                <p class="topic-description">
+                    Deepfake fraud, AI phone scams, AI bias, disappearing professions, 
+                    privacy concerns, and how to detect AI content.
+                </p>
+            </div>
+
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-icon">🏥</div>
+                    <h3 class="topic-title">Future is Now</h3>
+                </div>
+                <p class="topic-description">
+                    AI doctor diagnosis, personal AI teachers, movies with age regression, 
+                    self-driving cars, and smart homes.
+                </p>
+            </div>
+
+            <div class="topic-item">
+                <div class="topic-header">
+                    <div class="topic-icon">🔧</div>
+                    <h3 class="topic-title">Talking to AI</h3>
+                </div>
+                <p class="topic-description">
+                    Prompt engineering for everyone, discover magic phrases, master ChatGPT writing styles, 
+                    understand forbidden questions, and use the best prompts.
+                </p>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p>Each topic starts with what you already know or experience. We use simple analogies, real examples, and practical exercises. You'll not only understand AI — you'll learn how to use it, how to spot it, and how to make it work for you.</p>
+        </div>
+    </section>
+
+    <!-- Creator Section -->
+    <section class="creator-section fade-in" id="creator">
+        <div class="creator-header">
+            <div class="creator-avatar">👨‍💻</div>
+            <div class="creator-info">
+                <h3>From the Creator</h3>
+                <p>Independent Developer & AI Educator</p>
+            </div>
+        </div>
+        
+        <div class="creator-quote">
+            "I created Thorium-AI because I was tired of seeing people either fear AI or blindly trust it without understanding what it actually is. Most AI education is either too technical or too vague. There was nothing for regular people who just want to understand this technology that's changing everything."
+        </div>
+        
+        <div class="feature-tags">
+            <span class="feature-tag">Hundreds of hours of work</span>
+            <span class="feature-tag">Independent project</span>
+            <span class="feature-tag">Focus on accessibility</span>
+            <span class="feature-tag">Real-world examples</span>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section fade-in" id="support">
+        <h3 class="support-title">Support the Project</h3>
+        <p class="support-description">
+            This project is created and maintained independently. Your support helps 
+            keep Thorium-AI free and accessible to everyone, and enables the creation 
+            of more educational content about AI.
+        </p>
+        
+        <div class="support-buttons">
+            <a href="https://www.donationalerts.com/r/mobius_org" target="_blank" class="support-button">
+                💸 Support on Donation Alerts
+            </a>
+            <a href="https://t.me/mobius_org" target="_blank" class="support-button">
+                📢 Join Telegram Channel
+            </a>
+            <a href="https://github.com/waratecs123/Thorium-AI" target="_blank" class="support-button">
+                ⭐ Star on GitHub
+            </a>
+        </div>
+        
+        <div class="code-snippet">
+            <span class="code-comment"># This project is open source and community-driven</span><br>
+            git clone https://github.com/waratecs123/Thorium-AI
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer fade-in">
+        <div class="footer-links">
+            <a href="#course" class="footer-link">Course Overview</a>
+            <a href="#features" class="footer-link">Features</a>
+            <a href="#topics" class="footer-link">Topics</a>
+            <a href="#creator" class="footer-link">Creator</a>
+            <a href="https://github.com/waratecs123/Thorium-AI" target="_blank" class="footer-link">GitHub</a>
+            <a href="https://t.me/mobius_org" target="_blank" class="footer-link">Telegram</a>
+        </div>
+        <p>Thorium-AI © 2024 — Practical AI Education for Everyone</p>
+        <p style="margin-top: 8px; font-size: 13px; color: #6a737d;">
+            No code, no complex theories — just clear, practical AI knowledge
+        </p>
+    </footer>
 
     <script>
-        // Visitor counter functionality
+        // Simple scroll animations and interactions
         document.addEventListener('DOMContentLoaded', function() {
-            const GOAL = 100000000000; // 100 billion
-            
-            const counterElement = document.getElementById('counterValue');
-            const progressBar = document.getElementById('progressBar');
-            const counterContainer = document.getElementById('visitorCounter');
-            
-            // Get current count from localStorage or start with 24
-            let currentCount = parseInt(localStorage.getItem('thoriumAI_real_visitors')) || 24;
-            
-            // Check if we've already reached the goal
-            if (currentCount >= GOAL) {
-                currentCount = GOAL;
-                updateDisplay(currentCount);
-                celebrateGoal();
-                return;
-            }
-            
-            // Increment by 1 for this visit (real visitor)
-            currentCount += 1;
-            
-            // Cap at goal
-            if (currentCount > GOAL) {
-                currentCount = GOAL;
-            }
-            
-            // Save to localStorage
-            localStorage.setItem('thoriumAI_real_visitors', currentCount.toString());
-            
-            // Animate the counter
-            animateCounter(0, currentCount);
-            
-            // Update progress bar
-            updateProgress(currentCount);
-            
-            // Add hover effect
-            counterContainer.addEventListener('mouseenter', function() {
-                if (currentCount < GOAL) {
-                    this.classList.add('counter-celebrate');
-                }
-            });
-            
-            counterContainer.addEventListener('mouseleave', function() {
-                this.classList.remove('counter-celebrate');
-            });
-            
-            // Animate counter with number formatting
-            function animateCounter(start, end) {
-                const duration = 2000; // 2 seconds
-                const startTime = Date.now();
-                const endTime = startTime + duration;
-                
-                function update() {
-                    const now = Date.now();
-                    const progress = Math.min((now - startTime) / duration, 1);
-                    
-                    // Easing function for smooth animation
-                    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-                    
-                    const current = Math.floor(start + (end - start) * easeOutQuart);
-                    
-                    // Format number with commas
-                    counterElement.textContent = formatNumber(current);
-                    
-                    if (progress < 1) {
-                        requestAnimationFrame(update);
-                    } else {
-                        counterElement.textContent = formatNumber(end);
-                    }
-                }
-                
-                requestAnimationFrame(update);
-            }
-            
-            // Format number with commas
-            function formatNumber(num) {
-                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            }
-            
-            // Update progress bar
-            function updateProgress(count) {
-                const percentage = Math.min((count / GOAL) * 100, 100);
-                progressBar.style.width = percentage + '%';
-                
-                // Change color based on progress
-                if (percentage < 25) {
-                    progressBar.style.background = '#2ea44f';
-                } else if (percentage < 50) {
-                    progressBar.style.background = 'linear-gradient(90deg, #2ea44f, #0366d6)';
-                } else if (percentage < 75) {
-                    progressBar.style.background = '#0366d6';
-                } else if (percentage < 100) {
-                    progressBar.style.background = 'linear-gradient(90deg, #0366d6, #f0db4f)';
-                }
-            }
-            
-            // Update display immediately
-            function updateDisplay(count) {
-                counterElement.textContent = formatNumber(count);
-                updateProgress(count);
-            }
-            
-            // Celebrate when goal is reached
-            function celebrateGoal() {
-                counterContainer.classList.add('counter-complete');
-                
-                // Add special animation
-                const celebrateInterval = setInterval(() => {
-                    counterContainer.style.transform = 'scale(1.05)';
-                    setTimeout(() => {
-                        counterContainer.style.transform = 'scale(1)';
-                    }, 200);
-                }, 2000);
-                
-                // Create confetti effect
-                setTimeout(() => {
-                    createConfetti();
-                }, 500);
-                
-                // Update text to show achievement
-                const goalText = document.querySelector('.counter-goal');
-                goalText.textContent = "🎉 GOAL ACHIEVED! 🎉";
-                goalText.style.color = '#f0db4f';
-                goalText.style.fontWeight = 'bold';
-                goalText.style.fontSize = '14px';
-                
-                // Stop animation after 10 seconds
-                setTimeout(() => {
-                    clearInterval(celebrateInterval);
-                }, 10000);
-            }
-            
-            // Create confetti effect
-            function createConfetti() {
-                const colors = ['#0366d6', '#2ea44f', '#f0db4f', '#ff6b6b', '#9b59b6'];
-                
-                for (let i = 0; i < 50; i++) {
-                    const confetti = document.createElement('div');
-                    confetti.style.position = 'fixed';
-                    confetti.style.width = '12px';
-                    confetti.style.height = '12px';
-                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                    confetti.style.borderRadius = '50%';
-                    confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.top = '-20px';
-                    confetti.style.zIndex = '9999';
-                    confetti.style.pointerEvents = 'none';
-                    
-                    document.body.appendChild(confetti);
-                    
-                    // Animate confetti
-                    const animation = confetti.animate([
-                        { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-                        { transform: `translateY(${window.innerHeight + 100}px) rotate(${360 + Math.random() * 360}deg)`, opacity: 0 }
-                    ], {
-                        duration: 3000 + Math.random() * 2000,
-                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
-                    });
-                    
-                    // Remove confetti after animation
-                    animation.onfinish = () => confetti.remove();
-                }
-            }
-            
-            // Add interactivity to stat items
-            const statItems = document.querySelectorAll('.stat-item');
-            statItems.forEach(item => {
-                item.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-5px)';
-                });
-                item.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-            
-            // Add smooth scroll animation for sections
+            // Add fade-in animations on scroll
             const observerOptions = {
                 threshold: 0.1,
                 rootMargin: '0px 0px -50px 0px'
             };
-            
+
             const observer = new IntersectionObserver(function(entries) {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('animated');
+                        entry.target.classList.add('fade-in');
                     }
                 });
             }, observerOptions);
-            
+
             // Observe all sections
             document.querySelectorAll('section').forEach(section => {
                 observer.observe(section);
             });
-            
+
+            // Smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update active nav link
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.style.fontWeight = 'normal';
+                        });
+                        this.style.fontWeight = '600';
+                    }
+                });
+            });
+
+            // Add hover effect to feature cards
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add click effect to topic items
+            const topicItems = document.querySelectorAll('.topic-item');
+            topicItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    topicItems.forEach(i => i.style.borderColor = '#e1e4e8');
+                    this.style.borderColor = '#0366d6';
+                });
+            });
+
             // Initialize all sections as animated
             setTimeout(() => {
                 document.querySelectorAll('section').forEach(section => {
-                    section.classList.add('animated');
+                    section.classList.add('fade-in');
                 });
             }, 100);
+
+            // Add current year to footer
+            const yearElement = document.querySelector('footer p');
+            if (yearElement && yearElement.textContent.includes('2024')) {
+                const currentYear = new Date().getFullYear();
+                yearElement.innerHTML = yearElement.innerHTML.replace('2024', currentYear);
+            }
+
+            // Add keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    // Reset all interactive elements
+                    topicItems.forEach(item => {
+                        item.style.borderColor = '#e1e4e8';
+                    });
+                }
+            });
+
+            // Add loading animation
+            window.addEventListener('load', function() {
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.3s ease';
+                
+                setTimeout(() => {
+                    document.body.style.opacity = '1';
+                }, 100);
+            });
         });
     </script>
 </body>
