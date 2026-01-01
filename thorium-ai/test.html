@@ -475,25 +475,6 @@
             line-height: 1.6;
         }
 
-        /* MIT License Notice */
-        .license-notice {
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 1px solid #e1e4e8;
-            text-align: center;
-            color: #586069;
-            font-size: 13px;
-        }
-
-        .license-notice a {
-            color: #0366d6;
-            text-decoration: none;
-        }
-
-        .license-notice a:hover {
-            text-decoration: underline;
-        }
-
         /* Timer */
         .timer-display {
             font-size: 14px;
@@ -701,13 +682,8 @@
         </div>
     </div>
 
-    <div class="license-notice">
-        <p>© 2024 Thorium-AI. This content is open source and available under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.</p>
-        <p>You are free to use, modify, and distribute this content for any purpose, including commercial use.</p>
-    </div>
-
     <script>
-        // Questions data - 50 questions
+        // Questions data - РОВНО 50 вопросов
         const questions = [
             {
                 question: "What does 'AI' stand for?",
@@ -1280,28 +1256,6 @@
                 ],
                 correct: 0,
                 explanation: "The Turing Test, proposed by Alan Turing, evaluates a machine's ability to exhibit intelligent behavior equivalent to a human."
-            },
-            {
-                question: "What is 'Moore's Law' in computing?",
-                options: [
-                    "Computing power doubles every two years",
-                    "AI progress accelerates",
-                    "Data grows exponentially",
-                    "Chip size decreases"
-                ],
-                correct: 0,
-                explanation: "Moore's Law observes that the number of transistors on a microchip doubles about every two years, though the pace has slowed."
-            },
-            {
-                question: "What is 'singularity' in AI context?",
-                options: [
-                    "Hypothetical point where AI surpasses human intelligence",
-                    "Unique AI development",
-                    "Breakthrough moment",
-                    "AI dominance point"
-                ],
-                correct: 0,
-                explanation: "The technological singularity refers to a hypothetical future point where AI becomes capable of recursive self-improvement, leading to rapid advancement beyond human control."
             }
         ];
 
@@ -1339,15 +1293,6 @@
             updateNavigation();
             showQuestion(currentQuestion);
             startTimer();
-            
-            // Add current year to license notice
-            const yearElements = document.querySelectorAll('.license-notice p');
-            yearElements.forEach(el => {
-                if (el.textContent.includes('2024')) {
-                    const currentYear = new Date().getFullYear();
-                    el.innerHTML = el.innerHTML.replace('2024', currentYear);
-                }
-            });
         }
 
         // Render all questions
