@@ -17,7 +17,7 @@
             line-height: 1.6;
             color: #24292e;
             background-color: #ffffff;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
             -webkit-font-smoothing: antialiased;
@@ -91,27 +91,6 @@
             box-shadow: 0 4px 12px rgba(46, 164, 79, 0.2);
         }
 
-        .home-button {
-            background-color: #f6f8fa;
-            color: #24292e;
-            padding: 10px 20px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid #e1e4e8;
-            transition: all 0.2s ease;
-        }
-
-        .home-button:hover {
-            background-color: #e1e4e8;
-            border-color: #0366d6;
-            color: #0366d6;
-        }
-
         .test-title {
             font-size: 32px;
             font-weight: 700;
@@ -145,7 +124,7 @@
             font-size: 14px;
             color: #586069;
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 20px;
         }
 
         /* Question Container */
@@ -321,8 +300,8 @@
         }
 
         .score-circle {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             margin: 0 auto 32px;
             display: flex;
@@ -331,7 +310,7 @@
             font-size: 48px;
             font-weight: 700;
             position: relative;
-            border: 8px solid #e1e4e8;
+            border: 10px solid #e1e4e8;
         }
 
         .score-circle::before {
@@ -340,7 +319,7 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 8px solid;
+            border: 10px solid;
             border-top-color: #0366d6;
             border-right-color: #0366d6;
             border-bottom-color: #0366d6;
@@ -515,26 +494,13 @@
             text-decoration: underline;
         }
 
-        /* Early Course Access */
-        .early-access {
-            background: #f6f8fa;
-            border: 1px solid #e1e4e8;
-            border-radius: 12px;
-            padding: 24px;
-            margin: 32px 0;
-            text-align: center;
-        }
-
-        .early-access h3 {
-            font-size: 18px;
-            margin-bottom: 12px;
-            color: #24292e;
-        }
-
-        .early-access p {
+        /* Timer */
+        .timer-display {
+            font-size: 14px;
             color: #586069;
-            margin-bottom: 20px;
-            line-height: 1.6;
+            text-align: center;
+            margin: -20px 0 20px 0;
+            font-weight: 500;
         }
 
         /* Responsive Design */
@@ -586,13 +552,12 @@
             }
 
             .score-circle {
-                width: 120px;
-                height: 120px;
+                width: 140px;
+                height: 140px;
                 font-size: 36px;
             }
 
-            .start-course-button,
-            .home-button {
+            .start-course-button {
                 width: 100%;
                 justify-content: center;
                 text-align: center;
@@ -624,14 +589,24 @@
                 font-size: 11px;
                 padding: 4px 10px;
             }
+
+            .score-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 32px;
+                border-width: 8px;
+            }
+
+            .score-circle::before {
+                border-width: 8px;
+            }
         }
 
         /* Print styles */
         @media print {
             .navigation-buttons,
             .action-buttons,
-            .header-actions,
-            .early-access {
+            .header-actions {
                 display: none;
             }
         }
@@ -653,12 +628,13 @@
         </div>
         
         <h1 class="test-title">AI & Neural Networks Knowledge Test</h1>
-        <p class="test-subtitle">Test your understanding of artificial intelligence concepts. All content is open source and distributed under MIT License.</p>
+        <p class="test-subtitle">Test your understanding of artificial intelligence concepts. 50 questions covering fundamentals to advanced topics.</p>
         
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        <div class="progress-text" id="progressText">Question 1 of 20</div>
+        <div class="progress-text" id="progressText">Question 1 of 50</div>
+        <div class="timer-display" id="timerDisplay">Time: 0s</div>
     </div>
 
     <!-- Question Container -->
@@ -694,15 +670,19 @@
             </div>
             <div class="breakdown-item">
                 <span class="breakdown-label">Total Questions:</span>
-                <span class="breakdown-value">20</span>
+                <span class="breakdown-value">50</span>
             </div>
             <div class="breakdown-item">
                 <span class="breakdown-label">Accuracy:</span>
                 <span class="breakdown-value" id="accuracy">0%</span>
             </div>
             <div class="breakdown-item">
-                <span class="breakdown-label">Time Completed:</span>
+                <span class="breakdown-label">Time Taken:</span>
                 <span class="breakdown-value" id="completionTime">0s</span>
+            </div>
+            <div class="breakdown-item">
+                <span class="breakdown-label">Score:</span>
+                <span class="breakdown-value" id="score">0/50</span>
             </div>
         </div>
 
@@ -721,20 +701,14 @@
         </div>
     </div>
 
+    <div class="license-notice">
+        <p>© 2024 Thorium-AI. This content is open source and available under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.</p>
+        <p>You are free to use, modify, and distribute this content for any purpose, including commercial use.</p>
+    </div>
+
     <script>
-        // Questions data
+        // Questions data - 50 questions
         const questions = [
-            {
-                question: "What is a neural network inspired by?",
-                options: [
-                    "Human brain structure",
-                    "Computer processors",
-                    "Mathematical formulas",
-                    "Electric circuits"
-                ],
-                correct: 0,
-                explanation: "Neural networks are inspired by the structure and function of the human brain, specifically how neurons connect and communicate."
-            },
             {
                 question: "What does 'AI' stand for?",
                 options: [
@@ -745,6 +719,17 @@
                 ],
                 correct: 0,
                 explanation: "AI stands for Artificial Intelligence, which refers to machines or software that can perform tasks typically requiring human intelligence."
+            },
+            {
+                question: "What is a neural network inspired by?",
+                options: [
+                    "Human brain structure",
+                    "Computer processors",
+                    "Mathematical formulas",
+                    "Electric circuits"
+                ],
+                correct: 0,
+                explanation: "Neural networks are inspired by the structure and function of the human brain, specifically how neurons connect and communicate."
             },
             {
                 question: "Which of these is a popular AI chatbot?",
@@ -943,6 +928,380 @@
                 ],
                 correct: 0,
                 explanation: "Smartphone voice assistants like Siri, Google Assistant, and Alexa use AI to understand and respond to voice commands."
+            },
+            {
+                question: "What is 'supervised learning'?",
+                options: [
+                    "Learning from labeled data",
+                    "Learning without guidance",
+                    "Learning through rewards",
+                    "Learning from experience"
+                ],
+                correct: 0,
+                explanation: "Supervised learning uses labeled datasets to train algorithms to classify data or predict outcomes accurately."
+            },
+            {
+                question: "What is 'unsupervised learning'?",
+                options: [
+                    "Finding patterns in unlabeled data",
+                    "Learning without a teacher",
+                    "Both A and B",
+                    "Learning from mistakes"
+                ],
+                correct: 2,
+                explanation: "Unsupervised learning algorithms analyze and cluster unlabeled datasets by discovering hidden patterns without human intervention."
+            },
+            {
+                question: "What is 'deep learning'?",
+                options: [
+                    "A subset of machine learning using neural networks",
+                    "Learning complex topics",
+                    "Studying for long hours",
+                    "Advanced programming"
+                ],
+                correct: 0,
+                explanation: "Deep learning is a machine learning technique that teaches computers to do what comes naturally to humans: learn by example using neural networks with multiple layers."
+            },
+            {
+                question: "What is a 'Tensor' in TensorFlow?",
+                options: [
+                    "A multi-dimensional array of data",
+                    "A type of neural network",
+                    "A programming language",
+                    "A hardware component"
+                ],
+                correct: 0,
+                explanation: "In TensorFlow, a tensor is a multi-dimensional array used to represent data, similar to arrays and matrices."
+            },
+            {
+                question: "Which activation function is commonly used in hidden layers?",
+                options: [
+                    "ReLU (Rectified Linear Unit)",
+                    "Sigmoid",
+                    "Tanh",
+                    "Linear"
+                ],
+                correct: 0,
+                explanation: "ReLU is commonly used in hidden layers because it's computationally efficient and helps mitigate the vanishing gradient problem."
+            },
+            {
+                question: "What is 'overfitting'?",
+                options: [
+                    "When a model learns training data too well",
+                    "When a model is too simple",
+                    "When training takes too long",
+                    "When data is unbalanced"
+                ],
+                correct: 0,
+                explanation: "Overfitting occurs when a model learns the training data too well, including noise, and performs poorly on new, unseen data."
+            },
+            {
+                question: "What is 'underfitting'?",
+                options: [
+                    "When a model is too simple to capture patterns",
+                    "When a model is too complex",
+                    "When data is insufficient",
+                    "When training is incomplete"
+                ],
+                correct: 0,
+                explanation: "Underfitting occurs when a model is too simple to capture the underlying patterns in the data."
+            },
+            {
+                question: "What is 'feature engineering'?",
+                options: [
+                    "Creating new input features from existing data",
+                    "Designing computer features",
+                    "Engineering software features",
+                    "Building AI hardware"
+                ],
+                correct: 0,
+                explanation: "Feature engineering is the process of using domain knowledge to create features that make machine learning algorithms work better."
+            },
+            {
+                question: "What is 'transfer learning'?",
+                options: [
+                    "Using pre-trained models for new tasks",
+                    "Transferring data between systems",
+                    "Learning to transfer skills",
+                    "Moving learning algorithms"
+                ],
+                correct: 0,
+                explanation: "Transfer learning involves taking a model trained on one task and reusing it as a starting point for a related task."
+            },
+            {
+                question: "What is 'data augmentation'?",
+                options: [
+                    "Increasing training data by creating modified versions",
+                    "Making data bigger",
+                    "Adding more data sources",
+                    "Compressing data"
+                ],
+                correct: 0,
+                explanation: "Data augmentation involves creating modified versions of existing data to increase the size and diversity of training datasets."
+            },
+            {
+                question: "What is 'batch size' in training?",
+                options: [
+                    "Number of samples processed before updating model",
+                    "Size of data storage",
+                    "Amount of memory used",
+                    "Number of training epochs"
+                ],
+                correct: 0,
+                explanation: "Batch size is the number of training examples used in one iteration to update the model's weights."
+            },
+            {
+                question: "What is 'learning rate'?",
+                options: [
+                    "Step size for weight updates during training",
+                    "Speed of learning",
+                    "Rate of data processing",
+                    "Model accuracy improvement rate"
+                ],
+                correct: 0,
+                explanation: "Learning rate determines how much to change the model in response to the estimated error each time the model weights are updated."
+            },
+            {
+                question: "What is 'gradient descent'?",
+                options: [
+                    "Optimization algorithm to minimize error",
+                    "Method to descend gradients",
+                    "Data processing technique",
+                    "Model evaluation method"
+                ],
+                correct: 0,
+                explanation: "Gradient descent is an optimization algorithm used to minimize the loss function by iteratively moving toward the steepest descent."
+            },
+            {
+                question: "What is 'backpropagation'?",
+                options: [
+                    "Algorithm for training neural networks",
+                    "Propagating data backwards",
+                    "Reverse data flow",
+                    "Error correction method"
+                ],
+                correct: 0,
+                explanation: "Backpropagation is the algorithm used to train neural networks by calculating gradients of the loss function with respect to weights."
+            },
+            {
+                question: "What is a 'CNN' (Convolutional Neural Network) good for?",
+                options: [
+                    "Image processing and recognition",
+                    "Text generation",
+                    "Time series prediction",
+                    "Speech recognition"
+                ],
+                correct: 0,
+                explanation: "CNNs are particularly effective for image processing tasks due to their ability to capture spatial hierarchies in data."
+            },
+            {
+                question: "What is an 'RNN' (Recurrent Neural Network) good for?",
+                options: [
+                    "Sequential data like text or time series",
+                    "Image classification",
+                    "Data clustering",
+                    "Feature extraction"
+                ],
+                correct: 0,
+                explanation: "RNNs are designed for sequential data where order matters, making them ideal for text, speech, and time series analysis."
+            },
+            {
+                question: "What is 'attention mechanism' in transformers?",
+                options: [
+                    "Focusing on relevant parts of input",
+                    "Paying attention during training",
+                    "Data attention filter",
+                    "Input prioritization"
+                ],
+                correct: 0,
+                explanation: "Attention mechanism allows models to focus on different parts of the input sequence when producing output, crucial for tasks like translation."
+            },
+            {
+                question: "What is 'tokenization' in NLP?",
+                options: [
+                    "Splitting text into smaller units",
+                    "Creating security tokens",
+                    "Data encryption",
+                    "Text compression"
+                ],
+                correct: 0,
+                explanation: "Tokenization is the process of breaking text into words, subwords, or characters for processing by NLP models."
+            },
+            {
+                question: "What is 'word embedding'?",
+                options: [
+                    "Representing words as vectors",
+                    "Embedding text in images",
+                    "Word compression",
+                    "Text encoding"
+                ],
+                correct: 0,
+                explanation: "Word embeddings are vector representations of words that capture semantic meaning based on context."
+            },
+            {
+                question: "What is 'BLEU score' used for?",
+                options: [
+                    "Evaluating machine translation quality",
+                    "Measuring model speed",
+                    "Calculating accuracy",
+                    "Data quality assessment"
+                ],
+                correct: 0,
+                explanation: "BLEU (Bilingual Evaluation Understudy) score is a metric for evaluating the quality of machine-translated text."
+            },
+            {
+                question: "What is 'GPT' architecture based on?",
+                options: [
+                    "Transformer architecture",
+                    "CNN architecture",
+                    "RNN architecture",
+                    "Autoencoder architecture"
+                ],
+                correct: 0,
+                explanation: "GPT models are based on the Transformer architecture, specifically using the decoder part with attention mechanisms."
+            },
+            {
+                question: "What is 'fine-tuning' in AI?",
+                options: [
+                    "Adjusting pre-trained model for specific task",
+                    "Making small model adjustments",
+                    "Precise parameter tuning",
+                    "Model optimization"
+                ],
+                correct: 0,
+                explanation: "Fine-tuning involves taking a pre-trained model and training it further on a specific task with task-specific data."
+            },
+            {
+                question: "What is 'prompt engineering'?",
+                options: [
+                    "Designing effective prompts for AI models",
+                    "Engineering prompt responses",
+                    "Creating prompt templates",
+                    "Optimizing prompt delivery"
+                ],
+                correct: 0,
+                explanation: "Prompt engineering involves designing and optimizing input prompts to get desired outputs from AI models like ChatGPT."
+            },
+            {
+                question: "What is 'zero-shot learning'?",
+                options: [
+                    "Model performing tasks without specific training",
+                    "Learning without examples",
+                    "Zero training time",
+                    "Instant learning"
+                ],
+                correct: 0,
+                explanation: "Zero-shot learning refers to a model's ability to perform tasks it wasn't explicitly trained on, using its general knowledge."
+            },
+            {
+                question: "What is 'few-shot learning'?",
+                options: [
+                    "Learning from very few examples",
+                    "Quick learning",
+                    "Limited data learning",
+                    "Fast training"
+                ],
+                correct: 0,
+                explanation: "Few-shot learning involves training models to learn from a very small number of examples, often just a handful."
+            },
+            {
+                question: "What is 'multimodal AI'?",
+                options: [
+                    "AI processing multiple types of data",
+                    "Multiple AI models working together",
+                    "AI with multiple modes",
+                    "Versatile AI systems"
+                ],
+                correct: 0,
+                explanation: "Multimodal AI can process and understand multiple types of data inputs, such as text, images, and audio simultaneously."
+            },
+            {
+                question: "What is 'AI ethics' concerned with?",
+                options: [
+                    "Responsible development and use of AI",
+                    "Making AI more ethical",
+                    "Teaching ethics to AI",
+                    "AI moral reasoning"
+                ],
+                correct: 0,
+                explanation: "AI ethics focuses on the moral implications and responsible development of artificial intelligence technologies."
+            },
+            {
+                question: "What is 'explainable AI' (XAI)?",
+                options: [
+                    "AI systems that can explain their decisions",
+                    "Simple AI explanations",
+                    "AI transparency",
+                    "Understandable AI"
+                ],
+                correct: 0,
+                explanation: "Explainable AI refers to methods and techniques that make AI model decisions understandable to humans."
+            },
+            {
+                question: "What is 'federated learning'?",
+                options: [
+                    "Training models on decentralized data",
+                    "Learning federated systems",
+                    "Distributed AI learning",
+                    "Collaborative model training"
+                ],
+                correct: 0,
+                explanation: "Federated learning trains algorithms across multiple decentralized devices holding local data samples without exchanging them."
+            },
+            {
+                question: "What is 'edge AI'?",
+                options: [
+                    "AI running on local devices",
+                    "Cutting-edge AI",
+                    "Advanced AI systems",
+                    "AI at the network edge"
+                ],
+                correct: 0,
+                explanation: "Edge AI involves running AI algorithms locally on hardware devices rather than in the cloud."
+            },
+            {
+                question: "What is 'AGI' (Artificial General Intelligence)?",
+                options: [
+                    "AI with human-level general intelligence",
+                    "Advanced general AI",
+                    "All-purpose AI",
+                    "General purpose AI"
+                ],
+                correct: 0,
+                explanation: "AGI refers to AI systems that possess the ability to understand, learn, and apply knowledge across a wide range of tasks at human level."
+            },
+            {
+                question: "What is the 'Turing Test'?",
+                options: [
+                    "Test of machine's ability to exhibit intelligent behavior",
+                    "Test of computing power",
+                    "AI capability test",
+                    "Machine intelligence measurement"
+                ],
+                correct: 0,
+                explanation: "The Turing Test, proposed by Alan Turing, evaluates a machine's ability to exhibit intelligent behavior equivalent to a human."
+            },
+            {
+                question: "What is 'Moore's Law' in computing?",
+                options: [
+                    "Computing power doubles every two years",
+                    "AI progress accelerates",
+                    "Data grows exponentially",
+                    "Chip size decreases"
+                ],
+                correct: 0,
+                explanation: "Moore's Law observes that the number of transistors on a microchip doubles about every two years, though the pace has slowed."
+            },
+            {
+                question: "What is 'singularity' in AI context?",
+                options: [
+                    "Hypothetical point where AI surpasses human intelligence",
+                    "Unique AI development",
+                    "Breakthrough moment",
+                    "AI dominance point"
+                ],
+                correct: 0,
+                explanation: "The technological singularity refers to a hypothetical future point where AI becomes capable of recursive self-improvement, leading to rapid advancement beyond human control."
             }
         ];
 
@@ -951,11 +1310,13 @@
         let userAnswers = new Array(questions.length).fill(null);
         let testStartTime = Date.now();
         let score = 0;
+        let timerInterval;
 
         // DOM Elements
         const questionsContainer = document.getElementById('questionsContainer');
         const progressBar = document.getElementById('progressBar');
         const progressText = document.getElementById('progressText');
+        const timerDisplay = document.getElementById('timerDisplay');
         const prevButton = document.getElementById('prevButton');
         const nextButton = document.getElementById('nextButton');
         const resultsContainer = document.getElementById('resultsContainer');
@@ -965,6 +1326,7 @@
         const correctAnswersEl = document.getElementById('correctAnswers');
         const accuracyEl = document.getElementById('accuracy');
         const completionTimeEl = document.getElementById('completionTime');
+        const scoreEl = document.getElementById('score');
         const feedbackTitle = document.getElementById('feedbackTitle');
         const feedbackText = document.getElementById('feedbackText');
         const feedbackSection = document.getElementById('feedbackSection');
@@ -976,6 +1338,7 @@
             updateProgress();
             updateNavigation();
             showQuestion(currentQuestion);
+            startTimer();
             
             // Add current year to license notice
             const yearElements = document.querySelectorAll('.license-notice p');
@@ -1069,8 +1432,21 @@
             nextButton.disabled = userAnswers[currentQuestion] === null;
         }
 
+        // Start timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                const seconds = Math.floor((Date.now() - testStartTime) / 1000);
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                timerDisplay.textContent = `Time: ${minutes}m ${remainingSeconds}s`;
+            }, 1000);
+        }
+
         // Calculate results
         function calculateResults() {
+            clearInterval(timerInterval);
+            
+            // Calculate score
             score = 0;
             userAnswers.forEach((answer, index) => {
                 if (answer === questions[index].correct) {
@@ -1079,13 +1455,16 @@
             });
             
             const percentage = Math.round((score / questions.length) * 100);
-            const timeTaken = Math.round((Date.now() - testStartTime) / 1000);
+            const timeTaken = Math.floor((Date.now() - testStartTime) / 1000);
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
             
             // Update results display
             scoreValue.textContent = `${percentage}%`;
-            correctAnswersEl.textContent = `${score} / ${questions.length}`;
+            correctAnswersEl.textContent = score;
             accuracyEl.textContent = `${percentage}%`;
-            completionTimeEl.textContent = `${timeTaken} seconds`;
+            completionTimeEl.textContent = `${minutes > 0 ? minutes + 'm ' : ''}${seconds}s`;
+            scoreEl.textContent = `${score}/50`;
             
             // Set score circle class and description
             let description = '';
@@ -1093,31 +1472,41 @@
             
             if (percentage >= 90) {
                 scoreCircle.className = 'score-circle excellent';
-                description = 'Excellent! You have a strong understanding of AI concepts. You\'re ready to dive deeper into advanced topics.';
-                title = 'AI Expert Level';
-            } else if (percentage >= 75) {
+                description = 'Outstanding! You have expert-level knowledge of AI concepts. Your understanding spans from fundamentals to advanced topics.';
+                title = 'AI Expert';
+            } else if (percentage >= 80) {
                 scoreCircle.className = 'score-circle good';
-                description = 'Great job! You have a good grasp of AI fundamentals. Keep learning to become an AI pro.';
-                title = 'Solid Understanding';
+                description = 'Excellent! You have a strong grasp of AI concepts. Continue exploring specialized areas to deepen your expertise.';
+                title = 'AI Professional';
+            } else if (percentage >= 70) {
+                scoreCircle.className = 'score-circle good';
+                description = 'Great job! You have solid understanding of core AI concepts. Focus on areas where you scored lower to become an expert.';
+                title = 'AI Enthusiast';
             } else if (percentage >= 60) {
                 scoreCircle.className = 'score-circle average';
-                description = 'Good start! You know the basics but could benefit from more learning. The course will help fill gaps.';
-                title = 'Developing Knowledge';
+                description = 'Good foundation! You understand basic AI concepts well. The course will help you build on this knowledge.';
+                title = 'AI Learner';
+            } else if (percentage >= 50) {
+                scoreCircle.className = 'score-circle average';
+                description = 'You have a basic understanding of AI. This is a great starting point for your learning journey.';
+                title = 'AI Beginner';
             } else {
                 scoreCircle.className = 'score-circle needs-improvement';
-                description = 'Don\'t worry! AI can be complex. This is the perfect starting point for your learning journey.';
-                title = 'Beginner Level';
+                description = 'Don\'t worry! AI is a complex field. This test shows where you need to focus your learning efforts.';
+                title = 'Starting Your AI Journey';
             }
             
             scoreDescription.textContent = description;
             feedbackTitle.textContent = title;
-            feedbackText.textContent = 'Based on your results, we recommend starting with the course to build a solid foundation in AI concepts. All content is open source and freely available under MIT License.';
+            feedbackText.textContent = `You answered ${score} out of 50 questions correctly. Based on your performance, we recommend focusing on the course modules to strengthen your AI knowledge.`;
             
             // Show results
             questionsContainer.style.display = 'none';
             document.querySelector('.navigation-buttons').style.display = 'none';
-            document.querySelector('.early-access').style.display = 'none';
             resultsContainer.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
         }
 
         // Event Listeners
@@ -1157,12 +1546,12 @@
             
             questionsContainer.style.display = 'block';
             document.querySelector('.navigation-buttons').style.display = 'flex';
-            document.querySelector('.early-access').style.display = 'block';
             resultsContainer.classList.remove('active');
             
             showQuestion(currentQuestion);
             updateProgress();
             updateNavigation();
+            startTimer();
         });
 
         // Keyboard navigation
@@ -1176,32 +1565,15 @@
             } else if (e.key >= '1' && e.key <= '4') {
                 const optionIndex = parseInt(e.key) - 1;
                 selectOption(currentQuestion, optionIndex);
+            } else if (e.key === 'Enter' && currentQuestion === questions.length - 1) {
+                if (!nextButton.disabled) {
+                    nextButton.click();
+                }
             }
         });
 
         // Initialize test on load
         document.addEventListener('DOMContentLoaded', initTest);
-
-        // Add timer display
-        const timerDisplay = document.createElement('div');
-        timerDisplay.className = 'progress-text';
-        timerDisplay.style.fontSize = '12px';
-        timerDisplay.style.marginTop = '-20px';
-        timerDisplay.textContent = 'Time: 0s';
-        document.querySelector('.test-header').appendChild(timerDisplay);
-
-        // Update timer every second
-        const timerInterval = setInterval(() => {
-            const seconds = Math.floor((Date.now() - testStartTime) / 1000);
-            timerDisplay.textContent = `Time: ${seconds}s`;
-        }, 1000);
-
-        // Stop timer when test is completed
-        const originalCalculateResults = calculateResults;
-        calculateResults = function() {
-            clearInterval(timerInterval);
-            originalCalculateResults();
-        };
     </script>
 </body>
 </html>
