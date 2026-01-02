@@ -1675,40 +1675,68 @@
                 downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
                 downloadBtn.disabled = true;
 
-                // Store original styles
-                const originalBackground = certificateElement.style.background;
-                const originalBoxShadow = certificateElement.style.boxShadow;
+                // Create a clone of the certificate for capture
+                const clone = certificateElement.cloneNode(true);
 
-                // Set print-friendly background for download
-                certificateElement.style.background = '#ffffff';
-                certificateElement.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+                // Apply styles to the clone for consistent rendering
+                clone.style.backgroundColor = '#ffffff';
+                clone.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)';
+                clone.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+                clone.style.border = '2px solid var(--accent-color)';
+                clone.style.position = 'relative';
+                clone.style.width = certificateElement.offsetWidth + 'px';
+                clone.style.height = certificateElement.offsetHeight + 'px';
 
-                // Force white background for all elements in the certificate
-                const allElements = certificateElement.querySelectorAll('*');
+                // Apply white background to all child elements
+                const allElements = clone.querySelectorAll('*');
                 allElements.forEach(el => {
-                    if (el.style && el.style.backgroundColor && el.style.backgroundColor.includes('var(')) {
-                        el.style.backgroundColor = '#ffffff';
+                    if (el.style) {
+                        // Preserve original colors but ensure background is white
+                        if (el.classList.contains('course-name')) {
+                            el.style.backgroundColor = 'rgba(3, 102, 214, 0.05)';
+                        } else if (el.classList.contains('description')) {
+                            el.style.backgroundColor = '#f8f9fa';
+                        } else if (el.classList.contains('id-value')) {
+                            el.style.backgroundColor = 'rgba(3, 102, 214, 0.05)';
+                        } else if (el.classList.contains('student-name')) {
+                            el.style.color = '#222';
+                            el.style.backgroundColor = 'transparent';
+                        } else if (el.classList.contains('certificate-title')) {
+                            el.style.color = 'var(--accent-color)';
+                        } else if (el.classList.contains('seal')) {
+                            el.style.background = 'radial-gradient(circle, #ffd700 0%, #ffed4e 100%)';
+                        } else {
+                            el.style.backgroundColor = el.style.backgroundColor.includes('var(') ? '#ffffff' : el.style.backgroundColor;
+                        }
                     }
                 });
 
+                // Append clone to body temporarily
+                clone.style.position = 'fixed';
+                clone.style.left = '-9999px';
+                clone.style.top = '0';
+                clone.style.zIndex = '-1000';
+                document.body.appendChild(clone);
+
                 // Generate canvas with high quality
-                html2canvas(certificateElement, {
+                html2canvas(clone, {
                     scale: 3,
                     backgroundColor: '#ffffff',
                     useCORS: true,
                     logging: false,
                     allowTaint: true,
-                    width: certificateElement.offsetWidth,
-                    height: certificateElement.offsetHeight,
-                    windowWidth: certificateElement.offsetWidth,
-                    windowHeight: certificateElement.offsetHeight,
+                    width: clone.offsetWidth,
+                    height: clone.offsetHeight,
+                    windowWidth: clone.offsetWidth,
+                    windowHeight: clone.offsetHeight,
                     onclone: function(clonedDoc) {
-                        // Make sure cloned version also has white background
-                        const clonedCert = clonedDoc.getElementById('certificate');
-                        if (clonedCert) {
-                            clonedCert.style.background = '#ffffff';
-                            clonedCert.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
-                        }
+                        // Make sure all text is visible
+                        const textElements = clonedDoc.querySelectorAll('*');
+                        textElements.forEach(el => {
+                            if (el.style) {
+                                el.style.color = getComputedStyle(el).color;
+                            }
+                        });
                     }
                 }).then(canvas => {
                     // Create download link
@@ -1723,15 +1751,8 @@
                     link.click();
                     document.body.removeChild(link);
 
-                    // Restore original styles
-                    certificateElement.style.background = originalBackground;
-                    certificateElement.style.boxShadow = originalBoxShadow;
-
-                    allElements.forEach(el => {
-                        if (el.style && el.style.backgroundColor === '#ffffff') {
-                            el.style.backgroundColor = '';
-                        }
-                    });
+                    // Remove clone
+                    document.body.removeChild(clone);
 
                     // Success message
                     showNotification('Certificate downloaded successfully!', 'success');
@@ -1739,9 +1760,10 @@
                     console.error('Error generating certificate:', error);
                     showNotification('Error generating certificate. Please try again.', 'error');
 
-                    // Restore original styles on error
-                    certificateElement.style.background = originalBackground;
-                    certificateElement.style.boxShadow = originalBoxShadow;
+                    // Remove clone on error
+                    if (clone.parentNode) {
+                        document.body.removeChild(clone);
+                    }
                 }).finally(() => {
                     // Restore button
                     downloadBtn.innerHTML = originalText;
