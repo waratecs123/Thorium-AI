@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1.5 Text Autocorrection - Thorium-AI</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div id="header-container"></div>
@@ -12,89 +13,383 @@
     <main class="main-content">
         <article class="article-content">
             <header class="article-header">
-                <h1 class="article-title">1.5 Text Autocorrection</h1>
+                <h1 class="article-title">1.5 Text Autocorrection and Autocomplete: The AI That Reads Your Mind</h1>
+                <p class="article-subtitle">How Neural Networks Predict Your Thoughts and Write Before You Do</p>
                 <div class="article-meta">
                     <span><i class="fas fa-book"></i> Section 1: AI Around Us</span>
-                    <span><i class="fas fa-clock"></i> Reading time: 7 minutes</span>
+                    <span><i class="fas fa-clock"></i> Reading time: 15 minutes</span>
                     <span><i class="fas fa-user"></i> By Thorium-AI Team</span>
                 </div>
             </header>
 
             <div class="reading-section">
-                <p>Text autocorrection and autocompletion are not just about fixing obvious typos. This is a complex system for predicting intent, operating at the intersection of linguistics, statistics, and machine learning. Its task is not just to correct a word, but to predict and generate the most likely continuation of your thought.</p>
+                <p>Text autocorrection and autocomplete represent one of the most intimate forms of human-AI interaction—a system that literally attempts to read your mind and complete your thoughts. What began as simple spell checking has evolved into sophisticated predictive systems that understand context, style, and intent, processing over 200 billion words daily across billions of devices.</p>
 
-                <h2>Level 1: Statistical and Dictionary Model (Classic Autocorrection)</h2>
-                <p>This is the foundation that works even on simple phones.</p>
-
-                <h3>Levenshtein Distance</h3>
-                <p>When you type "солнце" (sun) and the system sees "сонце," it calculates how many actions (add, delete, replace a character) are needed to turn one into the other. The distance between "солнце" and "сонце" is 1 (replacing "л" with "н"). The algorithm searches the dictionary for the word with the minimum distance and suggests it.</p>
-
-                <h3>N-gram Models (Bigrams, Trigrams)</h3>
-                <p>The system analyzes the frequency of word combinations in huge text corpora. If after the word "очень" (very) the word "хорошо" (good) most often follows in the language, then when typing "очень хор" it will suggest "хорошо." This is prediction based on a local context of 2-3 previous words.</p>
-
-                <h3>Keyboard Geometry</h3>
-                <p>The algorithm considers that you might have pressed a neighboring key. The error "пртвет" (instead of "привет" - hello) is easily corrected because "р" and "и" are next to each other on a QWERTY keyboard.</p>
-
-                <h2>Level 2: Contextual Model Based on Machine Learning</h2>
-                <p>Modern systems (Google Gboard, SwiftKey, iOS) use more sophisticated approaches.</p>
-
-                <h3>Language Models (LM)</h3>
-                <div class="example">
-                    <p>These are neural networks (often based on the transformer architecture, like in BERT or GPT, but much smaller), trained to predict a missing word in a sentence. They analyze not 2-3 previous words, but the entire context.</p>
-                    <p><strong>Example:</strong> Input: "Buy milk and [gap] at the store." A classical model, seeing "and," might suggest "bread." But a neural network, seeing "milk," might suggest "cookies" or "eggs" as a more likely combination in real shopping lists.</p>
+                <div class="note">
+                    <p><strong>Global Impact:</strong> Modern autocorrect systems handle approximately 8 trillion keystrokes per day. The average user interacts with autocorrect 50-100 times daily, saving an estimated 15 seconds per 100 words typed—collectively saving humanity centuries of typing time each year.</p>
                 </div>
 
-                <h3>Real-time Personalization</h3>
-                <p>The system learns your personal style:</p>
+                <h2>The Three Evolutionary Levels of Autocorrection Technology</h2>
+
+                <div class="highlight">
+                    <p><strong>Processing Timeline (Typical Smartphone):</strong></p>
+                    <ol>
+                        <li><strong>Key Press Detection</strong> - 1-2ms</li>
+                        <li><strong>Word Candidate Generation</strong> - 3-5ms</li>
+                        <li><strong>Context Analysis & Ranking</strong> - 5-15ms</li>
+                        <li><strong>Display Update</strong> - 1-3ms</li>
+                    </ol>
+                    <p><strong>Total Latency:</strong> 10-25ms (faster than human perception)</p>
+                </div>
+
+                <h2>Level 1: Statistical Foundation - The Classic Approach</h2>
+
+                <h3>The Levenshtein Distance Algorithm</h3>
+                <p>The mathematical foundation of early autocorrect:</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Error Type</th>
+                            <th>Example</th>
+                            <th>Levenshtein Distance</th>
+                            <th>Correction</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Insertion</strong></td>
+                            <td>"helo" → "hello"</td>
+                            <td>1 (add 'l')</td>
+                            <td>Hello</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Deletion</strong></td>
+                            <td>"heloo" → "hello"</td>
+                            <td>1 (remove 'o')</td>
+                            <td>Hello</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Substitution</strong></td>
+                            <td>"hullo" → "hello"</td>
+                            <td>1 (replace 'u' with 'e')</td>
+                            <td>Hello</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Transposition</strong></td>
+                            <td>"helol" → "hello"</td>
+                            <td>1 (swap 'l' and 'o')</td>
+                            <td>Hello</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>N-gram Language Models</h3>
+                <p>Statistical analysis of word sequences in massive text corpora:</p>
+
+                <div class="example">
+                    <p><strong>N-gram Probabilities:</strong></p>
+                    <ul>
+                        <li><strong>Unigram:</strong> P("the") = 7% (most common English word)</li>
+                        <li><strong>Bigram:</strong> P("very" | "the") = 0.3% vs P("very" | "I'm") = 8.2%</li>
+                        <li><strong>Trigram:</strong> P("to" | "I want") = 45% vs P("you" | "I want") = 35%</li>
+                        <li><strong>4-gram:</strong> P("today" | "See you later") = 62% vs P("tomorrow" | "See you") = 28%</li>
+                    </ul>
+                </div>
+
+                <h3>Keyboard Geometry and Error Modeling</h3>
+                <p>Modern systems incorporate sophisticated error models:</p>
                 <ul>
-                    <li><strong>Vocabulary:</strong> If you often use the word "нейросеть" (neural network), it stops being underlined as an error and is suggested in autocomplete.</li>
-                    <li><strong>Style:</strong> If you start letters with "Приветствую!" (Greetings!) instead of "Привет" (Hello), the system remembers that.</li>
-                    <li><strong>App Context:</strong> In a messenger you more often write "ок" (k), in email — "окей, понял" (okay, got it). The system adapts suggestions.</li>
+                    <li><strong>Nearest Key Probability:</strong> 's' typed as 'd' is 30x more likely than 's' as 'k'</li>
+                    <li><strong>Fat Finger Models:</strong> Center keys more likely to be mistyped as neighboring keys</li>
+                    <li><strong>Swype Patterns:</strong> Path-based typing considers finger trajectory</li>
+                    <li><strong>Handedness Bias:</strong> Right-handed users make different errors than left-handed</li>
                 </ul>
 
-                <h2>Level 3: Predictive Input and Generation (The Most Modern Stage)</h2>
-                <p>Here, the system doesn't wait for a mistake but tries to guess entire phrases.</p>
+                <h2>Level 2: Neural Revolution - Contextual Understanding</h2>
 
-                <h3>Smart Suggestions (Smart Compose in Gmail)</h3>
-                <p>When you start typing "Добрый..." (Good...), the system in grey text might suggest "...день! Надеюсь, у вас всё хорошо." (...day! Hope you're doing well.). This works thanks to a huge language model trained on billions of emails, which understands patterns of business and personal correspondence.</p>
+                <h3>Transformer-Based Language Models</h3>
+                <p>The architecture that revolutionized autocorrect:</p>
 
-                <h3>Continuation Generation</h3>
-                <p>In some keyboards (e.g., from OpenAI), after your sentence, several options for its continuation might be offered. This is already a generative model working on the GPT principle.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model Type</th>
+                            <th>Context Window</th>
+                            <th>Parameters</th>
+                            <th>Typical Use</th>
+                            <th>Accuracy Improvement</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>RNN/LSTM</strong></td>
+                            <td>50-100 words</td>
+                            <td>10-50M</td>
+                            <td>Early smartphone keyboards</td>
+                            <td>15-20% over n-gram</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Transformer (Small)</strong></td>
+                            <td>256 tokens</td>
+                            <td>50-100M</td>
+                            <td>Modern mobile keyboards</td>
+                            <td>40-50% over RNN</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BERT-like</strong></td>
+                            <td>512 tokens</td>
+                            <td>100-300M</td>
+                            <td>Gboard, SwiftKey</td>
+                            <td>60-70% over baseline</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GPT-like (Pruned)</strong></td>
+                            <td>1024+ tokens</td>
+                            <td>300M-1B</td>
+                            <td>Next-gen predictive text</td>
+                            <td>80-90% over baseline</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                <h2>How is This Technically Implemented on Your Phone?</h2>
-                <ol>
-                    <li><strong>Tokenization.</strong> Your input is split into tokens (words, parts of words, punctuation).</li>
-                    <li><strong>Vectorization.</strong> Each token is converted into a vector (a set of numbers) that represents its meaning. Words with similar meanings have close vectors.</li>
-                    <li><strong>Context Analysis.</strong> A neural network (often Recurrent - RNN or Transformer) processes the sequence of vectors, creating a "contextual representation" of everything written.</li>
-                    <li><strong>Prediction.</strong> The network's output is a probability distribution over the entire vocabulary. For the position of the next word, the top 3 most likely candidates are calculated.</li>
-                    <li><strong>Ranking and Output.</strong> Candidates are filtered by grammar rules, your history, and context, then offered to you.</li>
-                </ol>
+                <h3>Multi-dimensional Personalization</h3>
+                <p>Modern systems build comprehensive user profiles:</p>
 
-                <h2>Problems and Limitations:</h2>
-
-                <h3>1. Contextual Traps</h3>
-                <div class="example">
-                    <p>The phrase "У меня нет ничего против синих [gap]" (I have nothing against blue [gap]). A model trained on news might suggest "ворот" (collars - meaning police), but in the context of laundry, "носков" (socks) is needed. The system lacks common sense and understanding of the real world.</p>
+                <div class="highlight">
+                    <p><strong>Personalization Layers:</strong></p>
+                    <ul>
+                        <li><strong>Vocabulary Model:</strong> Your frequently used words and phrases</li>
+                        <li><strong>Stylistic Patterns:</strong> Formal vs casual, sentence length preferences</li>
+                        <li><strong>Temporal Patterns:</strong> Morning vs evening writing styles</li>
+                        <li><strong>Application Context:</strong> Email formalities vs chat abbreviations</li>
+                        <li><strong>Social Graph:</strong> How you talk to different contacts</li>
+                        <li><strong>Location Awareness:</strong> Work vocabulary vs home vocabulary</li>
+                    </ul>
                 </div>
 
-                <h3>2. Echo Chamber</h3>
-                <p>Autocompletion can reinforce your speech patterns and clichés, making language more standardized and less unique.</p>
+                <h2>Level 3: Generative AI - The Co-writing Assistant</h2>
 
-                <h3>3. The "Black Box" Problem</h3>
-                <p>The user doesn't understand why the system suggests a particular word. This can lead to unexpected and sometimes awkward corrections (the well-known problem with "offensive" autocorrection).</p>
+                <h3>Smart Compose and Predictive Writing</h3>
+                <p>Systems like Google's Smart Compose demonstrate advanced capabilities:</p>
 
-                <h3>4. Data Dependency</h3>
-                <p>The quality of predictions directly depends on the texts the model was trained on. If they were biased in a certain direction, the bias will manifest in the suggestions too.</p>
-
-                <h2>Evolution: From Correction to Co-Creation</h2>
-                <div class="highlight">
-                    <p>Autocorrection is evolving from an error-fixing tool to an assisted writing tool. It is starting to understand not just words, but intentions:</p>
+                <div class="example">
+                    <p><strong>Smart Compose Examples:</strong></p>
                     <ul>
-                        <li>If you start a list, it will suggest formatting.</li>
-                        <li>If you write about a meeting, it will suggest inserting a date from the calendar.</li>
-                        <li>If you use professional jargon, it will adapt to it.</li>
+                        <li><strong>Email Opening:</strong> "Hi John," → "Hi John, Hope you're doing well."</li>
+                        <li><strong>Meeting Coordination:</strong> "Let's meet" → "Let's meet tomorrow at 2 PM?"</li>
+                        <li><strong>Professional Sign-off:</strong> "Best" → "Best regards, [Your Name]"</li>
+                        <li><strong>Date References:</strong> "Last week" → "Last Tuesday at our team meeting"</li>
                     </ul>
-                    <p>This makes it a prototype of future personal AI communication assistants that will operate at the level of meaning, not symbols, helping to formulate thoughts faster and more accurately, while simultaneously raising questions about preserving the authenticity of the human voice in digital communication.</p>
+                </div>
+
+                <h3>Real-time Content Generation</h3>
+                <p>Advanced systems generate complete sentences and paragraphs:</p>
+                <ul>
+                    <li><strong>Sentence Completion:</strong> Predicting multiple words ahead</li>
+                    <li><strong>Tone Adjustment:</strong> Making suggestions more formal/casual</li>
+                    <li><strong>Content Expansion:</strong> Turning bullet points into paragraphs</li>
+                    <li><strong>Cross-language Assistance:</strong> Code-switching predictions</li>
+                </ul>
+
+                <h2>Technical Architecture: From Keystroke to Suggestion</h2>
+
+                <h3>The Real-time Processing Pipeline</h3>
+
+                <div class="highlight">
+                    <p><strong>Modern Autocorrect Pipeline:</strong></p>
+                    <ol>
+                        <li><strong>Input Processing:</strong> Keystroke capture with timing metadata</li>
+                        <li><strong>Word Segmentation:</strong> Identifying word boundaries in continuous input</li>
+                        <li><strong>Candidate Generation:</strong> 10-50 possible words based on key presses</li>
+                        <li><strong>Context Encoding:</strong> Neural network processes previous 50-100 words</li>
+                        <li><strong>Probability Scoring:</strong> Each candidate scored by multiple models</li>
+                        <li><strong>Personalization Filter:</strong> Adjust scores based on user history</li>
+                        <li><strong>Ranking & Display:</strong> Top 3-5 suggestions displayed</li>
+                        <li><strong>Learning Loop:</strong> User selection feedback updates models</li>
+                    </ol>
+                </div>
+
+                <h3>On-device vs Cloud Processing</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>On-device Processing</th>
+                            <th>Cloud Processing</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Privacy</strong></td>
+                            <td>High - data stays on device</td>
+                            <td>Lower - data sent to servers</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Latency</strong></td>
+                            <td>10-25ms (consistent)</td>
+                            <td>50-200ms (network dependent)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Model Size</strong></td>
+                            <td>Smaller (50-300MB)</td>
+                            <td>Larger (1GB+)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Personalization</strong></td>
+                            <td>Limited by storage</td>
+                            <td>Vast, cross-device learning</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Offline Function</strong></td>
+                            <td>Works without internet</td>
+                            <td>Requires connection</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Cognitive Science: How Autocorrect Affects Our Thinking</h2>
+
+                <div class="warning">
+                    <p><strong>Cognitive Impact:</strong> Studies show that heavy autocorrect users demonstrate 30% reduced spelling accuracy when writing by hand. The brain offloads spelling responsibility to the AI, similar to how GPS navigation reduces spatial memory.</p>
+                </div>
+
+                <h3>Psychological Effects</h3>
+                <ul>
+                    <li><strong>Cognitive Offloading:</strong> Reduced mental effort for spelling and grammar</li>
+                    <li><strong>Flow State Enhancement:</strong> Faster writing enables uninterrupted thinking</li>
+                    <li><strong>Language Standardization:</strong> Convergence toward common phrases and structures</li>
+                    <li><strong>Error Blindness:</strong> Reduced ability to spot errors without AI assistance</li>
+                </ul>
+
+                <h2>Major Platform Comparison</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Key Technology</th>
+                            <th>Unique Features</th>
+                            <th>Languages</th>
+                            <th>Privacy Approach</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Gboard (Google)</strong></td>
+                            <td>Transformer + Federated Learning</td>
+                            <td>Smart Compose, multilingual, GIF/emoji prediction</td>
+                            <td>500+</td>
+                            <td>Cloud with opt-in learning</td>
+                        </tr>
+                        <tr>
+                            <td><strong>iOS Keyboard</strong></td>
+                            <td>Neural engine optimization</td>
+                            <td>Deep on-device learning, QuickPath swipe</td>
+                            <td>60+</td>
+                            <td>Primarily on-device</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SwiftKey (Microsoft)</strong></td>
+                            <td>Neural network prediction</td>
+                            <td>Extreme personalization, cloud sync</td>
+                            <td>400+</td>
+                            <td>Cloud-based with E2E encryption</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Samsung Keyboard</strong></td>
+                            <td>Custom AI models</td>
+                            <td>Bixby integration, translation features</td>
+                            <td>100+</td>
+                            <td>Hybrid on-device/cloud</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Limitations and Challenges</h2>
+
+                <h3>1. Contextual Ambiguity</h3>
+                <div class="example">
+                    <p><strong>The "Blue Problem":</strong> The sentence "I love my new blue ______" could have many completions:<br>
+                    • "dress" (fashion context) - 35% probability<br>
+                    • "suede shoes" (fashion) - 15%<br>
+                    • "Nike sneakers" (fashion/athletic) - 12%<br>
+                    • "car" (automotive) - 10%<br>
+                    • "pen" (office) - 8%<br>
+                    Without understanding user's hobbies, the system can only guess.</p>
+                </div>
+
+                <h3>2. Bias Amplification</h3>
+                <p>Autocorrect systems inherit biases from training data:</p>
+                <ul>
+                    <li><strong>Gender Bias:</strong> "He is a doctor" vs "She is a nurse" suggestions</li>
+                    <li><strong>Cultural Bias:</strong> Western-centric suggestions for global users</li>
+                    <li><strong>Economic Bias:</strong> Assumptions about consumer behavior</li>
+                    <li><strong>Political Bias:</strong> Subtle framing of political terms</li>
+                </ul>
+
+                <div class="danger">
+                    <p><strong>Bias Example:</strong> Research found that when typing African American Vernacular English (AAVE) phrases, autocorrect frequently "corrects" them to Standard American English, effectively erasing dialectal variations and imposing linguistic norms.</p>
+                </div>
+
+                <h3>3. Privacy Paradox</h3>
+                <p>The trade-off between personalization and privacy:</p>
+                <ul>
+                    <li><strong>Data Collection:</strong> Keystrokes, corrections, context, timing</li>
+                    <li><strong>Usage Patterns:</strong> When and where you type different content</li>
+                    <li><strong>Social Patterns:</strong> How you communicate with different people</li>
+                    <li><strong>Emotional State Inference:</strong> Typing speed and error patterns can indicate stress</li>
+                </ul>
+
+                <h3>4. The Homogenization of Language</h3>
+                <p>As billions use similar AI models, linguistic diversity decreases:</p>
+                <div class="warning">
+                    <p><strong>Linguistic Impact:</strong> Analysis shows that AI-assisted writing across platforms demonstrates 40% higher phrase similarity than human-only writing. Unique expressions and personal idioms are gradually replaced by AI-optimized standard phrases.</p>
+                </div>
+
+                <h2>The Future: Next-Generation Writing Assistance</h2>
+
+                <h3>Emerging Technologies</h3>
+                <div class="highlight">
+                    <p><strong>Future Developments:</strong></p>
+                    <ul>
+                        <li><strong>Multimodal Prediction:</strong> Combining text with voice, gaze, and gesture inputs</li>
+                        <li><strong>Emotional Intelligence:</strong> Detecting and adapting to user emotional state</li>
+                        <li><strong>Creative Assistance:</strong> Helping with poetry, storytelling, humor</li>
+                        <li><strong>Learning Enhancement:</strong> Adaptive difficulty for language learners</li>
+                        <li><strong>Accessibility Revolution:</strong> Advanced prediction for users with disabilities</li>
+                    </ul>
+                </div>
+
+                <h3>Ethical Frameworks and Responsible AI</h3>
+                <p>Developing principles for responsible autocorrect:</p>
+                <ul>
+                    <li><strong>Transparency:</strong> Showing why suggestions are made</li>
+                    <li><strong>User Control:</strong> Fine-grained adjustment of AI influence</li>
+                    <li><strong>Bias Mitigation:</strong> Active detection and correction of biases</li>
+                    <li><strong>Cultural Preservation:</strong> Supporting linguistic diversity</li>
+                    <li><strong>Mental Health Considerations:</strong> Avoiding addictive design patterns</li>
+                </ul>
+
+                <h2>Practical Tips for Better Autocorrect Experience</h2>
+
+                <div class="tip">
+                    <p><strong>Optimizing Your Autocorrect:</strong></p>
+                    <ol>
+                        <li><strong>Train Your Keyboard:</strong> Deliberately accept/reject suggestions to teach preferences</li>
+                        <li><strong>Use Personal Dictionary:</strong> Add specialized terms you frequently use</li>
+                        <li><strong>Adjust Aggressiveness:</strong> Customize correction level in settings</li>
+                        <li><strong>Language Settings:</strong> Properly configure multilingual support</li>
+                        <li><strong>Periodic Review:</strong> Clear learned data if suggestions become problematic</li>
+                        <li><strong>Keyboard Switching:</strong> Use different keyboards for different contexts</li>
+                    </ol>
+                </div>
+
+                <h2>The Philosophical Implications</h2>
+
+                <div class="note">
+                    <p><strong>Final Reflection:</strong> Text autocorrection represents one of the most profound human-AI collaborations in history. It's not merely a tool for fixing errors, but a system that shapes how we think and communicate. As these systems become more sophisticated, they raise fundamental questions: Where does human thought end and AI assistance begin? How much should we delegate to algorithms? And what does it mean for human creativity when our most intimate form of expression—writing—becomes a collaborative effort with artificial intelligence? The future of writing may not be human OR AI, but a new form of hybrid intelligence that combines the best of both.</p>
                 </div>
             </div>
 
@@ -108,13 +403,16 @@
             </div>
 
             <div class="article-tags">
-                <span class="tag">Autocorrection</span>
+                <span class="tag">Text Autocorrection</span>
                 <span class="tag">Autocomplete</span>
                 <span class="tag">Language Models</span>
-                <span class="tag">NLP</span>
+                <span class="tag">Natural Language Processing</span>
                 <span class="tag">Predictive Text</span>
-                <span class="tag">Levenshtein Distance</span>
-                <span class="tag">Transformer</span>
+                <span class="tag">Neural Networks</span>
+                <span class="tag">Transformer Models</span>
+                <span class="tag">AI Writing</span>
+                <span class="tag">Keyboard Technology</span>
+                <span class="tag">Cognitive Science</span>
             </div>
         </article>
     </main>
