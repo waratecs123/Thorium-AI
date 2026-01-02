@@ -1,58 +1,108 @@
-# Thorium-AI — AI for Everyone, No Code Needed
+# Thorium-AI — Practical AI Education for Everyone
 
-## https://thorium-ai.pages.dev/
+### [>> Website <<](https://thorium-ai.pages.dev/)
 
-**Thorium-AI** is a practical guide to Artificial Intelligence for everyday life. No code, no complex theories — just clear explanations of how AI already works around you. From TikTok algorithms to ChatGPT, from deepfakes to self-driving cars.
+**Thorium-AI** is a practical, code-free guide to understanding artificial intelligence in everyday life. No programming, no complex theories — just clear, actionable explanations of the AI that's already shaping your world. From YouTube recommendations to ChatGPT, from deepfakes to self-driving cars, Thorium-AI makes AI accessible to everyone.
 
 ## About the Project
 
-Thorium-AI offers a completely new approach to learning about artificial intelligence. We start with what you already experience every day: YouTube recommendations, TikTok algorithms, voice assistants, and autocorrect. Then we build up to ChatGPT, AI image generation, deepfakes, and beyond.
+Thorium-AI offers a fresh, hands‑on approach to AI education. We start with what you already experience daily — YouTube and TikTok algorithms, voice assistants, autocorrect — then build up to understanding ChatGPT, AI image generation, deepfakes, and beyond.
 
-This is **AI education for real life** — not for programmers.
+This is **AI education for real life, not just for programmers.**
 
-### Key Features
+## Key Features
 
-- **9 Practical Sections** — from "What is AI?" to "How can I use it in daily life?"
-- **40+ Real-World Topics** — from YouTube recommendations to neural network translators
-- **0 Lines of Code** — only explanations, examples, and step-by-step guides
-- **100% Practical Focus** — learn by doing, not just theory
+- **9 Practical Sections** — From "What is AI?" to "How can I use it in daily life?"
+- **40+ Real‑World Topics** — Covers everything from recommendation engines to neural network translators
+- **0 Lines of Code** — Only explanations, examples, and step‑by‑step guides
+- **100% Practical Focus** — Learn by doing, not just theory
+- **Interactive Knowledge Test** — 50‑question quiz to assess and reinforce learning
+- **Printable Certificate** — Recognize your AI literacy achievement
+- **Open Source** — Fully transparent and community‑driven
 
-### What You Will Learn
+## What You Will Learn
 
-- How AI already works in your daily apps
-- How ChatGPT really works and how to use it effectively
-- How to create AI images with tools like Midjourney
-- How to spot deepfakes and protect yourself from AI scams
-- How AI is changing industries, jobs, and creativity
+- How AI already powers your favorite apps and services
+- How ChatGPT works and how to use it effectively
+- How to create AI images with tools like Midjourney and DALL‑E
+- How to spot deepfakes and protect yourself from AI‑powered scams
+- How AI is transforming industries, jobs, and creative work
 - How to talk to AI with effective prompt engineering
-- The real dangers, ethics, and future of AI
+- The real dangers, ethical questions, and future of AI
 
-### Course Structure
+## Course Structure
 
 The course is organized into 9 practical sections:
 
 1. **AI Around Us** – Where AI already works in your daily life
-2. **ChatGPT and Neural Networks** – Understanding modern AI systems
-3. **AI Sensations** – Major AI breakthroughs and records
-4. **Future is Now** – AI applications already changing the world
-5. **Talking to AI** – Prompt engineering for everyone
-6. **AI for Hobbies** – Using AI for creativity and daily tasks
+2. **How AI Works (Simply)** – Fundamentals without mathematics
+3. **First Steps with AI** – Getting started with practical tools
+4. **ChatGPT & Neural Networks** – Understanding modern AI systems
+5. **AI for Hobbies** – Using AI for creativity and daily tasks
+6. **AI Sensations** – Major AI breakthroughs and records
 7. **Dangers and Ethics** – Risks and how to protect yourself
-8. **How AI Works (Simply)** – Fundamentals without mathematics
-9. **First Steps with AI** – Getting started with practical tools
+8. **Future is Now** – AI applications already changing the world
+9. **Talking to AI** – Prompt engineering for everyone
 
-### Project Philosophy
+Each section is filled with real‑world examples, simple analogies, and hands‑on exercises.
 
-This project is built on the belief that AI literacy is essential for everyone in today's world. Understanding AI should not require a computer science degree or technical background. Thorium-AI aims to provide clear, practical knowledge about the technology reshaping our world.
+## Getting Started
 
-### From the Creator
+To view the course locally:
 
-"I created Thorium-AI because I was tired of seeing people either fear AI or blindly trust it without understanding what it actually is. Most AI education is either too technical or too vague. This project fills that gap with practical, accessible education for everyone."
+1. Clone the repository:
+```bash
+git clone https://github.com/waratecs123/Thorium-AI.git
+```
 
-### Support
+2. Open `index.html` in your browser.
 
-This project is created and maintained by one person. Support helps keep Thorium-AI free and accessible to everyone. Contributions help cover time and resources needed to create and maintain this content.
+No installation, no dependencies — just open and start learning.
 
-### Start Learning
+## Take the AI Knowledge Test
 
-Begin your AI learning journey today with no prerequisites, no installations, and no cost. Just curiosity and a willingness to understand the technology shaping our future.
+Test your understanding with our interactive 50‑question quiz:
+
+1. Open `thorium-ai/test.html` in your browser
+2. Answer multiple‑choice questions covering all course topics
+3. Receive instant results and personalized feedback
+4. Identify areas for further learning
+
+## Earn Your Certificate
+
+After completing the test, generate your personalized AI Literacy Certificate:
+
+1. Open `thorium-ai/certificate.html`
+2. Enter your name and test score
+3. Download or print your certificate
+4. Share your achievement
+
+## From the Creator
+
+> "I created Thorium‑AI because I was tired of seeing people either fear AI or blindly trust it without understanding what it actually is. Most AI education is either too technical or too vague. There was nothing for regular people who just want to understand this technology that's changing everything."
+
+This project represents hundreds of hours of independent work, focused on accessibility and real‑world relevance.
+
+## Support the Project
+
+Thorium‑AI is created and maintained independently. Your support helps keep this resource free and accessible to everyone.
+
+- **[Donation Alerts](https://www.donationalerts.com/r/mobius_org)** – Direct financial support
+- **[Telegram Channel](https://t.me/mobius_org)** – Join the community
+- **Star on GitHub** – Show your support and help others find the project
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## Acknowledgments
+
+Thank you to everyone who has tested, shared, and supported Thorium‑AI. Special thanks to the open‑source community and all lifelong learners who believe that understanding technology should be accessible to everyone.
+
+---
+
+**Start your AI learning journey today** — no prerequisites, no installations, no cost. Just curiosity and a willingness to understand the technology shaping our future.
+
+---
+
+*Thorium‑AI: Because everyone should understand the AI that's already changing their world.*
