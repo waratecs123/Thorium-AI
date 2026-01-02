@@ -1,0 +1,1879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Certificate Generator - Thorium-AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* ============ Wikipedia/GitHub inspired design ============ */
+        :root {
+            /* Primary Colors */
+            --bg-color: #ffffff;
+            --text-color: #24292e;
+            --border-color: #e1e4e8;
+            --link-color: #0366d6;
+            --link-visited: #6f42c1;
+            --link-hover: #005cc5;
+            --sidebar-bg: #f6f8fa;
+            --code-bg: #f6f8fa;
+            --table-border: #dfe2e5;
+            --table-header-bg: #f6f8fa;
+            --blockquote-border: #dfe2e5;
+            --muted-color: #6a737d;
+            --accent-color: #0366d6;
+            --shadow: 0 1px 3px rgba(0,0,0,0.12);
+            --shadow-hover: 0 3px 12px rgba(0,0,0,0.15);
+
+            /* GitHub-like Additional Colors */
+            --success-color: #28a745;
+            --warning-color: #ffd33d;
+            --danger-color: #d73a49;
+            --info-color: #0366d6;
+
+            /* Spacing and Sizes */
+            --border-radius: 6px;
+            --border-radius-sm: 3px;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+
+            /* Note Colors */
+            --note-bg: #f1f8ff;
+            --warning-bg: #fffdef;
+            --tip-bg: #f0fff4;
+            --danger-bg: #ffeef0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0d1117;
+                --text-color: #c9d1d9;
+                --border-color: #30363d;
+                --link-color: #58a6ff;
+                --link-visited: #8e96f0;
+                --link-hover: #79c0ff;
+                --sidebar-bg: #161b22;
+                --code-bg: #161b22;
+                --table-border: #30363d;
+                --table-header-bg: #161b22;
+                --blockquote-border: #30363d;
+                --muted-color: #8b949e;
+                --accent-color: #58a6ff;
+
+                /* GitHub Dark Additional Colors */
+                --success-color: #238636;
+                --warning-color: #9e6a03;
+                --danger-color: #f85149;
+                --info-color: #58a6ff;
+
+                /* Dark Versions of Notes */
+                --note-bg: #0c2d6b;
+                --warning-bg: #5c4c0a;
+                --tip-bg: #1a5321;
+                --danger-bg: #78191e;
+            }
+        }
+
+        /* ============ Reset & Base ============ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* ============ Header and Navigation ============ */
+        .site-header {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 24px;
+            background: var(--bg-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+            width: 100%;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .site-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
+
+        .site-title:hover {
+            color: var(--link-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background-color: var(--sidebar-bg);
+            color: var(--link-color);
+        }
+
+        .github-button,
+        .test-button {
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            font-size: 13px;
+            white-space: nowrap;
+            height: 32px;
+        }
+
+        .github-button {
+            background-color: var(--text-color);
+            color: white;
+        }
+
+        .github-button:hover {
+            background-color: #2f363d;
+            color: white;
+        }
+
+        .test-button {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .test-button:hover {
+            background-color: var(--link-hover);
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(3, 102, 214, 0.2);
+        }
+
+        /* ============ Main Content ============ */
+        .main-content {
+            padding: 0 16px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* ============ Typography with Text Limits ============ */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin: var(--spacing-lg) 0 var(--spacing-md);
+            padding: 0;
+            color: var(--text-color);
+            letter-spacing: -0.01em;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        h1 {
+            font-size: 2em;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: var(--spacing-xs);
+            margin-top: 0;
+            margin-bottom: var(--spacing-lg);
+            font-weight: 700;
+            line-height: 1.2;
+            max-width: 100%;
+        }
+
+        h2 {
+            font-size: 1.6em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: var(--spacing-xs);
+            margin-top: var(--spacing-lg);
+            font-weight: 600;
+            max-width: 100%;
+        }
+
+        h3 {
+            font-size: 1.3em;
+            margin-top: var(--spacing-md);
+            font-weight: 600;
+            max-width: 100%;
+        }
+
+        p, .intro-text p, .tip p, .preview-info p, .step-content p {
+            margin: var(--spacing-md) 0;
+            font-size: 1em;
+            line-height: 1.6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            text-align: left;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 1px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        a:hover {
+            color: var(--link-hover);
+            border-bottom-color: var(--link-hover);
+        }
+
+        /* ============ Certificate Generator ============ */
+        .certificate-generator {
+            padding-bottom: 40px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .intro-text {
+            background-color: var(--sidebar-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            border-left: 4px solid var(--accent-color);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .generator-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            margin: var(--spacing-lg) 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .form-container {
+            background-color: var(--sidebar-bg);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .form-section {
+            margin-bottom: var(--spacing-lg);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .form-section h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-md);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.9em;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 15px;
+            transition: all 0.2s;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(3, 102, 214, 0.1);
+        }
+
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+
+        .color-option.active {
+            border-color: var(--text-color);
+            box-shadow: 0 0 0 2px var(--bg-color);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+            margin-top: var(--spacing-lg);
+            width: 100%;
+        }
+
+        .btn {
+            padding: 12px 16px;
+            border-radius: var(--border-radius);
+            border: none;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 140px;
+            min-height: 44px;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--link-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(3, 102, 214, 0.2);
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(40, 167, 69, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: var(--sidebar-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--code-bg);
+            transform: translateY(-1px);
+        }
+
+        /* ============ Certificate Design ============ */
+        .certificate-wrapper {
+            background-color: var(--sidebar-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            margin: var(--spacing-lg) 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .certificate {
+            position: relative;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 100%;
+            margin: 0 auto;
+            border: 2px solid var(--accent-color);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        /* Decorative corners */
+        .decoration {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            opacity: 0.15;
+            border: 2px solid var(--accent-color);
+        }
+
+        .decoration.top-left {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+            border-top-left-radius: 8px;
+        }
+
+        .decoration.top-right {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+            border-top-right-radius: 8px;
+        }
+
+        .decoration.bottom-left {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+            border-bottom-left-radius: 8px;
+        }
+
+        .decoration.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+            border-bottom-right-radius: 8px;
+        }
+
+        .certificate-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-color);
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .certificate-header::before,
+        .certificate-header::after {
+            content: "★";
+            position: absolute;
+            bottom: -10px;
+            color: var(--accent-color);
+            font-size: 18px;
+        }
+
+        .certificate-header::before {
+            left: calc(50% - 40px);
+        }
+
+        .certificate-header::after {
+            right: calc(50% - 40px);
+        }
+
+        .certificate-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 18px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .certificate-logo i {
+            font-size: 24px;
+        }
+
+        .certificate-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            line-height: 1.2;
+        }
+
+        .certificate-body {
+            flex: 1;
+            text-align: center;
+            padding: 15px 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .presented-to {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            font-style: italic;
+            max-width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .student-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #222;
+            margin: 15px 0;
+            padding: 8px 0;
+            border-top: 2px solid var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.05);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+            line-height: 1.2;
+        }
+
+        .achievement-text {
+            font-size: 15px;
+            color: #666;
+            margin: 20px 0 8px;
+            max-width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .course-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin: 15px 0;
+            padding: 10px 15px;
+            background: rgba(3, 102, 214, 0.05);
+            border-radius: 6px;
+            display: inline-block;
+            border-left: 3px solid var(--accent-color);
+            border-right: 3px solid var(--accent-color);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 90%;
+            line-height: 1.2;
+        }
+
+        .description {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            max-width: 100%;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid rgba(3, 102, 214, 0.1);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            text-align: center;
+        }
+
+        .certificate-footer {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e1e4e8;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .signature-section,
+        .date-section,
+        .id-section {
+            text-align: center;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .signature-line {
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+            margin: 0 auto 8px;
+        }
+
+        .signature-name {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+            color: var(--accent-color);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        .signature-title,
+        .date-label,
+        .id-label {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 4px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        .date-value,
+        .id-value {
+            font-weight: 600;
+            font-size: 13px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        .date-value {
+            color: var(--success-color);
+        }
+
+        .id-value {
+            color: var(--accent-color);
+            font-family: 'Courier New', monospace;
+            background: rgba(3, 102, 214, 0.05);
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+
+        .watermark {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 40px;
+            color: rgba(3, 102, 214, 0.05);
+        }
+
+        /* Achievement seal */
+        .seal {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ffd700 0%, #ffed4e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border: 2px solid white;
+        }
+
+        .seal i {
+            font-size: 24px;
+            color: var(--accent-color);
+        }
+
+        .preview-container h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .preview-actions {
+            margin-top: var(--spacing-md);
+            text-align: center;
+            width: 100%;
+        }
+
+        .preview-info {
+            background-color: var(--sidebar-bg);
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            font-size: 12px;
+            color: var(--muted-color);
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Instructions */
+        .instructions {
+            margin-top: var(--spacing-lg);
+            padding: var(--spacing-lg);
+            background-color: var(--sidebar-bg);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .instruction-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+            width: 100%;
+        }
+
+        .step {
+            display: flex;
+            gap: var(--spacing-sm);
+            align-items: flex-start;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+
+        .step-content h4 {
+            margin: 0 0 6px 0;
+            color: var(--text-color);
+            font-size: 15px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        .step-content p {
+            margin: 0;
+            color: var(--muted-color);
+            font-size: 13px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            left: 20px;
+            padding: 12px 16px;
+            background-color: var(--success-color);
+            color: white;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+            max-width: calc(100% - 40px);
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .notification.error {
+            background-color: var(--danger-color);
+        }
+
+        .notification.info {
+            background-color: var(--info-color);
+        }
+
+        .notification.fade-out {
+            animation: fadeOut 0.3s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Article meta */
+        .article-meta {
+            display: flex;
+            gap: var(--spacing-md);
+            color: var(--muted-color);
+            font-size: 0.85em;
+            margin-top: var(--spacing-sm);
+            flex-wrap: wrap;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+        }
+
+        /* Tip box */
+        .tip {
+            background-color: var(--tip-bg);
+            border-left: 4px solid var(--success-color);
+            padding: var(--spacing-md);
+            margin: var(--spacing-lg) 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .tip p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .tip:before {
+            content: "Tip";
+            display: block;
+            font-weight: 600;
+            color: var(--success-color);
+            margin-bottom: 6px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============ MOBILE RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .generator-container {
+                gap: var(--spacing-md);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+                line-height: 1.6;
+                padding: 0;
+                overflow-x: hidden;
+            }
+
+            .container {
+                padding: 0 12px;
+            }
+
+            .main-content {
+                padding: 0 12px 30px;
+            }
+
+            .site-header {
+                padding: 12px 0;
+                margin-bottom: 16px;
+                position: relative;
+            }
+
+            .header-content {
+                gap: 12px;
+            }
+
+            .site-title {
+                font-size: 20px;
+                max-width: 150px;
+            }
+
+            .nav-links {
+                gap: 8px;
+                justify-content: flex-start;
+                width: 100%;
+                order: 3;
+                margin-top: 12px;
+                overflow-x: auto;
+                padding-bottom: 4px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-link {
+                font-size: 13px;
+                padding: 5px 8px;
+                flex-shrink: 0;
+            }
+
+            .github-button,
+            .test-button {
+                font-size: 12px;
+                padding: 5px 10px;
+                height: 30px;
+                flex-shrink: 0;
+            }
+
+            h1 {
+                font-size: 1.6em;
+                margin-bottom: var(--spacing-md);
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+
+            h3 {
+                font-size: 1.1em;
+            }
+
+            .generator-container {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .form-container,
+            .preview-container {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .certificate-wrapper {
+                padding: 16px;
+            }
+
+            .certificate {
+                padding: 20px;
+                min-height: 350px;
+            }
+
+            .certificate-title {
+                font-size: 18px;
+            }
+
+            .student-name {
+                font-size: 22px;
+                padding: 6px 0;
+                margin: 10px 0;
+            }
+
+            .course-name {
+                font-size: 16px;
+                padding: 8px 12px;
+            }
+
+            .description {
+                font-size: 12px;
+                padding: 12px;
+                margin: 15px auto;
+            }
+
+            .certificate-footer {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .signature-line {
+                width: 80px;
+            }
+
+            .signature-name {
+                font-size: 13px;
+            }
+
+            .signature-title,
+            .date-label,
+            .id-label {
+                font-size: 10px;
+            }
+
+            .date-value,
+            .id-value {
+                font-size: 12px;
+            }
+
+            .seal {
+                width: 40px;
+                height: 40px;
+                bottom: 8px;
+                left: 8px;
+            }
+
+            .seal i {
+                font-size: 20px;
+            }
+
+            .watermark {
+                font-size: 30px;
+                bottom: 8px;
+                right: 8px;
+            }
+
+            .decoration {
+                width: 40px;
+                height: 40px;
+            }
+
+            .decoration.top-left {
+                top: 5px;
+                left: 5px;
+            }
+
+            .decoration.top-right {
+                top: 5px;
+                right: 5px;
+            }
+
+            .decoration.bottom-left {
+                bottom: 5px;
+                left: 5px;
+            }
+
+            .decoration.bottom-right {
+                bottom: 5px;
+                right: 5px;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn {
+                min-width: 100%;
+                max-width: 100%;
+            }
+
+            .instruction-steps {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            .step {
+                gap: var(--spacing-sm);
+            }
+
+            .notification {
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                max-width: calc(100% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+
+            .main-content {
+                padding: 0 10px 20px;
+            }
+
+            .site-title {
+                font-size: 18px;
+                max-width: 120px;
+            }
+
+            .nav-links {
+                gap: 6px;
+            }
+
+            .nav-link {
+                font-size: 12px;
+                padding: 4px 6px;
+            }
+
+            .github-button,
+            .test-button {
+                font-size: 11px;
+                padding: 4px 8px;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+
+            .intro-text,
+            .form-container,
+            .instructions {
+                padding: var(--spacing-md);
+            }
+
+            .certificate {
+                padding: 16px;
+                min-height: 300px;
+            }
+
+            .certificate-title {
+                font-size: 16px;
+            }
+
+            .student-name {
+                font-size: 18px;
+            }
+
+            .course-name {
+                font-size: 14px;
+                padding: 6px 10px;
+            }
+
+            .description {
+                font-size: 11px;
+                padding: 10px;
+            }
+
+            .form-group input,
+            .form-group select {
+                font-size: 14px;
+                padding: 8px 10px;
+            }
+
+            .btn {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .article-meta span {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .site-title {
+                font-size: 16px;
+                max-width: 100px;
+            }
+
+            .certificate {
+                padding: 12px;
+                min-height: 280px;
+            }
+
+            .certificate-title {
+                font-size: 14px;
+            }
+
+            .student-name {
+                font-size: 16px;
+            }
+
+            .course-name {
+                font-size: 13px;
+            }
+
+            .color-options {
+                gap: 8px;
+            }
+
+            .color-option {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .site-header, .form-container, .instructions, .tip, .btn, .article-meta, .intro-text, .preview-container h3, .preview-actions {
+                display: none !important;
+            }
+
+            body {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .certificate-wrapper {
+                padding: 0;
+                border: none;
+                background: none;
+                margin: 0;
+            }
+
+            .certificate {
+                box-shadow: none;
+                border: 2px solid #0366d6;
+                min-height: auto;
+                page-break-inside: avoid;
+            }
+
+            .generator-container {
+                display: block;
+                margin: 0;
+            }
+
+            .main-content {
+                padding: 0;
+                margin: 0;
+            }
+
+            .certificate-generator {
+                padding: 0;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for accessibility */
+        :focus {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* Ensure all text containers have proper text wrapping */
+        .text-container {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
+        }
+
+        /* Prevent horizontal overflow */
+        * {
+            max-width: 100%;
+        }
+
+        img, video, iframe {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Touch-friendly elements on mobile */
+        @media (max-width: 768px) {
+            .btn,
+            .color-option,
+            .nav-link,
+            .github-button,
+            .test-button {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+
+            input,
+            select,
+            textarea {
+                font-size: 16px !important; /* Prevent zoom on iOS */
+            }
+        }
+
+        /* Dark mode improvements */
+        @media (prefers-color-scheme: dark) {
+            .certificate {
+                background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            }
+
+            .course-name {
+                background: rgba(88, 166, 255, 0.1);
+                border-color: var(--accent-color);
+            }
+
+            .description {
+                background-color: var(--sidebar-bg);
+                border-color: rgba(88, 166, 255, 0.2);
+            }
+
+            .seal {
+                border-color: #2a2a2a;
+            }
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: var(--sidebar-bg);
+            border-top: 1px solid var(--border-color);
+            padding: var(--spacing-lg) 0;
+            margin-top: 40px;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: var(--link-color);
+        }
+
+        .copyright {
+            color: var(--muted-color);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .footer-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="site-title">Thorium-AI</a>
+                <div class="nav-links">
+                    <a href="1-0.html" class="test-button">
+                        Course
+                    </a>
+                    <a href="test.html" class="test-button">
+                        Take AI Test
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="certificate-generator">
+
+                <div class="intro-text">
+                    <p>Congratulations on completing your AI learning journey! Create a personalized certificate to celebrate your achievement.</p>
+                </div>
+
+                <div class="generator-container">
+                    <!-- Left side: Form -->
+                    <div class="form-container">
+                        <div class="form-section">
+                            <h3><i class="fas fa-user-edit"></i> Personal Information</h3>
+                            <div class="form-group">
+                                <label for="studentName">Full Name</label>
+                                <input type="text" id="studentName" placeholder="Enter your full name" value="Alex Johnson" maxlength="50">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="courseName">Course / Achievement</label>
+                                <select id="courseName">
+                                    <option value="AI Fundamentals">AI Fundamentals</option>
+                                    <option value="Practical AI Applications">Practical AI Applications</option>
+                                    <option value="ChatGPT Mastery">ChatGPT Mastery</option>
+                                    <option value="AI Ethics & Safety">AI Ethics & Safety</option>
+                                    <option value="Complete AI Course">Complete AI Course</option>
+                                    <option value="Prompt Engineering">Prompt Engineering</option>
+                                    <option value="AI for Creative Work">AI for Creative Work</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="completionDate">Completion Date</label>
+                                <input type="date" id="completionDate" value="2024-01-15">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="certificateId">Certificate ID (Optional)</label>
+                                <input type="text" id="certificateId" placeholder="THAI-2024-001" value="THAI-2024-001" maxlength="20">
+                            </div>
+                            <div class="form-group">
+                                <label for="signatureName">Instructor Name</label>
+                                <input type="text" id="signatureName" placeholder="Instructor/Organization" value="Thorium-AI Education Team" maxlength="40">
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button id="downloadBtn" class="btn btn-success">
+                                <i class="fas fa-download"></i> Download
+                            </button>
+                            <button id="resetBtn" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i> Reset
+                            </button>
+                        </div>
+
+                        <div class="tip">
+                            <p>For best results, download as PNG and use high-quality settings when printing.</p>
+                        </div>
+                    </div>
+
+                    <!-- Right side: Preview -->
+                    <div class="preview-container">
+                        <h3><i class="fas fa-certificate"></i> Certificate Preview</h3>
+
+                        <div class="certificate-wrapper" id="certificateWrapper">
+                            <div class="certificate" id="certificate">
+                                <!-- Corner Decorations -->
+                                <div class="decoration top-left"></div>
+                                <div class="decoration top-right"></div>
+                                <div class="decoration bottom-left"></div>
+                                <div class="decoration bottom-right"></div>
+
+                                <!-- Certificate content -->
+                                <div class="certificate-logo">
+                                    <i class="fas fa-brain"></i>
+                                    <span>Thorium-AI</span>
+                                </div>
+                                <div class="certificate-title" style="text-align: center;">
+                                    Certificate of Achievement
+                                </div>
+
+                                <div class="certificate-body">
+                                    <div class="presented-to">This certifies that</div>
+
+                                    <div class="student-name" id="previewName">Alex Johnson</div>
+
+                                    <div class="achievement-text">
+                                        has successfully completed the course
+                                    </div>
+
+                                    <div class="course-name" id="previewCourse">AI Fundamentals</div>
+
+                                    <div class="description" id="previewDescription">
+                                        demonstrating proficiency in understanding artificial intelligence concepts, practical applications, and ethical considerations.
+                                    </div>
+                                </div>
+
+                                <div class="certificate-footer">
+                                    <div class="signature-section">
+                                        <div class="signature-line"></div>
+                                        <div class="signature-name" id="previewSignature">Thorium-AI Education Team</div>
+                                        <div class="signature-title">Instructor / Organization</div>
+                                    </div>
+
+                                    <div class="date-section">
+                                        <div class="date-label">Date of Completion</div>
+                                        <div class="date-value" id="previewDate">January 15, 2024</div>
+                                    </div>
+
+                                    <div class="id-section">
+                                        <div class="id-label">Certificate ID</div>
+                                        <div class="id-value" id="previewId">THAI-2024-001</div>
+                                    </div>
+                                </div>
+
+                                <!-- Watermark -->
+                                <div class="watermark">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="preview-actions">
+                            <div class="preview-info">
+                                <p>The preview of the image is updated automatically in real time. To save the final image in PNG format with high resolution and quality, click on the button or link labeled "Download".</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Certificate functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const studentNameInput = document.getElementById('studentName');
+            const courseNameInput = document.getElementById('courseName');
+            const completionDateInput = document.getElementById('completionDate');
+            const certificateIdInput = document.getElementById('certificateId');
+            const signatureNameInput = document.getElementById('signatureName');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const resetBtn = document.getElementById('resetBtn');
+
+            // Preview elements
+            const previewName = document.getElementById('previewName');
+            const previewCourse = document.getElementById('previewCourse');
+            const previewDate = document.getElementById('previewDate');
+            const previewId = document.getElementById('previewId');
+            const previewSignature = document.getElementById('previewSignature');
+            const previewDescription = document.getElementById('previewDescription');
+
+            // Format date for display
+            function formatDate(dateString) {
+                const date = new Date(dateString);
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return date.toLocaleDateString('en-US', options);
+            }
+
+            // Truncate text if too long
+            function truncateText(text, maxLength) {
+                if (text.length <= maxLength) return text;
+                return text.substring(0, maxLength - 3) + '...';
+            }
+
+            // Update preview with text limits
+            function updatePreview() {
+                // Truncate name to 30 characters for display
+                const name = studentNameInput.value || 'Your Name';
+                previewName.textContent = truncateText(name, 30);
+
+                // Truncate course to 40 characters
+                const course = courseNameInput.value;
+                previewCourse.textContent = truncateText(course, 40);
+
+                // Format date
+                previewDate.textContent = formatDate(completionDateInput.value);
+
+                // Truncate ID to 15 characters
+                const id = certificateIdInput.value || 'THAI-XXXX-XXX';
+                previewId.textContent = truncateText(id, 15);
+
+                // Truncate signature to 30 characters
+                const signature = signatureNameInput.value || 'Thorium-AI Education Team';
+                previewSignature.textContent = truncateText(signature, 30);
+
+                // Update description based on course
+                updateDescription(course);
+            }
+
+            // Update description based on selected course
+            function updateDescription(course) {
+                const descriptions = {
+                    'AI Fundamentals': 'demonstrating proficiency in understanding artificial intelligence concepts, practical applications, and ethical considerations.',
+                    'Practical AI Applications': 'showing practical skills in applying AI tools and techniques to real-world problems and scenarios.',
+                    'ChatGPT Mastery': 'demonstrating expert knowledge in using ChatGPT for various tasks including writing, coding, and creative work.',
+                    'AI Ethics & Safety': 'showing deep understanding of ethical considerations, safety measures, and responsible AI development.',
+                    'Complete AI Course': 'completing comprehensive training in artificial intelligence from fundamentals to advanced applications.',
+                    'Prompt Engineering': 'demonstrating expert skills in crafting effective prompts for AI systems to achieve desired outcomes.',
+                    'AI for Creative Work': 'showing proficiency in using AI tools for creative projects including art, music, and writing.'
+                };
+
+                previewDescription.textContent = descriptions[course] ||
+                    'demonstrating proficiency in understanding artificial intelligence concepts, practical applications, and ethical considerations.';
+            }
+
+            // Set accent color
+            function setAccentColor(color) {
+                document.documentElement.style.setProperty('--accent-color', color);
+            }
+
+            // Download certificate as image
+            function downloadCertificate() {
+                const certificateElement = document.getElementById('certificate');
+
+                // Show loading state
+                const originalText = downloadBtn.innerHTML;
+                downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+                downloadBtn.disabled = true;
+
+                // Store original styles
+                const originalBackground = certificateElement.style.background;
+                const originalBoxShadow = certificateElement.style.boxShadow;
+
+                // Set print-friendly background for download
+                certificateElement.style.background = '#ffffff';
+                certificateElement.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+
+                // Force white background for all elements in the certificate
+                const allElements = certificateElement.querySelectorAll('*');
+                allElements.forEach(el => {
+                    if (el.style && el.style.backgroundColor && el.style.backgroundColor.includes('var(')) {
+                        el.style.backgroundColor = '#ffffff';
+                    }
+                });
+
+                // Generate canvas with high quality
+                html2canvas(certificateElement, {
+                    scale: 3,
+                    backgroundColor: '#ffffff',
+                    useCORS: true,
+                    logging: false,
+                    allowTaint: true,
+                    width: certificateElement.offsetWidth,
+                    height: certificateElement.offsetHeight,
+                    windowWidth: certificateElement.offsetWidth,
+                    windowHeight: certificateElement.offsetHeight,
+                    onclone: function(clonedDoc) {
+                        // Make sure cloned version also has white background
+                        const clonedCert = clonedDoc.getElementById('certificate');
+                        if (clonedCert) {
+                            clonedCert.style.background = '#ffffff';
+                            clonedCert.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.08)';
+                        }
+                    }
+                }).then(canvas => {
+                    // Create download link
+                    const link = document.createElement('a');
+                    const name = studentNameInput.value.trim().replace(/\s+/g, '-') || 'Certificate';
+                    const fileName = `Thorium-AI-Certificate-${name}.png`;
+                    link.download = fileName;
+                    link.href = canvas.toDataURL('image/png', 1.0);
+
+                    // Trigger download
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Restore original styles
+                    certificateElement.style.background = originalBackground;
+                    certificateElement.style.boxShadow = originalBoxShadow;
+
+                    allElements.forEach(el => {
+                        if (el.style && el.style.backgroundColor === '#ffffff') {
+                            el.style.backgroundColor = '';
+                        }
+                    });
+
+                    // Success message
+                    showNotification('Certificate downloaded successfully!', 'success');
+                }).catch(error => {
+                    console.error('Error generating certificate:', error);
+                    showNotification('Error generating certificate. Please try again.', 'error');
+
+                    // Restore original styles on error
+                    certificateElement.style.background = originalBackground;
+                    certificateElement.style.boxShadow = originalBoxShadow;
+                }).finally(() => {
+                    // Restore button
+                    downloadBtn.innerHTML = originalText;
+                    downloadBtn.disabled = false;
+                });
+            }
+
+            // Show notification
+            function showNotification(message, type) {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+                    <span>${message}</span>
+                `;
+
+                document.body.appendChild(notification);
+
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    notification.classList.add('fade-out');
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+
+            // Reset form
+            function resetForm() {
+                studentNameInput.value = 'Alex Johnson';
+                courseNameInput.value = 'AI Fundamentals';
+                completionDateInput.value = '2024-01-15';
+                certificateIdInput.value = 'THAI-2024-001';
+                signatureNameInput.value = 'Thorium-AI Education Team';
+
+                // Reset color to default
+                setAccentColor('#0366d6');
+
+                updatePreview();
+                showNotification('Form reset to default values', 'info');
+            }
+
+            // Event listeners
+            downloadBtn.addEventListener('click', downloadCertificate);
+            resetBtn.addEventListener('click', resetForm);
+
+            // Auto-update preview on input change
+            studentNameInput.addEventListener('input', updatePreview);
+            courseNameInput.addEventListener('change', updatePreview);
+            completionDateInput.addEventListener('change', updatePreview);
+            certificateIdInput.addEventListener('input', updatePreview);
+            signatureNameInput.addEventListener('input', updatePreview);
+
+            // Initialize with default values
+            updatePreview();
+
+            // Set default date to today if not set
+            if (!completionDateInput.value) {
+                const today = new Date();
+                completionDateInput.value = today.toISOString().split('T')[0];
+                updatePreview();
+            }
+
+            // Add smooth scroll for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Input validation and auto-truncation
+            studentNameInput.addEventListener('input', function() {
+                if (this.value.length > 50) {
+                    this.value = this.value.substring(0, 50);
+                }
+            });
+
+            certificateIdInput.addEventListener('input', function() {
+                if (this.value.length > 20) {
+                    this.value = this.value.substring(0, 20);
+                }
+            });
+
+            signatureNameInput.addEventListener('input', function() {
+                if (this.value.length > 40) {
+                    this.value = this.value.substring(0, 40);
+                }
+            });
+
+            // Prevent zoom on iOS when focusing inputs
+            document.querySelectorAll('input, select, textarea').forEach(input => {
+                input.addEventListener('focus', function() {
+                    if (window.innerWidth <= 768) {
+                        this.style.fontSize = '16px';
+                    }
+                });
+            });
+
+            // Touch-friendly interactions
+            document.querySelectorAll('.btn, .nav-link').forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+
+                element.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                });
+            });
+
+            // Initialize today's date
+            function setTodayDate() {
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                return `${yyyy}-${mm}-${dd}`;
+            }
+
+            // Set today's date if not already set
+            if (completionDateInput.value === '') {
+                completionDateInput.value = setTodayDate();
+                updatePreview();
+            }
+        });
+    </script>
+</body>
+</html>
